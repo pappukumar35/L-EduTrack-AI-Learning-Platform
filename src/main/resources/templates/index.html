@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>EduTrack AI</title>
+<link rel="stylesheet" th:href="@{/style.css}" />
+<link
+	href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+	integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+	<div class="container">
+		<header class="navbar">
+			<div class="logo">
+				<i class="fa fa-graduation-cap" aria-hidden="true"></i> EduTrack
+			</div>
+			<nav>
+				<a href="/"><i class="fa fa-home" aria-hidden="true"></i> Home</a> <a
+					href="/Courses"><i class="fa-solid fa-book-open-reader"></i>
+					Courses</a> <a href="/Courses.html">Gamified Zone</a> <a href="/event">Progress</a>
+				<a href="/splicot">Goals</a> <a href="/event">Community</a> <a
+					href="/splicot">Careers</a>
+			</nav>
+			<div class="auth-buttons">
+				<a href="/login" class="btn outline">Login</a> <a href="/register"
+					class="btn fill">Signup</a>
+			</div>
+		</header>
+
+		<!-- Hero Section Start -->
+<section class="hero">
+    <div class="overlay">
+
+        <!-- Updated Navbar Start -->
+        <div class="topbar">
+            <div class="hero-content">
+                <h1>
+                    🎓 Welcome to <span>Edutrack</span>
+                </h1>
+
+                <div class="ai-tag">Your AI-Powered, Gamified Learning Companion</div>
+                <div class="ai-tag">EduTrack transforms the way you learn by combining Artificial Intelligence with gamified experiences. Say goodbye to boring lectures and hello to interactive, personalized education that grows with you.</div>
+            </div>
+
+            <img th:src="@{/image/homelearn.jpg}" alt="Students with tablets" class="hero-img">
+        </div>
+    </div>
+</section>
+<!-- Hero Section End -->
+
+		<!-- Hero Section End -->
+		<footer>
+			<div class="footer-content">
+				<div class="footer-about">
+					<h3>🎓 EduTrack</h3>
+					<p>EduTrack is your AI-powered companion for gamified,
+						personalized, and goal-oriented learning.</p>
+				</div>
+
+				<div class="footer-links">
+					<h4>Quick Links</h4>
+					<ul>
+						<li><a href="#">🏠 Home</a></li>
+						<li><a href="#features">🚀 Features</a></li>
+						<li><a href="#career">💼 Career</a></li>
+						<li><a href="#about">ℹ About Us</a></li>
+						<li><a href="#contact">📬 Contact</a></li>
+					</ul>
+				</div>
+
+				<div class="footer-social">
+					<h4>Follow Us</h4>
+					<a href="https://www.instagram.com/">📸 Instagram</a> <a
+						href="https://www.linkedin.com/">💼 LinkedIn</a> <a
+						href="https://www.youtube.com/">▶ YouTube</a>
+				</div>
+
+				<div class="footer-newsletter">
+					<h4>📧 Newsletter</h4>
+					<p>Stay updated with new features & offers</p>
+					<form>
+						<input type="email" placeholder="Your Email">
+						<button type="submit">Subscribe</button>
+					</form>
+				</div>
+			</div>
+
+			<hr>
+			<p>© 2025 EduTrack. Built with ❤ by Vinay Kumar Mahato. All
+				rights reserved.</p>
+		</footer>
+	</div>
+</body>
+</html>

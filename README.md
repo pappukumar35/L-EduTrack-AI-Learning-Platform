@@ -1,4 +1,4 @@
-# Welcome to EduTrack – Your AI-powered Learning Companion 🚀
+# Welcome to EduTrack – Your AI-powered Learning Companion 🚀.
 **Gamified, Personalized, and Goal-Oriented Learning Platform**  
 Powered by **Java Full Stack • Spring Boot • Microservices • AI Integration**
 

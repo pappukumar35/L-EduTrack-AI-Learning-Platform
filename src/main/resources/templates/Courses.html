@@ -1,240 +1,342 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Courses - EduTrack</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>EduTrack AI</title>
 
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- External CSS -->
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="Courses.css" />
+
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+    rel="stylesheet"
+  />
 
   <!-- Font Awesome -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
 
-  <!-- Custom CSS -->
-  <link rel="stylesheet" th:href="@{/Courses.css}" />
-
-  <style>
-    .navbar-custom {
-      background-color: #004080;
-    }
-
-    .navbar-custom .nav-link,
-    .navbar-custom .navbar-brand {
-      color: white;
-      font-weight: 500;
-    }
-
-    .navbar-custom .nav-link:hover {
-      color: #ffcc00;
-    }
-
-    .auth-buttons .btn-outline-light {
-      border: 1px solid white;
-      color: white;
-      margin-right: 10px;
-    }
-
-    .auth-buttons .btn-outline-light:hover {
-      background-color: white;
-      color: #004080;
-    }
-
-    .auth-buttons .btn-warning {
-      font-weight: bold;
-      color: #004080;
-    }
-
-    .course-icon img {
-      width: 60px;
-      height: 60px;
-      object-fit: contain;
-      border-radius: 8px;
-    }
-
-    .btn-readmore {
-      background-color: #004080;
-      color: white;
-    }
-
-    .btn-readmore:hover {
-      background-color: #ffcc00;
-      color: #004080;
-    }
-
-    .course-card {
-      border: 1px solid #e0e0e0;
-      transition: transform 0.2s ease;
-    }
-
-    .course-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-    }
-  </style>
 </head>
-
 <body>
-
-  <!-- ✅ Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-custom px-4">
-    <a class="navbar-brand fw-bold fs-5" href="">
-      <i class="fa fa-graduation-cap me-2"></i> EduTrack
-    </a>
-    <button class="navbar-toggler text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-      <span class="navbar-toggler-icon bg-light"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item"><a class="nav-link" href="/"><i class="fa fa-home me-1"></i>Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="/Courses"><i class="fa-solid fa-book-open-reader me-1"></i>Courses</a></li>
-        <li class="nav-item"><a class="nav-link" href="/Courses.html">Gamified Zone</a></li>
-        <li class="nav-item"><a class="nav-link" th:href="@{/progress}">Progress</a></li>
-        <li class="nav-item"><a class="nav-link" href="/splicot">Goals</a></li>
-        <li class="nav-item"><a class="nav-link" href="/event">Community</a></li>
-        <li class="nav-item"><a class="nav-link" href="/splicot">Careers</a></li>
-        <li class="nav-item"><a class="nav-link" href="/event">AI Assistant</a></li>
-        <li class="nav-item"><a class="nav-link" href="/splicot">Planner</a></li>
-        <li class="nav-item"><a class="nav-link" href="/event">Resources</a></li>
-      </ul>
-      <div class="d-flex auth-buttons">
-        <a href="/login" class="btn btn-outline-light rounded-pill px-3 me-2">Login</a>
-        <a href="/register" class="btn btn-warning rounded-pill px-3">Signup</a>
+  <div class="container">
+    <header class="navbar">
+      <div class="logo">
+        <i class="fa fa-graduation-cap" aria-hidden="true"></i> EduTrack
       </div>
-    </div>
-  </nav>
-
-  <!-- ✅ Courses Section -->
-  <div class="container py-5">
-    <div class="text-center mb-5">
-      <h1 class="fw-bold">Our Popular Courses</h1>
-      <p class="text-muted">Level up your skills with curated content across development stacks</p>
-    </div>
-
-    <div class="row g-4">
-      <!-- HTML -->
-      <div class="col-md-6 col-lg-4">
-        <div class="card course-card p-4 text-center">
-          <div class="course-icon mb-3">
-            <img src="/image/html_img.jpg" alt="HTML">
-          </div>
-          <h5 class="card-title fw-bold">HTML</h5>
-          <p class="card-text text-muted">Build structured webpages using semantic HTML tags.</p>
-          <a th:href="@{/courses/html}" class="btn btn-readmore rounded-pill px-4">Read More →</a>
-        </div>
+      <nav>
+        <a href="/"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
+        <a href="/Courses"><i class="fa-solid fa-book-open-reader"></i> Courses</a>
+        <a href="/Courses.html">Gamified Zone</a>
+        <a href="/event">Progress</a>
+        <a href="/splicot">Goals</a>
+        <a href="/event">Community</a>
+        <a href="/splicot">Careers</a>
+      </nav>
+      <div class="auth-buttons">
+        <a href="/login" class="btn outline">Login</a>
+        <a href="/register" class="btn fill">Signup</a>
       </div>
+    </header>
 
-      <!-- CSS -->
-      <div class="col-md-6 col-lg-4">
-        <div class="card course-card p-4 text-center">
-          <div class="course-icon mb-3">
-            <img src="/image/css_img.jpg" alt="CSS">
-          </div>
-          <h5 class="card-title fw-bold">CSS</h5>
-          <p class="card-text text-muted">Style and layout your HTML using advanced CSS techniques.</p>
-          <a th:href="@{/courses/css}" class="btn btn-readmore rounded-pill px-4">Read More →</a>
-        </div>
-      </div>
+	
+	<section class="course-section">
+	  <div class="course-container">
+	    <h2 class="section-title">All Courses</h2>
+	    <p class="section-subtitle">Explore courses across all popular domains.</p>
 
-      <!-- Java -->
-      <div class="col-md-6 col-lg-4">
-        <div class="card course-card p-4 text-center">
-          <div class="course-icon mb-3">
-            <img src="/images/java.png" alt="Java">
-          </div>
-          <h5 class="card-title fw-bold">Java (Core & Advanced)</h5>
-          <p class="card-text text-muted">Master OOPs, collections, threads, and more.</p>
-          <a th:href="@{/courses/java}" class="btn btn-readmore rounded-pill px-4">Read More →</a>
-        </div>
-      </div>
+	    <div class="course-grid">
+	      <!-- HTML -->
+	      <div class="course-card">
+	        <div class="card-icon"><img src="icons/html.svg" alt="HTML" /></div>
+	        <h3>HTML</h3>
+	        <p>Learn the basics of webpage structure.</p>
+	        <span class="badge" style="background:#e34c26;">Beginner</span>
+			<a href="/html.html">
+			  <button class="explore-btn">Explore More</button>
+			</a>
+	      </div>
 
-      <!-- MySQL -->
-      <div class="col-md-6 col-lg-4">
-        <div class="card course-card p-4 text-center">
-          <div class="course-icon mb-3">
-            <img src="/images/mysql.png" alt="MySQL">
-          </div>
-          <h5 class="card-title fw-bold">MySQL</h5>
-          <p class="card-text text-muted">Learn structured data storage, queries, joins, and optimization.</p>
-          <a th:href="@{/courses/mysql}" class="btn btn-readmore rounded-pill px-4">Read More →</a>
-        </div>
-      </div>
+	      <!-- CSS -->
+	      <div class="course-card">
+	        <div class="card-icon"><img src="icons/css.svg" alt="CSS" /></div>
+	        <h3>CSS</h3>
+	        <p>Style your web pages beautifully.</p>
+	        <span class="badge" style="background:#2965f1;">Beginner</span>
+	        <button class="explore-btn">Explore More</button>
+	      </div>
 
-      <!-- JDBC -->
-      <div class="col-md-6 col-lg-4">
-        <div class="card course-card p-4 text-center">
-          <div class="course-icon mb-3">
-            <img src="/images/jdbc.png" alt="JDBC">
-          </div>
-          <h5 class="card-title fw-bold">JDBC</h5>
-          <p class="card-text text-muted">Connect Java apps to databases using JDBC API.</p>
-          <a th:href="@{/courses/jdbc}" class="btn btn-readmore rounded-pill px-4">Read More →</a>
-        </div>
-      </div>
+	      <!-- JavaScript -->
+	      <div class="course-card">
+	        <div class="card-icon"><img src="icons/js.svg" alt="JavaScript" /></div>
+	        <h3>JavaScript</h3>
+	        <p>Make web pages interactive and dynamic.</p>
+	        <span class="badge" style="background:#f0db4f;color:#000;">Intermediate</span>
+	        <button class="explore-btn">Explore More</button>
+	      </div>
 
-      <!-- Spring -->
-      <div class="col-md-6 col-lg-4">
-        <div class="card course-card p-4 text-center">
-          <div class="course-icon mb-3">
-            <img src="/images/spring.png" alt="Spring">
-          </div>
-          <h5 class="card-title fw-bold">Spring</h5>
-          <p class="card-text text-muted">Build enterprise apps with dependency injection and MVC.</p>
-          <a th:href="@{/courses/spring}" class="btn btn-readmore rounded-pill px-4">Read More →</a>
-        </div>
-      </div>
+	      <!-- SQL -->
+	      <div class="course-card">
+	        <div class="card-icon"><img src="icons/sql.svg" alt="SQL" /></div>
+	        <h3>SQL</h3>
+	        <p>Manage databases efficiently with SQL.</p>
+	        <span class="badge" style="background:#00758f;">Intermediate</span>
+	        <button class="explore-btn">Explore More</button>
+	      </div>
 
-      <!-- Spring Boot -->
-      <div class="col-md-6 col-lg-4">
-        <div class="card course-card p-4 text-center">
-          <div class="course-icon mb-3">
-            <img src="/images/springboot.png" alt="Spring Boot">
-          </div>
-          <h5 class="card-title fw-bold">Spring Boot</h5>
-          <p class="card-text text-muted">Create REST APIs quickly using Spring Boot + JPA + Hibernate.</p>
-          <a th:href="@{/courses/springboot}" class="btn btn-readmore rounded-pill px-4">Read More →</a>
-        </div>
-      </div>
+	      <!-- Python -->
+	      <div class="course-card">
+	        <div class="card-icon"><img src="icons/python.svg" alt="Python" /></div>
+	        <h3>Python</h3>
+	        <p>Versatile programming for beginners.</p>
+	        <span class="badge" style="background:#306998;">Beginner</span>
+	        <button class="explore-btn">Explore More</button>
+	      </div>
 
-      <!-- Hibernate -->
-      <div class="col-md-6 col-lg-4">
-        <div class="card course-card p-4 text-center">
-          <div class="course-icon mb-3">
-            <img src="/images/hibernate.png" alt="Hibernate">
-          </div>
-          <h5 class="card-title fw-bold">Hibernate</h5>
-          <p class="card-text text-muted">Handle ORM with Hibernate and JPA effectively.</p>
-          <a th:href="@{/courses/hibernate}" class="btn btn-readmore rounded-pill px-4">Read More →</a>
-        </div>
-      </div>
+	      <!-- Java -->
+	      <div class="course-card">
+	        <div class="card-icon"><img src="icons/java.svg" alt="Java" /></div>
+	        <h3>Java</h3>
+	        <p>Object-oriented programming basics.</p>
+	        <span class="badge" style="background:#b07219;">Intermediate</span>
+	        <button class="explore-btn">Explore More</button>
+	      </div>
 
-      <!-- REST API -->
-      <div class="col-md-6 col-lg-4">
-        <div class="card course-card p-4 text-center">
-          <div class="course-icon mb-3">
-            <img src="/images/api.png" alt="API">
-          </div>
-          <h5 class="card-title fw-bold">REST API Development</h5>
-          <p class="card-text text-muted">Design RESTful APIs using Spring Boot and JSON.</p>
-          <a th:href="@{/courses/restapi}" class="btn btn-readmore rounded-pill px-4">Read More →</a>
-        </div>
-      </div>
+	      <!-- PHP -->
+	      <div class="course-card">
+	        <div class="card-icon"><img src="icons/php.svg" alt="PHP" /></div>
+	        <h3>PHP</h3>
+	        <p>Server-side scripting and web dev.</p>
+	        <span class="badge" style="background:#777bb3;">Intermediate</span>
+	        <button class="explore-btn">Explore More</button>
+	      </div>
 
-      <!-- GitBase -->
-      <div class="col-md-6 col-lg-4">
-        <div class="card course-card p-4 text-center">
-          <div class="course-icon mb-3">
-            <img src="/images/github.png" alt="Git">
-          </div>
-          <h5 class="card-title fw-bold">Git & GitHub</h5>
-          <p class="card-text text-muted">Version control, collaboration, pull requests, and GitHub flow.</p>
-          <a th:href="@{/courses/command}" class="btn btn-readmore rounded-pill px-4">Read More →</a>
-        </div>
-      </div>
-    </div>
+	      <!-- How To -->
+	      <div class="course-card">
+	        <div class="card-icon"><img src="icons/howto.svg" alt="How To" /></div>
+	        <h3>How To</h3>
+	        <p>Step-by-step tutorials on tech topics.</p>
+	        <span class="badge" style="background:#10b981;">Beginner</span>
+	        <button class="explore-btn">Explore More</button>
+	      </div>
+
+	      <!-- W3.CSS -->
+	      <div class="course-card">
+	        <div class="card-icon"><img src="icons/w3css.svg" alt="W3.CSS" /></div>
+	        <h3>W3.CSS</h3>
+	        <p>Simple CSS framework from W3Schools.</p>
+	        <span class="badge" style="background:#27ae60;">Beginner</span>
+	        <button class="explore-btn">Explore More</button>
+	      </div>
+
+	      <!-- C -->
+	      <div class="course-card">
+	        <div class="card-icon"><img src="icons/c.svg" alt="C" /></div>
+	        <h3>C</h3>
+	        <p>Learn low-level programming.</p>
+	        <span class="badge" style="background:#a8b9cc;">Intermediate</span>
+	        <button class="explore-btn">Explore More</button>
+	      </div>
+
+	      <!-- C++ -->
+	      <div class="course-card">
+	        <div class="card-icon"><img src="icons/cpp.svg" alt="C++" /></div>
+	        <h3>C++</h3>
+	        <p>Object-oriented and generic programming.</p>
+	        <span class="badge" style="background:#00599c;">Intermediate</span>
+	        <button class="explore-btn">Explore More</button>
+	      </div>
+
+	      <!-- C# -->
+	      <div class="course-card">
+	        <div class="card-icon"><img src="icons/csharp.svg" alt="C#" /></div>
+	        <h3>C#</h3>
+	        <p>Microsoft’s powerful language for .NET.</p>
+	        <span class="badge" style="background:#68217a;">Intermediate</span>
+	        <button class="explore-btn">Explore More</button>
+	      </div>
+
+	      <!-- Bootstrap -->
+	      <div class="course-card">
+	        <div class="card-icon"><img src="icons/bootstrap.svg" alt="Bootstrap" /></div>
+	        <h3>Bootstrap</h3>
+	        <p>Responsive CSS framework.</p>
+	        <span class="badge" style="background:#563d7c;">Beginner</span>
+	        <button class="explore-btn">Explore More</button>
+	      </div>
+
+	      <!-- React -->
+	      <div class="course-card">
+	        <div class="card-icon"><img src="icons/react.svg" alt="React" /></div>
+	        <h3>React</h3>
+	        <p>Build user interfaces using React.</p>
+	        <span class="badge" style="background:#61dafb;color:#000;">Intermediate</span>
+	        <button class="explore-btn">Explore More</button>
+	      </div>
+
+	      <!-- MySQL -->
+	      <div class="course-card">
+	        <div class="card-icon"><img src="icons/mysql.svg" alt="MySQL" /></div>
+	        <h3>MySQL</h3>
+	        <p>Popular relational database management.</p>
+	        <span class="badge" style="background:#4479a1;">Intermediate</span>
+	        <button class="explore-btn">Explore More</button>
+	      </div>
+
+	      <!-- jQuery -->
+	      <div class="course-card">
+	        <div class="card-icon"><img src="icons/jquery.svg" alt="jQuery" /></div>
+	        <h3>jQuery</h3>
+	        <p>Fast, small JavaScript library.</p>
+	        <span class="badge" style="background:#0769ad;">Intermediate</span>
+	        <button class="explore-btn">Explore More</button>
+	      </div>
+
+	      <!-- Excel -->
+	      <div class="course-card">
+	        <div class="card-icon"><img src="icons/excel.svg" alt="Excel" /></div>
+	        <h3>Excel</h3>
+	        <p>Data analysis with spreadsheets.</p>
+	        <span class="badge" style="background:#217346;">Beginner</span>
+	        <button class="explore-btn">Explore More</button>
+	      </div>
+
+	      <!-- XML -->
+	      <div class="course-card">
+	        <div class="card-icon"><img src="icons/xml.svg" alt="XML" /></div>
+	        <h3>XML</h3>
+	        <p>Markup language for data storage and transport.</p>
+	        <span class="badge" style="background:#007396;">Intermediate</span>
+	        <button class="explore-btn">Explore More</button>
+	      </div>
+
+	      <!-- Django -->
+	      <div class="course-card">
+	        <div class="card-icon"><img src="icons/django.svg" alt="Django" /></div>
+	        <h3>Django</h3>
+	        <p>Python framework for web development.</p>
+	        <span class="badge" style="background:#092e20;">Intermediate</span>
+	        <button class="explore-btn">Explore More</button>
+	      </div>
+
+	      <!-- NumPy -->
+	      <div class="course-card">
+	        <div class="card-icon"><img src="icons/numpy.svg" alt="NumPy" /></div>
+	        <h3>NumPy</h3>
+	        <p>Python library for numerical computations.</p>
+	        <span class="badge" style="background:#013243;">Intermediate</span>
+	        <button class="explore-btn">Explore More</button>
+	      </div>
+
+	      <!-- Pandas -->
+	      <div class="course-card">
+	        <div class="card-icon"><img src="icons/pandas.svg" alt="Pandas" /></div>
+	        <h3>Pandas</h3>
+	        <p>Python data analysis and manipulation.</p>
+	        <span class="badge" style="background:#150458;">Intermediate</span>
+	        <button class="explore-btn">Explore More</button>
+	      </div>
+
+	      <!-- NodeJS -->
+	      <div class="course-card">
+	        <div class="card-icon"><img src="icons/nodejs.svg" alt="NodeJS" /></div>
+	        <h3>NodeJS</h3>
+	        <p>JavaScript runtime for backend development.</p>
+	        <span class="badge" style="background:#68a063;">Intermediate</span>
+	        <button class="explore-btn">Explore More</button>
+	      </div>
+
+		    <!-- Flask -->
+		    <div class="course-card">
+		      <div class="card-icon"><img src="icons/flask.svg" alt="Flask" /></div>
+		      <h3>Flask</h3>
+		      <p>Lightweight Python web framework.</p>
+		      <span class="badge" style="background:#000000;">Intermediate</span>
+		      <button class="explore-btn">Explore More</button>
+		    </div>
+
+		    <!-- GitHub -->
+		    <div class="course-card">
+		      <div class="card-icon"><img src="icons/github.svg" alt="GitHub" /></div>
+		      <h3>GitHub</h3>
+		      <p>Version control and collaboration platform.</p>
+		      <span class="badge" style="background:#181717;">Beginner</span>
+		      <button class="explore-btn">Explore More</button>
+		    </div>
+
+		    <!-- AWS -->
+		    <div class="course-card">
+		      <div class="card-icon"><img src="icons/aws.svg" alt="AWS" /></div>
+		      <h3>AWS</h3>
+		      <p>Cloud computing services by Amazon.</p>
+		      <span class="badge" style="background:#ff9900;">Intermediate</span>
+		      <button class="explore-btn">Explore More</button>
+		    </div>
+
+		    <!-- Firebase -->
+		    <div class="course-card">
+		      <div class="card-icon"><img src="icons/firebase.svg" alt="Firebase" /></div>
+		      <h3>Firebase</h3>
+		      <p>Backend platform for mobile and web apps.</p>
+		      <span class="badge" style="background:#ffca28;">Intermediate</span>
+		      <button class="explore-btn">Explore More</button>
+		    </div>
+
+		    <!-- Bootstrap 5 -->
+		    <div class="course-card">
+		      <div class="card-icon"><img src="icons/bootstrap5.svg" alt="Bootstrap 5" /></div>
+		      <h3>Bootstrap 5</h3>
+		      <p>Latest Bootstrap CSS framework version.</p>
+		      <span class="badge" style="background:#7952b3;">Beginner</span>
+		      <button class="explore-btn">Explore More</button>
+		    </div>
+
+		    <!-- Tailwind -->
+		    <div class="course-card">
+		      <div class="card-icon"><img src="icons/tailwind.svg" alt="Tailwind" /></div>
+		      <h3>Tailwind</h3>
+		      <p>Utility-first CSS framework.</p>
+		      <span class="badge" style="background:#38b2ac;">Intermediate</span>
+		      <button class="explore-btn">Explore More</button>
+		    </div>
+
+		    <!-- JavaScript ES6 -->
+		    <div class="course-card">
+		      <div class="card-icon"><img src="icons/js.svg" alt="JavaScript ES6" /></div>
+		      <h3>JavaScript ES6</h3>
+		      <p>Modern JavaScript features and syntax.</p>
+		      <span class="badge" style="background:#f0db4f;color:#000;">Intermediate</span>
+		      <button class="explore-btn">Explore More</button>
+		    </div>
+
+		    <!-- MongoDB -->
+		    <div class="course-card">
+		      <div class="card-icon"><img src="icons/mongodb.svg" alt="MongoDB" /></div>
+		      <h3>MongoDB</h3>
+		      <p>NoSQL database for modern apps.</p>
+		      <span class="badge" style="background:#47a248;">Intermediate</span>
+		      <button class="explore-btn">Explore More</button>
+		    </div>
+
+		    <!-- Git -->
+		    <div class="course-card">
+		      <div class="card-icon"><img src="icons/git.svg" alt="Git" /></div>
+		      <h3>Git</h3>
+		      <p>Distributed version control system.</p>
+		      <span class="badge" style="background:#f34f29;">Beginner</span>
+		      <button class="explore-btn">Explore More</button>
+		    </div>
+		  </div>
+
+    
   </div>
-
-  <!-- Bootstrap JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

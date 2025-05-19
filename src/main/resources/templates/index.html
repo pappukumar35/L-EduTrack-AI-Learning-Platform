@@ -12,89 +12,275 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
 	integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
 	crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<script src="https://cdn.tailwindcss.com"></script>
+
 </head>
 
 <body>
 	<div class="container">
 		<header class="navbar">
-			<div class="logo">
-				<i class="fa fa-graduation-cap" aria-hidden="true"></i> EduTrack
-			</div>
-			<nav>
-				<a href="/"><i class="fa fa-home" aria-hidden="true"></i> Home</a> <a
-					href="/Courses"><i class="fa-solid fa-book-open-reader"></i>
-					Courses</a> <a href="/Courses.html">Gamified Zone</a> <a href="/event">Progress</a>
-				<a href="/splicot">Goals</a> <a href="/event">Community</a> <a
-					href="/splicot">Careers</a>
-			</nav>
-			<div class="auth-buttons">
-				<a href="/login" class="btn outline">Login</a> <a href="/register"
-					class="btn fill">Signup</a>
-			</div>
+		  <div class="logo">
+		    <i class="fa fa-graduation-cap" aria-hidden="true"></i> EduTrack
+		  </div>
+
+		  <nav class="nav-links">
+		    <a href="/" aria-label="Home">
+		      <i class="fa fa-home" aria-hidden="true"></i> Home
+		    </a>
+			
+		    <a href="/Courses" aria-label="Courses">
+		      <i class="fa-solid fa-book-open-reader"></i> Courses
+		    </a>
+			
+		    <a href="/Gamified" aria-label="Gamified Zone">Gamified Zone</a>
+		    <a href="/event" aria-label="Progress">Progress</a>
+		    <a href="/splicot" aria-label="Goals">Goals</a>
+		    <a href="/event" aria-label="Community">Community</a>
+		    <a href="/splicot" aria-label="Careers">Careers</a>
+		  </nav>
+
+		  <div class="auth-buttons">
+		    <a href="/login" class="btn outline" aria-label="Login">Login</a>
+		    <a href="/register" class="btn fill" aria-label="Signup">Signup</a>
+		  </div>
 		</header>
 
-		<!-- Hero Section Start -->
-<section class="hero">
-    <div class="overlay">
+		<section class="hero">
+		  <div class="hero-content">
+		    <div class="text-section">
+		      <h1><span class="icon">🎓</span> Welcome to Edutrack</h1>
+		      <p>
+		        EduTrack is an AI-powered, student-centric learning platform designed
+		        to revolutionize traditional learning. It enhances engagement,
+		        tracks student progress, and boosts.
+		      </p>
+		      <a href="#features" class="hero-btn">Explore Now</a>
+		    </div>
+		    <div class="image-section">
+		      <video autoplay muted loop class="hero-video">
+		        <source th:src="@{/image/home2.mp4}" type="video/mp4">
+		        Your browser does not support the video tag.
+		      </video>
+		    </div>
+		  </div>
+		</section>
 
-        <!-- Updated Navbar Start -->
-        <div class="topbar">
-            <div class="hero-content">
-                <h1>
-                    🎓 Welcome to <span>Edutrack</span>
-                </h1>
 
-                <div class="ai-tag">Your AI-Powered, Gamified Learning Companion</div>
-                <div class="ai-tag">EduTrack transforms the way you learn by combining Artificial Intelligence with gamified experiences. Say goodbye to boring lectures and hello to interactive, personalized education that grows with you.</div>
-            </div>
+		<section class="features-section">
+		  <div class="features-container">
+		    <div class="features-left">
+		      <video autoplay muted loop class="teacher-video">
+				<source th:src="@{/image/feature.mp4}" type="video/mp4">
+		        Your browser does not support the video tag.
+		      </video>
+		    </div>
+		    <div class="features-right">
+		      <h1><span class="icon">🔥</span> Key Features</h1>
+		      <div class="feature-grid">
+		        <div class="feature-box">Personalized Learning Paths</div>
+		        <div class="feature-box">Gamified Learning Experience</div>
+		        <div class="feature-box">Community Collaboration</div>
+		        <div class="feature-box">AI-powered Assistance</div>
+		        <div class="feature-box">Real-time Progress Tracking</div>
+		      </div>
+		    </div>
+		  </div>
+		</section>
+		
+		
+		<section class="how-it-works">
+		  <h2><span class="icon">🚀</span> How It Works</h2>
+		  <div class="steps-container">
+		    <div class="step-box">
+		      <div class="step-number">1</div>
+		      <div class="step-content">
+		        <h3>Sign up and set your learning goals</h3>
+		        <p>Create your account<br>Choose your subjects and interests</p>
+		      </div>
+		      <img src="/image/man.png" alt="Step 1" class="step-image" />
+		    </div>
 
-            <img th:src="@{/image/homelearn.jpg}" alt="Students with tablets" class="hero-img">
-        </div>
-    </div>
-</section>
-<!-- Hero Section End -->
+		    <div class="step-box">
+		      <div class="step-number">2</div>
+		      <div class="step-content">
+		        <h3>Start personalized learning</h3>
+		        <p>AI-curated lessons just for you<br>Learn at your own pace</p>
+		      </div>
+			  <img src="/image/robot.png" alt="Step 1" class="step-image" />
+		    </div>
 
-		<!-- Hero Section End -->
-		<footer>
-			<div class="footer-content">
-				<div class="footer-about">
-					<h3>🎓 EduTrack</h3>
-					<p>EduTrack is your AI-powered companion for gamified,
-						personalized, and goal-oriented learning.</p>
-				</div>
+		    <div class="step-box">
+		      <div class="step-number">3</div>
+		      <div class="step-content">
+		        <h3>Track your progress & earn rewards</h3>
+		        <p>View charts & analytics<br>Earn badges and climb leaderboards</p>
+		      </div>
+			  <img src="/image/track.png" alt="Step 1" class="step-image" />
+		    </div>
 
-				<div class="footer-links">
-					<h4>Quick Links</h4>
-					<ul>
-						<li><a href="#">🏠 Home</a></li>
-						<li><a href="#features">🚀 Features</a></li>
-						<li><a href="#career">💼 Career</a></li>
-						<li><a href="#about">ℹ About Us</a></li>
-						<li><a href="#contact">📬 Contact</a></li>
-					</ul>
-				</div>
+		    <div class="step-box">
+		      <div class="step-number">4</div>
+		      <div class="step-content">
+		        <h3>Collaborate and grow your career</h3>
+		        <p>Connect with mentors & peers</p>
+		      </div>
+			  <img src="/image/collaborate.png" alt="Step 1" class="step-image" />
+		    </div>
+		  </div>
+		  
+		</section>
+		
+		
+		<section class="transform ur journer">
 
-				<div class="footer-social">
-					<h4>Follow Us</h4>
-					<a href="https://www.instagram.com/">📸 Instagram</a> <a
-						href="https://www.linkedin.com/">💼 LinkedIn</a> <a
-						href="https://www.youtube.com/">▶ YouTube</a>
-				</div>
+		   <div class="image-container">
+			<img src="/image/teaching.gif" alt="Step 1" class="step-image" />
+		   </div>
 
-				<div class="footer-newsletter">
-					<h4>📧 Newsletter</h4>
-					<p>Stay updated with new features & offers</p>
-					<form>
-						<input type="email" placeholder="Your Email">
-						<button type="submit">Subscribe</button>
-					</form>
-				</div>
-			</div>
+		   <div class="heading">TRANSFORM YOUR LEARNING JOURNEY</div>
 
-			<hr>
-			<p>© 2025 EduTrack. Built with ❤ by Vinay Kumar Mahato. All
-				rights reserved.</p>
-		</footer>
+		   <div class="subtext">
+		     EduTrack is more than just a platform — it’s your smart learning companion.
+		   </div>
+
+		   <div class="features">
+		     <div class="feature">
+		       <span>🎯</span><strong>Smart Learning Experience</strong><br>
+		       Personalized, AI-powered learning paths designed just for you.
+		     </div>
+		     <div class="feature">
+		       <span>🎮</span><strong>Fun & Engaging</strong><br>
+		       Gamified modules with badges, rewards, and challenges.
+		     </div>
+		     <div class="feature">
+		       <span>📈</span><strong>Career-Focused Growth</strong><br>
+		       Internship alerts, job-prep programs, and skill-building content.
+		     </div>
+		     <div class="feature">
+		       <span>🌍</span><strong>Trusted by Thousands</strong><br>
+		       Students across the country are already upgrading their skills with EduTrack.
+		     </div>
+			 <div class="feature">
+			   <span>🧠</span><strong>Adaptive Feedback</strong><br>
+			   Real-time insights and suggestions to keep you on track and constantly improving.
+			 </div>
+			 <div class="feature">
+			   <span>🤝</span><strong>Mentorship Support</strong><br>
+			   Get guidance from experienced mentors to solve doubts and shape your learning path.
+			 </div>
+			 <div class="feature">
+			   <span>📚</span><strong>Resource-Rich Library</strong><br>
+			   Access a wide range of curated content — from videos to eBooks to expert articles.
+			 </div>
+		     <div class="feature">
+		       <span>⏳</span><strong>No More Waiting</strong><br>
+		       Start learning smarter, faster — today!
+		     </div>
+		   </div>
+
+		   <div class="buttons">
+		     <button>Join EduTrack Now</button>
+		     <button>Start Learning Free</button>
+		   </div>
+		 </section>
+
+
+		 <footer class="bg-gray-900 text-gray-200 pt-12 pb-6 px-6 md:px-20 relative">
+		   <!-- Grid Layout -->
+		   <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10">
+
+		     <!-- EduTrack About -->
+		     <div>
+		       <h2 class="text-2xl font-bold text-white mb-4">EduTrack</h2>
+		       <p class="text-sm text-gray-400">
+		         AI-powered learning platform for personalized education, gamified experiences, and real-world career skills.
+		       </p>
+		     </div>
+
+		     <!-- Quick Links -->
+		     <div>
+		       <h3 class="text-lg font-semibold text-white mb-3">Quick Links</h3>
+		       <ul class="space-y-2 text-sm">
+		         <li><a href="#" class="hover:text-blue-400">Home</a></li>
+		         <li><a href="#" class="hover:text-blue-400">Features</a></li>
+		         <li><a href="#" class="hover:text-blue-400">Courses</a></li>
+		         <li><a href="#" class="hover:text-blue-400">Careers</a></li>
+		         <li><a href="#" class="hover:text-blue-400">Gamified Zone</a></li>
+		         <li><a href="#" class="hover:text-blue-400">FAQs</a></li>
+		       </ul>
+		     </div>
+
+		     <!-- Contact Info -->
+		     <div>
+		       <h3 class="text-lg font-semibold text-white mb-3">Contact</h3>
+		       <ul class="text-sm space-y-2">
+		         <li>📧 support@edutrack.com</li>
+		         <li>📞 +91 98765 43210</li>
+		         <li>🏢 Bangalore, India</li>
+		       </ul>
+			   <div class="flex mt-4 space-x-4">
+			     <!-- LinkedIn -->
+			     <a href="#" target="_blank" aria-label="LinkedIn">
+			       <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-5 h-5 text-white hover:text-blue-400" viewBox="0 0 24 24">
+			         <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.762 2.239 5 5 5h14c2.762 0 5-2.238 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-9h3v9zm-1.5-10.3c-.967 0-1.75-.785-1.75-1.75s.783-1.75 1.75-1.75c.965 0 1.75.785 1.75 1.75s-.785 1.75-1.75 1.75zm13.5 10.3h-3v-4.5c0-1.08-.02-2.47-1.5-2.47s-1.73 1.17-1.73 2.38v4.59h-3v-9h2.89v1.23h.04c.4-.76 1.37-1.56 2.82-1.56 3.02 0 3.58 1.99 3.58 4.58v4.75z"/>
+			       </svg>
+			     </a>
+
+			     <!-- Twitter -->
+			     <a href="#" target="_blank" aria-label="Twitter">
+			       <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-5 h-5 text-white hover:text-blue-400" viewBox="0 0 24 24">
+			         <path d="M24 4.557a9.83 9.83 0 0 1-2.828.775 4.932 4.932 0 0 0 2.165-2.724c-.937.555-1.978.959-3.084 1.184a4.916 4.916 0 0 0-8.384 4.482c-4.083-.205-7.702-2.159-10.126-5.127a4.822 4.822 0 0 0-.664 2.475c0 1.708.869 3.216 2.188 4.099a4.904 4.904 0 0 1-2.228-.616c-.054 2.28 1.581 4.415 3.949 4.89a4.935 4.935 0 0 1-2.224.084 4.927 4.927 0 0 0 4.604 3.419A9.867 9.867 0 0 1 0 19.54 13.905 13.905 0 0 0 7.548 22c9.056 0 14.01-7.514 14.01-14.01 0-.213-.005-.425-.014-.636A10.025 10.025 0 0 0 24 4.557z"/>
+			       </svg>
+			     </a>
+
+			     <!-- Instagram -->
+			     <a href="#" target="_blank" aria-label="Instagram">
+			       <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-5 h-5 text-white hover:text-pink-500" viewBox="0 0 24 24">
+			         <path d="M12 2.2c3.2 0 3.584.012 4.85.07 1.17.056 1.968.24 2.43.406a4.91 4.91 0 0 1 1.76 1.023 4.91 4.91 0 0 1 1.023 1.76c.166.462.35 1.26.406 2.43.058 1.266.07 1.65.07 4.85s-.012 3.584-.07 4.85c-.056 1.17-.24 1.968-.406 2.43a4.91 4.91 0 0 1-1.023 1.76 4.91 4.91 0 0 1-1.76 1.023c-.462.166-1.26.35-2.43.406-1.266.058-1.65.07-4.85.07s-3.584-.012-4.85-.07c-1.17-.056-1.968-.24-2.43-.406a4.91 4.91 0 0 1-1.76-1.023 4.91 4.91 0 0 1-1.023-1.76c-.166-.462-.35-1.26-.406-2.43C2.212 15.584 2.2 15.2 2.2 12s.012-3.584.07-4.85c.056-1.17.24-1.968.406-2.43a4.91 4.91 0 0 1 1.023-1.76A4.91 4.91 0 0 1 5.46 2.676c.462-.166 1.26-.35 2.43-.406C8.416 2.212 8.8 2.2 12 2.2zm0 1.8c-3.16 0-3.518.012-4.762.07-1.03.048-1.59.22-1.96.37a3.113 3.113 0 0 0-1.137.74 3.113 3.113 0 0 0-.74 1.137c-.15.37-.322.93-.37 1.96-.058 1.244-.07 1.602-.07 4.762s.012 3.518.07 4.762c.048 1.03.22 1.59.37 1.96.168.418.39.78.74 1.137.357.357.72.572 1.137.74.37.15.93.322 1.96.37 1.244.058 1.602.07 4.762.07s3.518-.012 4.762-.07c1.03-.048 1.59-.22 1.96-.37a3.113 3.113 0 0 0 1.137-.74 3.113 3.113 0 0 0 .74-1.137c.15-.37.322-.93.37-1.96.058-1.244.07-1.602.07-4.762s-.012-3.518-.07-4.762c-.048-1.03-.22-1.59-.37-1.96a3.113 3.113 0 0 0-.74-1.137 3.113 3.113 0 0 0-1.137-.74c-.37-.15-.93-.322-1.96-.37-1.244-.058-1.602-.07-4.762-.07zm0 3.8a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 1.8a3.2 3.2 0 1 0 0 6.4 3.2 3.2 0 0 0 0-6.4zm4.8-2.1a1.2 1.2 0 1 1-2.4 0 1.2 1.2 0 0 1 2.4 0z"/>
+			       </svg>
+			     </a>
+
+			     <!-- YouTube -->
+			     <a href="#" target="_blank" aria-label="YouTube">
+			       <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-5 h-5 text-white hover:text-red-500" viewBox="0 0 24 24">
+			         <path d="M23.498 6.186c-.275-1.03-1.082-1.838-2.112-2.112C19.24 3.5 12 3.5 12 3.5s-7.24 0-9.386.574c-1.03.275-1.838 1.082-2.112 2.112C.5 8.332.5 12 .5 12s0 3.668.574 5.814c.275 1.03 1.082 1.838 2.112 2.112C4.76 20.5 12 20.5 12 20.5s7.24 0 9.386-.574c1.03-.275 1.838-1.082 2.112-2.112.574-2.146.574-5.814.574-5.814s0-3.668-.574-5.814zM9.75 15.02v-6.04l6.02 3.02-6.02 3.02z"/>
+			       </svg>
+			     </a>
+			   </div>
+
+		     </div>
+
+		     <!-- Newsletter -->
+		     <div>
+		       <h3 class="text-lg font-semibold text-white mb-3">Subscribe</h3>
+		       <p class="text-sm text-gray-400 mb-3">Get the latest tips, internships & job alerts.</p>
+		       <form class="flex items-center bg-gray-800 rounded-lg overflow-hidden">
+		         <input type="email" placeholder="Your email" class="px-3 py-2 w-full bg-transparent text-white focus:outline-none" />
+		         <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2">Subscribe</button>
+		       </form>
+		     </div>
+
+		   </div>
+
+		   <!-- Motivational Quote -->
+		   <div class="mt-10 text-center text-sm text-gray-400 italic">
+		     “Empowering learners, one smart step at a time.”
+		   </div>
+
+		   <!-- Copyright -->
+		   <div class="mt-4 border-t border-gray-700 pt-4 text-center text-sm text-gray-500">
+		     © 2025 EduTrack. All Rights Reserved.
+		   </div>
+
+		   <!-- Back to Top Button -->
+		   <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})"
+		           class="fixed bottom-6 right-6 bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700 transition-all duration-300">
+		     ⬆️
+		   </button>
+		 </footer>
+
+		
+		
 	</div>
 </body>
 </html>

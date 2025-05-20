@@ -47,10 +47,10 @@ public class UserController {
     }
     
     @GetMapping("/Courses")
-    public String getCourses() {
-    	return "Courses";
+    public String coursesPage() {
+        return "Courses"; // no .html, Thymeleaf adds it
     }
-    
+
     
     //courses  controller in this section for selling the course
     @GetMapping("/courses/html")
@@ -119,7 +119,11 @@ public class UserController {
     }
     
     
-    
+    @GetMapping("/gamifiedzone")
+    public String showGamifiedZone() {
+        return "gamifiedzone"; // matches file name in templates/ or static/
+    }
+
     
     
     

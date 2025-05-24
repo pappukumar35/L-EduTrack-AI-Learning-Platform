@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduTrack Community</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #141414;
+            --bg-card: #1a1a1a;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --accent-primary: #00f2fe;
+            --accent-secondary: #4facfe;
+            --gradient-primary: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            --card-shadow: 0 4px 20px rgba(0, 242, 254, 0.1);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: var(--bg-secondary);
+            padding: 20px 0;
+            margin-bottom: 30px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8em;
+            font-weight: 700;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--gradient-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2em;
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: 15px 20px;
+            background: var(--bg-secondary);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-size: 1em;
+            margin-bottom: 20px;
+        }
+
+        .category-filter {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+        }
+
+        .category-btn {
+            padding: 10px 20px;
+            background: var(--bg-secondary);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: var(--transition);
+            white-space: nowrap;
+        }
+
+        .category-btn:hover {
+            background: var(--bg-card);
+            color: var(--text-primary);
+        }
+
+        .category-btn.active {
+            background: var(--gradient-primary);
+            color: var(--text-primary);
+            border: none;
+        }
+
+        .community-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .community-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
+            cursor: pointer;
+            text-decoration: none;
+            color: var(--text-primary);
+        }
+
+        .community-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--card-shadow);
+        }
+
+        .card-icon {
+            font-size: 2em;
+            margin-bottom: 15px;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .card-title {
+            font-size: 1.4em;
+            margin-bottom: 10px;
+        }
+
+        .card-description {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .card-stats {
+            display: flex;
+            gap: 15px;
+            color: var(--text-secondary);
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container header-content">
+            <a href="#" class="logo">EduTrack Community</a>
+            <div class="user-profile">
+                <div class="user-avatar">JD</div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <input type="text" class="search-bar" placeholder="Search community...">
+
+        <div class="category-filter">
+            <button class="category-btn active" data-category="all">All</button>
+            <button class="category-btn" data-category="forums">Forums</button>
+            <button class="category-btn" data-category="doubt">Doubt Corner</button>
+            <button class="category-btn" data-category="mentor">Mentor Connect</button>
+            <button class="category-btn" data-category="groups">Study Groups</button>
+            <button class="category-btn" data-category="ai">AI Assistant</button>
+        </div>
+
+        <div class="community-grid">
+            <a th:href="forums" class="community-card" data-category="forums">
+                <div class="card-icon"><i class="fas fa-comments"></i></div>
+                <h3 class="card-title">Forums</h3>
+                <p class="card-description">Join discussions, ask questions, and share knowledge with the community.</p>
+                <div class="card-stats">
+                    <span><i class="fas fa-comments"></i> 150+ Topics</span>
+                    <span><i class="fas fa-users"></i> 1.2k Members</span>
+                </div>
+            </a>
+
+            <a th:href="doubt-corner" class="community-card" data-category="doubt">
+                <div class="card-icon"><i class="fas fa-question-circle"></i></div>
+                <h3 class="card-title">Doubt Corner</h3>
+                <p class="card-description">Get your doubts cleared by experts in real-time sessions.</p>
+                <div class="card-stats">
+                    <span><i class="fas fa-clock"></i> 24/7 Available</span>
+                    <span><i class="fas fa-users"></i> 50+ Experts</span>
+                </div>
+            </a>
+
+            <a th:href="mentor-connect" class="community-card" data-category="mentor">
+                <div class="card-icon"><i class="fas fa-user-tie"></i></div>
+                <h3 class="card-title">Mentor Connect</h3>
+                <p class="card-description">Connect with industry experts and get personalized guidance.</p>
+                <div class="card-stats">
+                    <span><i class="fas fa-star"></i> 4.8 Rating</span>
+                    <span><i class="fas fa-users"></i> 100+ Mentors</span>
+                </div>
+            </a>
+
+            <a th:href="study-groups" class="community-card" data-category="groups">
+                <div class="card-icon"><i class="fas fa-users"></i></div>
+                <h3 class="card-title">Study Groups</h3>
+                <p class="card-description">Join study groups and learn collaboratively with peers.</p>
+                <div class="card-stats">
+                    <span><i class="fas fa-users"></i> 200+ Groups</span>
+                    <span><i class="fas fa-clock"></i> Active Now</span>
+                </div>
+            </a>
+
+            <a href="ai-assistant.html" class="community-card" data-category="ai">
+                <div class="card-icon"><i class="fas fa-robot"></i></div>
+                <h3 class="card-title">AI Assistant</h3>
+                <p class="card-description">Get instant help from our AI-powered learning assistant.</p>
+                <div class="card-stats">
+                    <span><i class="fas fa-bolt"></i> 24/7 Support</span>
+                    <span><i class="fas fa-star"></i> 4.9 Rating</span>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Initialize variables
+        const categoryButtons = document.querySelectorAll('.category-btn');
+        const communityCards = document.querySelectorAll('.community-card');
+
+        // Category filter
+        categoryButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                categoryButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+
+                const category = button.getAttribute('data-category');
+                communityCards.forEach(card => {
+                    if (category === 'all' || card.getAttribute('data-category') === category) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Search functionality
+        const searchBar = document.querySelector('.search-bar');
+        searchBar.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            communityCards.forEach(card => {
+                const title = card.querySelector('.card-title').textContent.toLowerCase();
+                const description = card.querySelector('.card-description').textContent.toLowerCase();
+                const stats = card.querySelector('.card-stats').textContent.toLowerCase();
+                if (
+                    title.includes(searchTerm) ||
+                    description.includes(searchTerm) ||
+                    stats.includes(searchTerm)
+                ) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html> 

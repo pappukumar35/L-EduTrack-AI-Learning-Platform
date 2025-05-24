@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EduTrack Dashboard</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <title>EduTrack - Student Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        /* Modern Reset and Base Styles */
+        /* Global Styles */
         * {
             margin: 0;
             padding: 0;
@@ -18,48 +18,1185 @@
 
         :root {
             --primary: #00f7ff;
-            --secondary: #00aaff;
-            --accent: #ff3e3e;
-            --background: #0a0a0a;
-            --card-bg: rgba(20, 20, 20, 0.8);
-            --text-primary: #FFFFFF;
-            --text-secondary: #B3B3B3;
-            --success: #4CAF50;
-            --warning: #FFC107;
-            --error: #CF6679;
-            --gradient-primary: linear-gradient(135deg, #00f7ff, #00aaff);
-            --gradient-secondary: linear-gradient(135deg, #ff3e3e, #ff8e53);
-            --gradient-dark: linear-gradient(135deg, #1a1a1a, #2a2a2a);
-            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
-            --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.2);
-            --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.3);
-            --border-light: 1px solid rgba(255, 255, 255, 0.1);
-            --border-glow: 1px solid rgba(0, 247, 255, 0.2);
+            --success: #2ecc71;
+            --warning: #e67e22;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+            --gradient-primary: linear-gradient(135deg, #00f7ff, #2980b9);
+            --text-secondary: #ecf0f1;
+            --background: #1a1a1a;
         }
 
         body {
-            background: var(--background);
-            color: var(--text-primary);
+            background: var(--light);
+            color: var(--dark);
             line-height: 1.6;
             min-height: 100vh;
-            background-image: 
-                radial-gradient(circle at 10% 20%, rgba(0, 247, 255, 0.05) 0%, transparent 20%),
-                radial-gradient(circle at 90% 80%, rgba(0, 170, 255, 0.05) 0%, transparent 20%);
         }
 
-        .container {
-            max-width: 1400px;
+        .challenges-container {
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 2rem;
         }
 
+        /* Progress Dashboard Styles */
+        .progress-dashboard {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .dashboard-header h2 {
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+        }
+
+        .level-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 500;
+        }
+
+        .level-badge.gold {
+            background: linear-gradient(135deg, #ffd700, #ffa500);
+            color: white;
+        }
+
+        .dashboard-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--light);
+            padding: 1.5rem;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: var(--transition);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+
+        .stat-card i {
+            font-size: 2rem;
+            color: var(--primary);
+        }
+
+        .stat-info h3 {
+            font-size: 0.9rem;
+            color: var(--dark);
+            opacity: 0.8;
+        }
+
+        .stat-info p {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .progress-section {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .progress-bar-container {
+            background: var(--light);
+            padding: 1.5rem;
+            border-radius: 10px;
+            transition: var(--transition);
+        }
+
+        .progress-bar-container:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--success));
+            border-radius: 4px;
+            transition: var(--transition);
+        }
+
+        /* Courses Section */
+        .courses-section {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .courses-section h2 {
+            color: var(--dark);
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+        }
+
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .course-card {
+            background: var(--light);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .course-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .course-icon {
+            width: 60px;
+            height: 60px;
+            background: white;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            transition: var(--transition);
+        }
+
+        .course-card:hover .course-icon {
+            transform: scale(1.1);
+        }
+
+        .course-icon i {
+            font-size: 2rem;
+            color: var(--primary);
+        }
+
+        .course-card h3 {
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .course-card p {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .course-progress {
+            margin-bottom: 1rem;
+        }
+
+        .course-progress .progress-bar {
+            height: 6px;
+            margin-bottom: 0.5rem;
+        }
+
+        .course-progress span {
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        .explore-btn {
+            width: 100%;
+            padding: 0.8rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        .explore-btn:hover {
+            background: #3498db;
+            transform: translateY(-2px);
+        }
+
+        /* Course-specific colors */
+        .course-card:nth-child(1) .course-icon i { color: #e34c26; } /* HTML */
+        .course-card:nth-child(2) .course-icon i { color: #264de4; } /* CSS */
+        .course-card:nth-child(3) .course-icon i { color: #f7df1e; } /* JavaScript */
+        .course-card:nth-child(4) .course-icon i { color: #00758f; } /* SQL */
+        .course-card:nth-child(5) .course-icon i { color: #306998; } /* Python */
+        .course-card:nth-child(6) .course-icon i { color: #007396; } /* Java */
+        .course-card:nth-child(7) .course-icon i { color: #61dafb; } /* React */
+
+        /* Achievements Section */
+        .achievements-section {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .achievements-section h2 {
+            color: var(--dark);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+        }
+
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .achievement-card {
+            background: var(--light);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .achievement-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .achievement-card i {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .achievement-card h3 {
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .achievement-card p {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .achievement-date {
+            font-size: 0.8rem;
+            color: #888;
+        }
+
+        /* Topics Progress Section */
+        .topics-progress {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .topics-progress h2 {
+            color: var(--dark);
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+        }
+
+        .topics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .topic-card {
+            background: var(--light);
+            padding: 1.5rem;
+            border-radius: 10px;
+            transition: var(--transition);
+        }
+
+        .topic-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .topic-card i {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .topic-card h3 {
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+
+        .topic-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .stat {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .stat .label {
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        .stat .value {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .topic-progress {
+            margin-top: 1rem;
+        }
+
+        /* Activity Graph Section */
+        .activity-graph {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .activity-graph h2 {
+            color: var(--dark);
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+        }
+
+        .graph-container {
+            position: relative;
+            height: 400px;
+            width: 100%;
+        }
+
+        .graph-tooltip {
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .challenges-container {
+                padding: 1rem;
+            }
+
+            .dashboard-header {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .dashboard-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .courses-grid,
+            .achievements-grid,
+            .topics-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .topic-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .graph-container {
+                height: 300px;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .stat-card,
+        .achievement-card,
+        .topic-card,
+        .course-card {
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        /* Profile Section */
+        .profile-section {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .profile-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: var(--light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .profile-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .profile-image .edit-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 0.5rem;
+            text-align: center;
+            color: white;
+            cursor: pointer;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .profile-image:hover .edit-overlay {
+            opacity: 1;
+        }
+
+        .profile-info {
+            flex: 1;
+        }
+
+        .profile-info h2 {
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .profile-info p {
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .profile-stat {
+            background: var(--light);
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .profile-stat h4 {
+            color: var(--dark);
+            margin-bottom: 0.25rem;
+        }
+
+        .profile-stat p {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .edit-profile-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .edit-profile-btn:hover {
+            background: #3498db;
+            transform: translateY(-2px);
+        }
+
+        /* Enrolled Courses Section */
+        .enrolled-courses {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .enrolled-courses h2 {
+            color: var(--dark);
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+        }
+
+        .enrolled-courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .enrolled-course-card {
+            background: var(--light);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .enrolled-course-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .course-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .course-icon {
+            width: 50px;
+            height: 50px;
+            background: white;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .course-icon i {
+            font-size: 1.5rem;
+        }
+
+        .course-info h3 {
+            color: var(--dark);
+            margin-bottom: 0.25rem;
+        }
+
+        .course-info p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .course-progress {
+            margin: 1rem 0;
+        }
+
+        .course-progress .progress-bar {
+            height: 6px;
+            background: #e0e0e0;
+            border-radius: 3px;
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+        }
+
+        .course-progress .progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--success));
+            border-radius: 3px;
+            transition: var(--transition);
+        }
+
+        .course-progress span {
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        .course-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .course-btn {
+            flex: 1;
+            padding: 0.8rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+            text-align: center;
+        }
+
+        .continue-btn {
+            background: var(--primary);
+            color: white;
+        }
+
+        .continue-btn:hover {
+            background: #3498db;
+            transform: translateY(-2px);
+        }
+
+        .view-btn {
+            background: var(--light);
+            color: var(--dark);
+            border: 1px solid #ddd;
+        }
+
+        .view-btn:hover {
+            background: #e0e0e0;
+            transform: translateY(-2px);
+        }
+
+        /* Course-specific colors */
+        .course-icon.html i { color: #e34c26; }
+        .course-icon.css i { color: #264de4; }
+        .course-icon.js i { color: #f7df1e; }
+        .course-icon.python i { color: #306998; }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .profile-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .profile-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .enrolled-courses-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .course-actions {
+                flex-direction: column;
+            }
+        }
+
+        /* Profile Modal Styles */
+        .profile-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .profile-modal.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-content {
+            background: white;
+            width: 90%;
+            max-width: 800px;
+            margin: auto;
+            border-radius: 15px;
+            position: relative;
+            transform: translateY(-20px);
+            transition: transform 0.3s ease;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .profile-modal.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h2 {
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #666;
+            cursor: pointer;
+            padding: 0.5rem;
+            transition: var(--transition);
+        }
+
+        .close-modal:hover {
+            color: var(--dark);
+            transform: rotate(90deg);
+        }
+
+        .modal-body {
+            padding: 1.5rem;
+        }
+
+        /* Profile Edit Form */
+        .profile-form {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            color: var(--dark);
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(41, 128, 185, 0.1);
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .save-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        .save-btn:hover {
+            background: #3498db;
+            transform: translateY(-2px);
+        }
+
+        .cancel-btn {
+            background: var(--light);
+            color: var(--dark);
+            border: 1px solid #ddd;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        .cancel-btn:hover {
+            background: #e0e0e0;
+            transform: translateY(-2px);
+        }
+
+        /* Profile Stats in Modal */
+        .profile-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .profile-stat-card {
+            background: var(--light);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .profile-stat-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+
+        .profile-stat-card i {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .profile-stat-card h3 {
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-stat-card p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design for Modal */
+        @media (max-width: 768px) {
+            .modal-content {
+                width: 95%;
+                margin: 1rem;
+            }
+
+            .profile-stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .form-actions {
+                flex-direction: column;
+            }
+
+            .save-btn,
+            .cancel-btn {
+                width: 100%;
+            }
+        }
+
+        /* Analytics Dashboard Styles */
+        .analytics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .analytics-card {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .analytics-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .analytics-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .analytics-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--light);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .analytics-icon i {
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        .analytics-info h3 {
+            color: var(--dark);
+            margin-bottom: 0.25rem;
+        }
+
+        .analytics-info p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .analytics-value {
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin: 1rem 0;
+        }
+
+        .analytics-trend {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--success);
+            font-size: 0.9rem;
+        }
+
+        .analytics-trend.negative {
+            color: #e74c3c;
+        }
+
+        /* Level Progress Section */
+        .level-progress {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .level-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .level-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .level-badge {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .level-badge.gold {
+            background: linear-gradient(135deg, #ffd700, #ffa500);
+            color: white;
+        }
+
+        .level-progress-bar {
+            height: 8px;
+            background: var(--light);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+        }
+
+        .level-progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--success));
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        /* Problem Solving Stats */
+        .problem-stats {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .problem-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .problem-stat-card {
+            background: var(--light);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .problem-stat-card h4 {
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .problem-stat-card .value {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .problem-stat-card .sub-value {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 0.25rem;
+        }
+
+        /* Difficulty Distribution */
+        .difficulty-chart {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .difficulty-bars {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .difficulty-bar {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .difficulty-label {
+            width: 100px;
+            color: var(--dark);
+            font-weight: 500;
+        }
+
+        .difficulty-progress {
+            flex: 1;
+            height: 8px;
+            background: var(--light);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .difficulty-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        .difficulty-fill.easy { background: #2ecc71; }
+        .difficulty-fill.medium { background: #f1c40f; }
+        .difficulty-fill.hard { background: #e74c3c; }
+
+        .difficulty-value {
+            width: 60px;
+            text-align: right;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .analytics-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .problem-stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .level-header {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+        }
+
+       
+		
+		
+		
 
 		/* Enhanced Navbar */
 		.navbar {
 		    display: flex;
 		    justify-content: space-between;
 		    align-items: center;
-		    padding: 20px 30px;
+		    padding: 15px 30px;
 		    background: rgba(10, 10, 10, 0.8);
 		    backdrop-filter: blur(20px);
 		    border: 1px solid rgba(255, 255, 255, 0.1);
@@ -70,6 +1207,8 @@
 		    top: 20px;
 		    z-index: 1000;
 		}
+		
+		
 
 		.navbar .logo {
 		    font-size: 28px;
@@ -193,650 +1332,11 @@
 		    box-shadow: 0 4px 15px rgba(0, 247, 255, 0.3);
 		}
 
-        /* Enhanced Cards */
-        .card {
-            background: var(--card-bg);
-            border-radius: 20px;
-            padding: 25px;
-            border: var(--border-light);
-            backdrop-filter: blur(20px);
-            transition: all 0.3s ease;
-            box-shadow: var(--shadow-md);
-        }
 
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-lg);
-            border: var(--border-glow);
-        }
-
-        /* Top Bar Enhancement */
-        .top-bar {
-            background: var(--card-bg);
-            padding: 25px;
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 30px;
-            border: var(--border-light);
-            backdrop-filter: blur(20px);
-            box-shadow: var(--shadow-md);
-        }
-
-        .user-profile {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .profile-pic {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: var(--gradient-primary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-primary);
-            font-weight: bold;
-            font-size: 24px;
-            box-shadow: var(--shadow-md);
-            border: var(--border-glow);
-        }
-
-        .user-info h2 {
-            font-size: 1.4rem;
-            margin-bottom: 8px;
-            color: var(--text-primary);
-            font-weight: 600;
-        }
-
-        .level-badge {
-            background: var(--gradient-primary);
-            color: var(--text-primary);
-            padding: 6px 16px;
-            border-radius: 30px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            border: none;
-            cursor: pointer;
-            box-shadow: var(--shadow-sm);
-        }
-
-        /* Enhanced Progress Bars */
-        .progress-bar {
-            height: 10px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            overflow: hidden;
-            margin: 15px 0;
-            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
-        }
-
-        .progress {
-            height: 100%;
-            background: var(--gradient-primary);
-            border-radius: 10px;
-            transition: width 0.5s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .progress::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(
-                90deg,
-                transparent,
-                rgba(255, 255, 255, 0.2),
-                transparent
-            );
-            animation: shimmer 2s infinite;
-        }
-
-        /* Enhanced Grid Layout */
-        .challenges-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 25px;
-            margin-bottom: 30px;
-        }
-
-        .challenge-card {
-            background: var(--card-bg);
-            padding: 25px;
-            border-radius: 20px;
-            border: var(--border-light);
-            backdrop-filter: blur(20px);
-            transition: all 0.3s ease;
-            box-shadow: var(--shadow-md);
-        }
-
-        .challenge-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-lg);
-            border: var(--border-glow);
-        }
-
-        .challenge-header {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-
-        .challenge-icon {
-            width: 50px;
-            height: 50px;
-            background: var(--gradient-primary);
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-primary);
-            font-size: 1.5rem;
-            box-shadow: var(--shadow-md);
-        }
-
-        /* Enhanced Analytics Section */
-        .analytics-section {
-            background: var(--card-bg);
-            padding: 30px;
-            border-radius: 20px;
-            margin-bottom: 30px;
-            border: var(--border-light);
-            backdrop-filter: blur(20px);
-            box-shadow: var(--shadow-md);
-        }
-
-        .analytics-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin-top: 25px;
-        }
-
-        .analytics-card {
-            background: var(--gradient-dark);
-            padding: 25px;
-            border-radius: 20px;
-            color: var(--text-primary);
-            text-align: center;
-            border: var(--border-light);
-            transition: all 0.3s ease;
-        }
-
-        .analytics-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-lg);
-            border: var(--border-glow);
-        }
-
-        .analytics-card .number {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin: 15px 0;
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        /* Enhanced Streak Display */
-        .streak-container {
-            background: var(--gradient-secondary);
-            padding: 30px;
-            border-radius: 20px;
-            color: var(--text-primary);
-            text-align: center;
-            margin-bottom: 30px;
-            box-shadow: var(--shadow-lg);
-            border: var(--border-light);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .streak-container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(
-                45deg,
-                transparent,
-                rgba(255, 255, 255, 0.1),
-                transparent
-            );
-            animation: shine 3s infinite;
-        }
-
-        .streak-fire {
-            font-size: 3rem;
-            color: #FFD700;
-            animation: flame 1s infinite alternate;
-            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
-        }
-
-        .streak-days {
-            font-size: 3rem;
-            font-weight: 700;
-            margin: 15px 0;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
-        }
-
-        /* Enhanced Animations */
-        @keyframes shimmer {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
-        }
-
-        @keyframes shine {
-            0% { transform: translateX(-100%) rotate(45deg); }
-            100% { transform: translateX(100%) rotate(45deg); }
-        }
-
-        @keyframes flame {
-            0% { transform: scale(1) rotate(-5deg); }
-            100% { transform: scale(1.2) rotate(5deg); }
-        }
-
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
-        }
-
-        /* Responsive Design */
-        @media (max-width: 1200px) {
-            .container {
-                padding: 15px;
-            }
-            
-            .challenges-grid {
-                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            }
-        }
-
-        @media (max-width: 768px) {
-            .navbar {
-                flex-direction: column;
-                padding: 15px;
-                position: relative;
-            }
-
-            .navbar nav {
-                margin: 15px 0;
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 10px;
-            }
-
-            .navbar nav a {
-                padding: 6px 12px;
-                font-size: 0.9rem;
-            }
-
-            .navbar .auth-buttons {
-                margin-top: 15px;
-                gap: 10px;
-            }
-
-            .navbar .auth-buttons a {
-                padding: 8px 16px;
-                font-size: 0.9rem;
-            }
-
-            .analytics-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Chart Customization */
-        .chart-container {
-            background: var(--card-bg);
-            padding: 25px;
-            border-radius: 20px;
-            border: var(--border-light);
-            backdrop-filter: blur(20px);
-            box-shadow: var(--shadow-md);
-            margin-top: 25px;
-        }
-
-        /* Achievement Popup Enhancement */
-        .achievement-popup {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: var(--gradient-primary);
-            padding: 20px;
-            border-radius: 15px;
-            color: var(--text-primary);
-            display: none;
-            align-items: center;
-            gap: 15px;
-            box-shadow: var(--shadow-lg);
-            animation: slideIn 0.5s ease;
-            z-index: 1000;
-        }
-
-        .achievement-popup i {
-            font-size: 24px;
-            color: #FFD700;
-        }
-
-        /* Motivational Text Enhancement */
-        .motivational-text {
-            text-align: center;
-            margin: 20px 0;
-            padding: 20px;
-            background: var(--gradient-dark);
-            color: var(--text-primary);
-            border-radius: 15px;
-            font-size: 1.2rem;
-            font-weight: 500;
-            border: var(--border-light);
-            box-shadow: var(--shadow-md);
-            animation: fadeIn 2s ease-in-out;
-        }
-
-        /* Enhanced Leaderboard Section */
-        .leaderboard {
-            background: var(--card-bg);
-            padding: 30px;
-            border-radius: 20px;
-            margin-bottom: 30px;
-            border: var(--border-light);
-            backdrop-filter: blur(20px);
-            box-shadow: var(--shadow-md);
-        }
-
-        .leaderboard h2 {
-            font-size: 1.8rem;
-            margin-bottom: 25px;
-            color: var(--text-primary);
-            text-align: center;
-            position: relative;
-            padding-bottom: 15px;
-        }
-
-        .leaderboard h2::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 3px;
-            background: var(--gradient-primary);
-            border-radius: 3px;
-        }
-
-        .leaderboard-item {
-            display: flex;
-            align-items: center;
-            padding: 20px;
-            border-radius: 15px;
-            margin-bottom: 15px;
-            background: rgba(255, 255, 255, 0.05);
-            transition: all 0.3s ease;
-        }
-
-        .leaderboard-item:hover {
-            transform: translateX(10px);
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .leaderboard-item .rank {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--primary);
-            width: 50px;
-            text-align: center;
-        }
-
-        .student-info {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            flex: 1;
-        }
-
-        .student-pic {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: var(--gradient-primary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-primary);
-            font-weight: bold;
-            font-size: 1.2rem;
-            box-shadow: var(--shadow-md);
-            border: var(--border-glow);
-        }
-
-        .student-info span {
-            font-size: 1.1rem;
-            font-weight: 500;
-        }
-
-        .leaderboard-item .xp {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--primary);
-            padding: 8px 15px;
-            background: rgba(0, 247, 255, 0.1);
-            border-radius: 20px;
-        }
-
-        /* Enhanced Progress Tracker */
-        .progress-tracker {
-            background: var(--card-bg);
-            padding: 30px;
-            border-radius: 20px;
-            margin-bottom: 30px;
-            border: var(--border-light);
-            backdrop-filter: blur(20px);
-            box-shadow: var(--shadow-md);
-        }
-
-        .progress-tracker h2 {
-            font-size: 1.8rem;
-            margin-bottom: 25px;
-            color: var(--text-primary);
-            text-align: center;
-            position: relative;
-            padding-bottom: 15px;
-        }
-
-        .progress-tracker h2::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 3px;
-            background: var(--gradient-primary);
-            border-radius: 3px;
-        }
-
-        .streak {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 25px;
-            padding: 20px;
-            background: var(--gradient-secondary);
-            border-radius: 15px;
-            box-shadow: var(--shadow-md);
-        }
-
-        .streak i {
-            font-size: 2rem;
-            color: #FFD700;
-            animation: flame 1s infinite alternate;
-        }
-
-        .streak span {
-            font-size: 1.4rem;
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-
-        /* Enhanced Badge Showcase */
-        .badge-showcase {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin-bottom: 30px;
-        }
-
-        .badge {
-            background: var(--card-bg);
-            padding: 30px;
-            border-radius: 20px;
-            text-align: center;
-            border: var(--border-light);
-            backdrop-filter: blur(20px);
-            box-shadow: var(--shadow-md);
-            transition: all 0.3s ease;
-        }
-
-        .badge:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-lg);
-            border: var(--border-glow);
-        }
-
-        .badge-icon {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 20px;
-            background: var(--gradient-primary);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-primary);
-            font-size: 2rem;
-            box-shadow: var(--shadow-md);
-            border: var(--border-glow);
-        }
-
-        .badge h3 {
-            font-size: 1.4rem;
-            margin-bottom: 10px;
-            color: var(--text-primary);
-            font-weight: 600;
-        }
-
-        .badge p {
-            color: var(--text-secondary);
-            font-size: 1rem;
-        }
-
-        /* Enhanced Rewards Section */
-        .rewards {
-            background: var(--card-bg);
-            padding: 30px;
-            border-radius: 20px;
-            border: var(--border-light);
-            backdrop-filter: blur(20px);
-            box-shadow: var(--shadow-md);
-        }
-
-        .rewards h2 {
-            font-size: 1.8rem;
-            margin-bottom: 25px;
-            color: var(--text-primary);
-            text-align: center;
-            position: relative;
-            padding-bottom: 15px;
-        }
-
-        .rewards h2::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 3px;
-            background: var(--gradient-primary);
-            border-radius: 3px;
-        }
-
-        .reward-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 20px;
-            border-radius: 15px;
-            margin-bottom: 15px;
-            background: rgba(255, 255, 255, 0.05);
-            transition: all 0.3s ease;
-        }
-
-        .reward-item:hover {
-            transform: translateX(10px);
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .reward-info {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .reward-icon {
-            width: 60px;
-            height: 60px;
-            background: var(--gradient-primary);
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-primary);
-            font-size: 1.5rem;
-            box-shadow: var(--shadow-md);
-        }
-
-        .reward-info h3 {
-            font-size: 1.2rem;
-            margin-bottom: 5px;
-            color: var(--text-primary);
-        }
-
-        .points-required {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
-
-        .reward-item .level-badge {
-            padding: 10px 20px;
-            font-size: 0.9rem;
-            background: var(--gradient-dark);
-            border: var(--border-light);
-        }
-
-        .reward-item .level-badge.unlocked {
-            background: var(--gradient-primary);
-            border: var(--border-glow);
-        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Navbar -->
+    <div class="challenges-container">
         <header class="navbar">
             <div class="logo">
                 <i class="fa fa-graduation-cap" aria-hidden="true"></i> EduTrack
@@ -846,514 +1346,466 @@
                 <a href="/" aria-label="Home">
                     <i class="fa fa-home" aria-hidden="true"></i> Home
                 </a>
+                
                 <a href="/Courses" aria-label="Courses">
                     <i class="fa-solid fa-book-open-reader"></i> Courses
                 </a>
+                
                 <a href="/gamifiedzone" aria-label="Gamified Zone">Gamified Zone</a>
-                <a href="/event" aria-label="Progress">Progress</a>
-                <a href="/splicot" aria-label="Goals">Goals</a>
+                <a href="/challenge" aria-label="Goals">Challenge</a>
                 <a href="/event" aria-label="Community">Community</a>
-                <a href="/splicot" aria-label="Careers">Careers</a>
+                <a href="/career" aria-label="Careers">Careers</a>
             </nav>
 
-            <div class="auth-buttons">
-                <a href="/login" class="btn outline" aria-label="Login">Login</a>
-                <a href="/register" class="btn fill" aria-label="Signup">Signup</a>
-            </div>
+           
         </header>
 
-        <!-- Motivational Text -->
-        <div class="motivational-text" id="motivationalText">
-            Keep pushing forward! Every step counts towards your success. 🚀
-        </div>
-
-        <!-- Achievement Popup -->
-        <div class="achievement-popup" id="achievementPopup">
-            <i class="fas fa-trophy"></i>
-            <span>New Achievement Unlocked!</span>
-        </div>
-
-        <!-- Top Bar -->
-        <div class="top-bar">
-            <div class="user-profile">
-                <div class="profile-pic">JD</div>
-                <div class="user-info">
-                    <h2>John Doe</h2>
-                    <span class="level-badge">Level 5</span>
-                </div>
-            </div>
-            <div class="xp-bar">
-                <div class="xp-progress"></div>
-            </div>
-        </div>
-
-        <!-- Challenges Section -->
-        <div class="challenges-grid">
-            <div class="challenge-card">
-                <div class="challenge-header">
-                    <div class="challenge-icon">
-                        <i class="fas fa-star"></i>
+        <!-- Analytics Dashboard -->
+        <section class="analytics-grid">
+            <div class="analytics-card">
+                <div class="analytics-header">
+                    <div class="analytics-icon">
+                        <i class="fas fa-fire"></i>
                     </div>
-                    <h3>Daily Challenge</h3>
-                </div>
-                <p>Complete 3 quizzes</p>
-                <div class="progress-bar">
-                    <div class="progress" style="width: 60%"></div>
-                </div>
-                <span>2/3 Completed</span>
-            </div>
-
-            <div class="challenge-card">
-                <div class="challenge-header">
-                    <div class="challenge-icon">
-                        <i class="fas fa-calendar-week"></i>
+                    <div class="analytics-info">
+                        <h3>Coding Streak</h3>
+                        <p>Current Streak</p>
                     </div>
-                    <h3>Weekly Challenge</h3>
                 </div>
-                <p>Score 1000 points</p>
-                <div class="progress-bar">
-                    <div class="progress" style="width: 40%"></div>
+                <div class="analytics-value">15 Days</div>
+                <div class="analytics-trend">
+                    <i class="fas fa-arrow-up"></i>
+                    <span>3 days longer than last week</span>
                 </div>
-                <span>400/1000 Points</span>
             </div>
 
-            <div class="challenge-card">
-                <div class="challenge-header">
-                    <div class="challenge-icon">
+            <div class="analytics-card">
+                <div class="analytics-header">
+                    <div class="analytics-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <div class="analytics-info">
+                        <h3>Problems Solved</h3>
+                        <p>Total Solutions</p>
+                    </div>
+                </div>
+                <div class="analytics-value">247</div>
+                <div class="analytics-trend">
+                    <i class="fas fa-arrow-up"></i>
+                    <span>12% increase this month</span>
+                </div>
+            </div>
+
+            <div class="analytics-card">
+                <div class="analytics-header">
+                    <div class="analytics-icon">
                         <i class="fas fa-trophy"></i>
                     </div>
-                    <h3>Monthly Challenge</h3>
-                </div>
-                <p>Complete all courses</p>
-                <div class="progress-bar">
-                    <div class="progress" style="width: 25%"></div>
-                </div>
-                <span>3/12 Courses</span>
-            </div>
-        </div>
-
-        <!-- Leaderboard -->
-        <div class="leaderboard">
-            <h2>Top Students</h2>
-            <div class="leaderboard-item">
-                <span class="rank">1</span>
-                <div class="student-info">
-                    <div class="student-pic">JD</div>
-                    <span>John Doe</span>
-                </div>
-                <span class="xp">2500 XP</span>
-            </div>
-            <div class="leaderboard-item">
-                <span class="rank">2</span>
-                <div class="student-info">
-                    <div class="student-pic">AS</div>
-                    <span>Alice Smith</span>
-                </div>
-                <span class="xp">2300 XP</span>
-            </div>
-            <div class="leaderboard-item">
-                <span class="rank">3</span>
-                <div class="student-info">
-                    <div class="student-pic">RJ</div>
-                    <span>Robert Johnson</span>
-                </div>
-                <span class="xp">2100 XP</span>
-            </div>
-        </div>
-
-        <!-- Progress Tracker -->
-        <div class="progress-tracker">
-            <h2>Your Progress</h2>
-            <div class="streak">
-                <i class="fas fa-fire"></i>
-                <span>7 Day Streak!</span>
-            </div>
-            <div class="progress-bar">
-                <div class="progress" style="width: 75%"></div>
-            </div>
-            <p>75% of course completed</p>
-        </div>
-
-        <!-- Badge Showcase -->
-        <div class="badge-showcase">
-            <div class="badge">
-                <div class="badge-icon">
-                    <i class="fas fa-award"></i>
-                </div>
-                <h3>Quick Learner</h3>
-                <p>Complete 5 courses</p>
-            </div>
-            <div class="badge">
-                <div class="badge-icon">
-                    <i class="fas fa-brain"></i>
-                </div>
-                <h3>Knowledge Seeker</h3>
-                <p>Score 100% in 3 quizzes</p>
-            </div>
-            <div class="badge">
-                <div class="badge-icon">
-                    <i class="fas fa-star"></i>
-                </div>
-                <h3>Perfect Streak</h3>
-                <p>7 days of learning</p>
-            </div>
-        </div>
-
-        <!-- Rewards Section -->
-        <div class="rewards">
-            <h2>Available Rewards</h2>
-            <div class="reward-item">
-                <div class="reward-info">
-                    <div class="reward-icon">
-                        <i class="fas fa-certificate"></i>
-                    </div>
-                    <div>
-                        <h3>Advanced Course Certificate</h3>
-                        <p class="points-required">2000 points required</p>
+                    <div class="analytics-info">
+                        <h3>Success Rate</h3>
+                        <p>Problem Solving</p>
                     </div>
                 </div>
-                <button class="level-badge">Locked</button>
-            </div>
-            <div class="reward-item">
-                <div class="reward-info">
-                    <div class="reward-icon">
-                        <i class="fas fa-user-astronaut"></i>
-                    </div>
-                    <div>
-                        <h3>Premium Avatar Pack</h3>
-                        <p class="points-required">1500 points required</p>
-                    </div>
+                <div class="analytics-value">85%</div>
+                <div class="analytics-trend">
+                    <i class="fas fa-arrow-up"></i>
+                    <span>5% better than last month</span>
                 </div>
-                <button class="level-badge">Locked</button>
             </div>
-        </div>
 
-        <!-- Enhanced Streak Display -->
-        <div class="streak-container">
-            <div class="streak-fire">
-                <i class="fas fa-fire"></i>
-            </div>
-            <div class="streak-days" id="streakDays">7</div>
-            <div class="streak-message">Keep the fire burning! 🔥</div>
-            <div class="course-progress">
-                <span>Next Milestone: 10 days</span>
-                <div class="course-progress-bar">
-                    <div class="course-progress-fill" style="width: 70%"></div>
+            <div class="analytics-card">
+                <div class="analytics-header">
+                    <div class="analytics-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="analytics-info">
+                        <h3>Average Time</h3>
+                        <p>Per Problem</p>
+                    </div>
+                </div>
+                <div class="analytics-value">12m</div>
+                <div class="analytics-trend negative">
+                    <i class="fas fa-arrow-down"></i>
+                    <span>2m faster than last week</span>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <!-- Course Analytics Section -->
-        <div class="analytics-section">
-            <h2>Course Analytics</h2>
-            <div class="analytics-grid">
-                <div class="analytics-card">
-                    <h3>Total Courses</h3>
-                    <div class="number" id="totalCourses">12</div>
-                    <p>Available Courses</p>
+        <!-- Level Progress -->
+        <section class="level-progress">
+            <div class="level-header">
+                <div class="level-info">
+                    <div class="level-badge gold">
+                        <i class="fas fa-crown"></i>
+                        <span>Gold Level</span>
+                    </div>
+                    <h3>Level 8 - Advanced Problem Solver</h3>
                 </div>
-                <div class="analytics-card">
-                    <h3>Completed</h3>
-                    <div class="number" id="completedCourses">9</div>
-                    <p>Courses Finished</p>
+                <button class="edit-profile-btn" onclick="openProfileModal()">
+                    <i class="fas fa-user"></i> View Profile
+                </button>
+            </div>
+            <div class="level-progress-bar">
+                <div class="level-progress-fill" style="width: 75%"></div>
+            </div>
+            <div class="progress-info">
+                <span>75% to Level 9</span>
+                <span>750/1000 XP</span>
+            </div>
+        </section>
+
+        <!-- Problem Solving Stats -->
+        <section class="problem-stats">
+            <h2><i class="fas fa-chart-bar"></i> Problem Solving Statistics</h2>
+            <div class="problem-stats-grid">
+                <div class="problem-stat-card">
+                    <h4>Easy Problems</h4>
+                    <div class="value">120</div>
+                    <div class="sub-value">98% Success Rate</div>
                 </div>
-                <div class="analytics-card">
-                    <h3>Success Rate</h3>
-                    <div class="number" id="successRate">75%</div>
-                    <p>Average Score</p>
+                <div class="problem-stat-card">
+                    <h4>Medium Problems</h4>
+                    <div class="value">85</div>
+                    <div class="sub-value">82% Success Rate</div>
+                </div>
+                <div class="problem-stat-card">
+                    <h4>Hard Problems</h4>
+                    <div class="value">42</div>
+                    <div class="sub-value">65% Success Rate</div>
+                </div>
+                <div class="problem-stat-card">
+                    <h4>Total Submissions</h4>
+                    <div class="value">1,245</div>
+                    <div class="sub-value">Last 30 Days: 156</div>
                 </div>
             </div>
-            <div class="chart-container">
-                <canvas id="courseProgressChart"></canvas>
+        </section>
+
+        <!-- Difficulty Distribution -->
+        <section class="difficulty-chart">
+            <h2><i class="fas fa-chart-pie"></i> Difficulty Distribution</h2>
+            <div class="difficulty-bars">
+                <div class="difficulty-bar">
+                    <span class="difficulty-label">Easy</span>
+                    <div class="difficulty-progress">
+                        <div class="difficulty-fill easy" style="width: 90%"></div>
+                    </div>
+                    <span class="difficulty-value">90%</span>
+                </div>
+                <div class="difficulty-bar">
+                    <span class="difficulty-label">Medium</span>
+                    <div class="difficulty-progress">
+                        <div class="difficulty-fill medium" style="width: 75%"></div>
+                    </div>
+                    <span class="difficulty-value">75%</span>
+                </div>
+                <div class="difficulty-bar">
+                    <span class="difficulty-label">Hard</span>
+                    <div class="difficulty-progress">
+                        <div class="difficulty-fill hard" style="width: 60%"></div>
+                    </div>
+                    <span class="difficulty-value">60%</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Enrolled Courses Section -->
+        <section class="enrolled-courses">
+            <h2><i class="fas fa-graduation-cap"></i> My Courses</h2>
+            <div class="enrolled-courses-grid">
+                <div class="enrolled-course-card">
+                    <div class="course-header">
+                        <div class="course-icon html">
+                            <i class="fab fa-html5"></i>
+                        </div>
+                        <div class="course-info">
+                            <h3>HTML Fundamentals</h3>
+                            <p>Web Development</p>
+                        </div>
+                    </div>
+                    <div class="course-progress">
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 75%"></div>
+                        </div>
+                        <span>75% Complete</span>
+                    </div>
+                    <div class="course-actions">
+                        <button class="course-btn continue-btn">Continue Learning</button>
+                        <button class="course-btn view-btn">View Details</button>
+                    </div>
+                </div>
+
+                <div class="enrolled-course-card">
+                    <div class="course-header">
+                        <div class="course-icon css">
+                            <i class="fab fa-css3-alt"></i>
+                        </div>
+                        <div class="course-info">
+                            <h3>CSS Styling</h3>
+                            <p>Web Development</p>
+                        </div>
+                    </div>
+                    <div class="course-progress">
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 45%"></div>
+                        </div>
+                        <span>45% Complete</span>
+                    </div>
+                    <div class="course-actions">
+                        <button class="course-btn continue-btn">Continue Learning</button>
+                        <button class="course-btn view-btn">View Details</button>
+                    </div>
+                </div>
+
+                <div class="enrolled-course-card">
+                    <div class="course-header">
+                        <div class="course-icon js">
+                            <i class="fab fa-js"></i>
+                        </div>
+                        <div class="course-info">
+                            <h3>JavaScript Basics</h3>
+                            <p>Web Development</p>
+                        </div>
+                    </div>
+                    <div class="course-progress">
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 30%"></div>
+                        </div>
+                        <span>30% Complete</span>
+                    </div>
+                    <div class="course-actions">
+                        <button class="course-btn continue-btn">Continue Learning</button>
+                        <button class="course-btn view-btn">View Details</button>
+                    </div>
+                </div>
+
+                <div class="enrolled-course-card">
+                    <div class="course-header">
+                        <div class="course-icon python">
+                            <i class="fab fa-python"></i>
+                        </div>
+                        <div class="course-info">
+                            <h3>Python Programming</h3>
+                            <p>Programming</p>
+                        </div>
+                    </div>
+                    <div class="course-progress">
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 60%"></div>
+                        </div>
+                        <span>60% Complete</span>
+                    </div>
+                    <div class="course-actions">
+                        <button class="course-btn continue-btn">Continue Learning</button>
+                        <button class="course-btn view-btn">View Details</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Activity Graph Section -->
+        <section class="activity-graph">
+            <h2><i class="fas fa-chart-line"></i> Learning Activity</h2>
+            <div class="graph-container">
+                <canvas id="activityChart"></canvas>
+            </div>
+        </section>
+    </div>
+
+    <!-- Profile Modal -->
+    <div class="profile-modal" id="profileModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-user-circle"></i> Profile Information</h2>
+                <button class="close-modal" onclick="closeProfileModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="profile-header">
+                    <div class="profile-image">
+                        <img src="https://via.placeholder.com/120" alt="Profile Picture">
+                        <div class="edit-overlay">
+                            <i class="fas fa-camera"></i> Change Photo
+                        </div>
+                    </div>
+                    <div class="profile-info">
+                        <h2>John Doe</h2>
+                        <p><i class="fas fa-envelope"></i> john.doe@example.com</p>
+                        <p><i class="fas fa-phone"></i> +1 234 567 890</p>
+                        <p><i class="fas fa-map-marker-alt"></i> New York, USA</p>
+                    </div>
+                </div>
+
+                <form class="profile-form">
+                    <div class="form-group">
+                        <label for="fullName">Full Name</label>
+                        <input type="text" id="fullName" value="John Doe">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" value="john.doe@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone</label>
+                        <input type="tel" id="phone" value="+1 234 567 890">
+                    </div>
+                    <div class="form-group">
+                        <label for="location">Location</label>
+                        <input type="text" id="location" value="New York, USA">
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="save-btn">Save Changes</button>
+                        <button type="button" class="cancel-btn" onclick="closeProfileModal()">Cancel</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 
     <script>
-        // Sample user data (in real application, this would come from a backend)
-        const userData = {
-            name: "John Doe",
-            level: 5,
-            xp: 1875,
-            xpToNextLevel: 2500,
-            streak: 7,
-            completedCourses: 9,
-            totalCourses: 12,
-            dailyChallenge: {
-                completed: 2,
-                total: 3,
-                task: "Complete 3 quizzes"
-            },
-            weeklyChallenge: {
-                points: 400,
-                target: 1000,
-                task: "Score 1000 points"
-            },
-            monthlyChallenge: {
-                completed: 3,
-                total: 12,
-                task: "Complete all courses"
-            },
-            badges: [
-                { name: "Quick Learner", icon: "award", description: "Complete 5 courses" },
-                { name: "Knowledge Seeker", icon: "brain", description: "Score 100% in 3 quizzes" },
-                { name: "Perfect Streak", icon: "star", description: "7 days of learning" }
-            ],
-            leaderboard: [
-                { name: "John Doe", xp: 2500, initials: "JD" },
-                { name: "Alice Smith", xp: 2300, initials: "AS" },
-                { name: "Robert Johnson", xp: 2100, initials: "RJ" }
-            ],
-            rewards: [
-                { name: "Advanced Course Certificate", points: 2000, icon: "certificate" },
-                { name: "Premium Avatar Pack", points: 1500, icon: "user-astronaut" }
-            ],
-            courseAnalytics: {
-                totalCourses: 12,
-                completedCourses: 9,
-                successRate: 75,
-                courseProgress: [
-                    { month: 'Jan', completed: 2 },
-                    { month: 'Feb', completed: 3 },
-                    { month: 'Mar', completed: 4 },
-                    { month: 'Apr', completed: 6 },
-                    { month: 'May', completed: 7 },
-                    { month: 'Jun', completed: 9 }
-                ],
-                courseCategories: {
-                    'Programming': 4,
-                    'Mathematics': 2,
-                    'Science': 3
-                }
+        // Generate random data for the last 7 days
+        const generateData = () => {
+            const data = [];
+            const labels = [];
+            const today = new Date();
+            
+            for (let i = 6; i >= 0; i--) {
+                const date = new Date(today);
+                date.setDate(date.getDate() - i);
+                labels.push(date.toLocaleDateString('en-US', { weekday: 'short' }));
+                data.push(Math.floor(Math.random() * 100));
             }
+            
+            return { labels, data };
         };
 
-        // Motivational quotes
-        const motivationalQuotes = [
-            "Keep pushing forward! Every step counts towards your success. 🚀",
-            "Learning is a journey, not a destination. Enjoy the ride! 🌟",
-            "Your potential is limitless. Keep exploring! 💫",
-            "Every challenge is an opportunity to grow. 🌱",
-            "Success is built one lesson at a time. 📚"
-        ];
+        // Chart configuration
+        const ctx = document.getElementById('activityChart').getContext('2d');
+        const { labels, data } = generateData();
 
-        // Update dashboard with user data
-        function updateDashboard() {
-            // Update user profile
-            document.querySelector('.profile-pic').textContent = userData.name.split(' ').map(n => n[0]).join('');
-            document.querySelector('.user-info h2').textContent = userData.name;
-            document.querySelector('.level-badge').textContent = `Level ${userData.level}`;
-
-            // Update XP bar
-            const xpPercentage = (userData.xp / userData.xpToNextLevel) * 100;
-            document.querySelector('.xp-progress').style.width = `${xpPercentage}%`;
-
-            // Update challenges
-            updateChallenge('daily', userData.dailyChallenge);
-            updateChallenge('weekly', userData.weeklyChallenge);
-            updateChallenge('monthly', userData.monthlyChallenge);
-
-            // Update progress tracker
-            const coursePercentage = (userData.completedCourses / userData.totalCourses) * 100;
-            document.querySelector('.progress-tracker .progress').style.width = `${coursePercentage}%`;
-            document.querySelector('.progress-tracker p').textContent = `${coursePercentage}% of course completed`;
-
-            // Update streak
-            document.querySelector('.streak span').textContent = `${userData.streak} Day Streak!`;
-
-            // Update leaderboard
-            updateLeaderboard();
-
-            // Update badges
-            updateBadges();
-
-            // Update rewards
-            updateRewards();
-        }
-
-        function updateChallenge(type, data) {
-            const card = document.querySelector(`.challenge-card:nth-child(${
-                type === 'daily' ? 1 : type === 'weekly' ? 2 : 3
-            })`);
-            
-            card.querySelector('p').textContent = data.task;
-            const progress = card.querySelector('.progress');
-            const percentage = type === 'weekly' 
-                ? (data.points / data.target) * 100
-                : (data.completed / data.total) * 100;
-            progress.style.width = `${percentage}%`;
-            
-            const status = card.querySelector('span');
-            if (type === 'weekly') {
-                status.textContent = `${data.points}/${data.target} Points`;
-            } else {
-                status.textContent = `${data.completed}/${data.total} Completed`;
-            }
-        }
-
-        function updateLeaderboard() {
-            const leaderboardItems = document.querySelectorAll('.leaderboard-item');
-            userData.leaderboard.forEach((student, index) => {
-                const item = leaderboardItems[index];
-                item.querySelector('.student-pic').textContent = student.initials;
-                item.querySelector('.student-info span').textContent = student.name;
-                item.querySelector('.xp').textContent = `${student.xp} XP`;
-            });
-        }
-
-        function updateBadges() {
-            const badges = document.querySelectorAll('.badge');
-            userData.badges.forEach((badge, index) => {
-                const badgeElement = badges[index];
-                badgeElement.querySelector('h3').textContent = badge.name;
-                badgeElement.querySelector('p').textContent = badge.description;
-                badgeElement.querySelector('i').className = `fas fa-${badge.icon}`;
-            });
-        }
-
-        function updateRewards() {
-            const rewards = document.querySelectorAll('.reward-item');
-            userData.rewards.forEach((reward, index) => {
-                const rewardElement = rewards[index];
-                rewardElement.querySelector('h3').textContent = reward.name;
-                rewardElement.querySelector('.points-required').textContent = `${reward.points} points required`;
-                rewardElement.querySelector('i').className = `fas fa-${reward.icon}`;
-            });
-        }
-
-        // Change motivational text every 10 seconds
-        function updateMotivationalText() {
-            const textElement = document.getElementById('motivationalText');
-            let currentIndex = 0;
-
-            setInterval(() => {
-                currentIndex = (currentIndex + 1) % motivationalQuotes.length;
-                textElement.style.opacity = '0';
-                setTimeout(() => {
-                    textElement.textContent = motivationalQuotes[currentIndex];
-                    textElement.style.opacity = '1';
-                }, 500);
-            }, 10000);
-        }
-
-        // Show achievement popup
-        function showAchievementPopup() {
-            const popup = document.getElementById('achievementPopup');
-            popup.style.display = 'block';
-            setTimeout(() => {
-                popup.style.display = 'none';
-            }, 3000);
-        }
-
-        // Initialize dashboard
-        document.addEventListener('DOMContentLoaded', () => {
-            updateDashboard();
-            updateMotivationalText();
-            
-            // Simulate achievement unlock (for demo)
-            setTimeout(showAchievementPopup, 5000);
-        });
-
-        // Add level up animation
-        function levelUp() {
-            const levelBadge = document.querySelector('.level-badge');
-            levelBadge.classList.add('level-up-animation');
-            setTimeout(() => {
-                levelBadge.classList.remove('level-up-animation');
-            }, 500);
-        }
-
-        // Simulate XP gain (for demo)
-        setInterval(() => {
-            userData.xp += 100;
-            if (userData.xp >= userData.xpToNextLevel) {
-                userData.level++;
-                userData.xp = 0;
-                levelUp();
-            }
-            updateDashboard();
-        }, 10000);
-
-        // Initialize Course Progress Chart
-        function initializeCourseChart() {
-            const ctx = document.getElementById('courseProgressChart').getContext('2d');
-            new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: userData.courseAnalytics.courseProgress.map(item => item.month),
-                    datasets: [{
-                        label: 'Courses Completed',
-                        data: userData.courseAnalytics.courseProgress.map(item => item.completed),
-                        borderColor: '#6C63FF',
-                        backgroundColor: 'rgba(108, 99, 255, 0.1)',
-                        tension: 0.4,
-                        fill: true
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            display: false
-                        }
+        const activityChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Daily Activity',
+                    data: data,
+                    borderColor: '#2980b9',
+                    backgroundColor: 'rgba(41, 128, 185, 0.1)',
+                    tension: 0.4,
+                    fill: true,
+                    pointBackgroundColor: '#2980b9',
+                    pointBorderColor: '#fff',
+                    pointBorderWidth: 2,
+                    pointRadius: 4,
+                    pointHoverRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
                     },
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            grid: {
-                                color: 'rgba(0, 0, 0, 0.1)'
-                            }
+                    tooltip: {
+                        backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                        padding: 12,
+                        titleFont: {
+                            size: 14,
+                            family: "'Poppins', sans-serif"
                         },
-                        x: {
-                            grid: {
-                                display: false
+                        bodyFont: {
+                            size: 13,
+                            family: "'Poppins', sans-serif"
+                        },
+                        callbacks: {
+                            label: function(context) {
+                                return `Activity: ${context.raw} points`;
                             }
                         }
                     }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            color: 'rgba(0, 0, 0, 0.1)'
+                        },
+                        ticks: {
+                            font: {
+                                family: "'Poppins', sans-serif"
+                            }
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        },
+                        ticks: {
+                            font: {
+                                family: "'Poppins', sans-serif"
+                            }
+                        }
+                    }
+                },
+                interaction: {
+                    intersect: false,
+                    mode: 'index'
+                },
+                animation: {
+                    duration: 1000,
+                    easing: 'easeInOutQuart'
                 }
-            });
-        }
-
-        // Update analytics display
-        function updateAnalytics() {
-            document.getElementById('totalCourses').textContent = userData.courseAnalytics.totalCourses;
-            document.getElementById('completedCourses').textContent = userData.courseAnalytics.completedCourses;
-            document.getElementById('successRate').textContent = `${userData.courseAnalytics.successRate}%`;
-        }
-
-        // Enhanced streak display
-        function updateStreak() {
-            const streakDays = document.getElementById('streakDays');
-            streakDays.textContent = userData.streak;
-            
-            // Add streak animation
-            if (userData.streak > 5) {
-                streakDays.style.color = '#FFD700';
             }
-        }
-
-        // Initialize everything
-        document.addEventListener('DOMContentLoaded', () => {
-            updateDashboard();
-            updateMotivationalText();
-            initializeCourseChart();
-            updateAnalytics();
-            updateStreak();
-            
-            // Simulate achievement unlock (for demo)
-            setTimeout(showAchievementPopup, 5000);
         });
 
-        // Simulate course progress (for demo)
-        setInterval(() => {
-            if (Math.random() > 0.7) {
-                userData.courseAnalytics.completedCourses++;
-                userData.courseAnalytics.successRate = Math.min(100, userData.courseAnalytics.successRate + 1);
-                updateAnalytics();
-                initializeCourseChart();
+        // Add hover effect to show tooltip
+        const graphContainer = document.querySelector('.graph-container');
+        const tooltip = document.createElement('div');
+        tooltip.className = 'graph-tooltip';
+        graphContainer.appendChild(tooltip);
+
+        graphContainer.addEventListener('mousemove', (e) => {
+            const rect = graphContainer.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            tooltip.style.left = `${x + 10}px`;
+            tooltip.style.top = `${y + 10}px`;
+            tooltip.style.opacity = '1';
+        });
+
+        graphContainer.addEventListener('mouseleave', () => {
+            tooltip.style.opacity = '0';
+        });
+
+        // Profile Modal Functions
+        function openProfileModal() {
+            const modal = document.getElementById('profileModal');
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeProfileModal() {
+            const modal = document.getElementById('profileModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('profileModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeProfileModal();
             }
-        }, 15000);
+        });
+
+        // Handle form submission
+        document.querySelector('.profile-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            closeProfileModal();
+        });
     </script>
 </body>
 </html> 

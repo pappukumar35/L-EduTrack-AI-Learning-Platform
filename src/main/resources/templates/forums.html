@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduTrack Forums</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #141414;
+            --bg-card: #1a1a1a;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --accent-primary: #00f2fe;
+            --accent-secondary: #4facfe;
+            --gradient-primary: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            --card-shadow: 0 4px 20px rgba(0, 242, 254, 0.1);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: var(--bg-secondary);
+            padding: 20px 0;
+            margin-bottom: 30px;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8em;
+            font-weight: 700;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: 15px 20px;
+            background: var(--bg-secondary);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-size: 1em;
+            margin-bottom: 20px;
+        }
+
+        .forum-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .category-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--card-shadow);
+        }
+
+        .category-icon {
+            font-size: 2em;
+            margin-bottom: 15px;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .forum-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .forum-item {
+            background: var(--bg-card);
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
+        }
+
+        .forum-item:hover {
+            transform: translateX(5px);
+            border-color: var(--accent-primary);
+        }
+
+        .forum-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .forum-stats {
+            display: flex;
+            gap: 15px;
+            color: var(--text-secondary);
+            font-size: 0.9em;
+        }
+
+        .forum-tags {
+            display: flex;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .forum-tag {
+            background: var(--gradient-primary);
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8em;
+        }
+
+        .create-post-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--gradient-primary);
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5em;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: var(--card-shadow);
+        }
+
+        .create-post-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 30px;
+            width: 90%;
+            max-width: 800px;
+            margin: auto;
+            position: relative;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 1.5em;
+            cursor: pointer;
+        }
+
+        .post-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group label {
+            color: var(--text-secondary);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            padding: 12px;
+            background: var(--bg-secondary);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: var(--text-primary);
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            padding: 12px 25px;
+            background: var(--gradient-primary);
+            border: none;
+            border-radius: 8px;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--card-shadow);
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container header-content">
+            <a href="#" class="logo">EduTrack Forums</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <input type="text" class="search-bar" placeholder="Search forums...">
+
+        <div class="forum-categories">
+            <div class="category-card" data-category="courses">
+                <div class="category-icon">📚</div>
+                <h3>Courses</h3>
+                <p>Discuss course content, assignments, and projects</p>
+            </div>
+            <div class="category-card" data-category="challenges">
+                <div class="category-icon">🏆</div>
+                <h3>Challenges</h3>
+                <p>Share solutions and discuss coding challenges</p>
+            </div>
+            <div class="category-card" data-category="career">
+                <div class="category-icon">💼</div>
+                <h3>Career</h3>
+                <p>Career advice, job opportunities, and industry insights</p>
+            </div>
+        </div>
+
+        <div class="forum-list">
+            <div class="forum-item">
+                <div class="forum-header">
+                    <h3>Getting Started with Web Development</h3>
+                    <div class="forum-stats">
+                        <span><i class="fas fa-comments"></i> 45 replies</span>
+                        <span><i class="fas fa-eye"></i> 120 views</span>
+                    </div>
+                </div>
+                <p>Share your journey and get advice from experienced developers.</p>
+                <div class="forum-tags">
+                    <span class="forum-tag">Web Dev</span>
+                    <span class="forum-tag">Beginner</span>
+                </div>
+            </div>
+
+            <div class="forum-item">
+                <div class="forum-header">
+                    <h3>Best Practices for React Development</h3>
+                    <div class="forum-stats">
+                        <span><i class="fas fa-comments"></i> 32 replies</span>
+                        <span><i class="fas fa-eye"></i> 98 views</span>
+                    </div>
+                </div>
+                <p>Discuss React patterns and best practices with the community.</p>
+                <div class="forum-tags">
+                    <span class="forum-tag">React</span>
+                    <span class="forum-tag">Frontend</span>
+                </div>
+            </div>
+
+            <div class="forum-item">
+                <div class="forum-header">
+                    <h3>Career Guidance for Tech Professionals</h3>
+                    <div class="forum-stats">
+                        <span><i class="fas fa-comments"></i> 28 replies</span>
+                        <span><i class="fas fa-eye"></i> 156 views</span>
+                    </div>
+                </div>
+                <p>Get advice on career growth and opportunities in tech.</p>
+                <div class="forum-tags">
+                    <span class="forum-tag">Career</span>
+                    <span class="forum-tag">Advice</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button class="create-post-btn">+</button>
+
+    <div class="modal" id="createPostModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Create New Post</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <form class="post-form">
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <input type="text" id="title" required>
+                </div>
+                <div class="form-group">
+                    <label for="category">Category</label>
+                    <select id="category" required>
+                        <option value="courses">Courses</option>
+                        <option value="challenges">Challenges</option>
+                        <option value="career">Career</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="content">Content</label>
+                    <textarea id="content" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="tags">Tags (comma separated)</label>
+                    <input type="text" id="tags" placeholder="e.g., Web Dev, React, Career">
+                </div>
+                <button type="submit" class="submit-btn">Create Post</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Initialize variables
+        const createPostBtn = document.querySelector('.create-post-btn');
+        const createPostModal = document.getElementById('createPostModal');
+        const closeModalBtn = document.querySelector('.close-modal');
+        const postForm = document.querySelector('.post-form');
+        const searchBar = document.querySelector('.search-bar');
+        const forumItems = document.querySelectorAll('.forum-item');
+        const categoryCards = document.querySelectorAll('.category-card');
+
+        // Open create post modal
+        createPostBtn.addEventListener('click', () => {
+            createPostModal.classList.add('active');
+        });
+
+        // Close modal
+        closeModalBtn.addEventListener('click', () => {
+            createPostModal.classList.remove('active');
+        });
+
+        // Close modal when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target === createPostModal) {
+                createPostModal.classList.remove('active');
+            }
+        });
+
+        // Handle form submission
+        postForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const title = document.getElementById('title').value;
+            const category = document.getElementById('category').value;
+            const content = document.getElementById('content').value;
+            const tags = document.getElementById('tags').value;
+
+            // Create new forum item
+            const newForumItem = document.createElement('div');
+            newForumItem.className = 'forum-item';
+            newForumItem.innerHTML = `
+                <div class="forum-header">
+                    <h3>${title}</h3>
+                    <div class="forum-stats">
+                        <span><i class="fas fa-comments"></i> 0 replies</span>
+                        <span><i class="fas fa-eye"></i> 0 views</span>
+                    </div>
+                </div>
+                <p>${content}</p>
+                <div class="forum-tags">
+                    ${tags.split(',').map(tag => `<span class="forum-tag">${tag.trim()}</span>`).join('')}
+                </div>
+            `;
+
+            // Add new post to the list
+            document.querySelector('.forum-list').prepend(newForumItem);
+            createPostModal.classList.remove('active');
+            postForm.reset();
+        });
+
+        // Search functionality
+        searchBar.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            forumItems.forEach(item => {
+                const title = item.querySelector('h3').textContent.toLowerCase();
+                const content = item.querySelector('p').textContent.toLowerCase();
+                const tags = Array.from(item.querySelectorAll('.forum-tag'))
+                    .map(tag => tag.textContent.toLowerCase());
+
+                if (title.includes(searchTerm) || 
+                    content.includes(searchTerm) || 
+                    tags.some(tag => tag.includes(searchTerm))) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+
+        // Category filtering
+        categoryCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const category = card.getAttribute('data-category');
+                forumItems.forEach(item => {
+                    const tags = Array.from(item.querySelectorAll('.forum-tag'))
+                        .map(tag => tag.textContent.toLowerCase());
+                    if (category === 'all' || tags.some(tag => tag.includes(category))) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html> 

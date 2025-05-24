@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduTrack Career Page</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+		
+		
+		/* Enhanced Recruiter Section Styles */
+		.stats-grid {
+		    display: grid;
+		    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+		    gap: 24px;
+		    margin-bottom: 32px;
+		}
+		
+
+		.stat-card {
+		    background: var(--bg-card);
+		    border-radius: 16px;
+		    padding: 24px;
+		    text-align: center;
+		    transition: var(--transition);
+		    border: 1.5px solid rgba(255,255,255,0.07);
+		    backdrop-filter: blur(var(--blur));
+		}
+
+		.stat-card:hover {
+		    transform: translateY(-4px);
+		    box-shadow: var(--shadow-card);
+		    border-color: var(--accent2);
+		}
+
+		.stat-card .icon {
+		    font-size: 2em;
+		    margin-bottom: 12px;
+		    background: var(--gradient2);
+		    -webkit-background-clip: text;
+		    -webkit-text-fill-color: transparent;
+		}
+
+		.stat-card .number {
+		    font-size: 2.2em;
+		    font-weight: 700;
+		    margin-bottom: 8px;
+		    background: var(--gradient);
+		    -webkit-background-clip: text;
+		    -webkit-text-fill-color: transparent;
+		}
+
+		.stat-card .label {
+		    color: var(--text-secondary);
+		    font-size: 1.1em;
+		}
+
+		.tabs {
+		    display: flex;
+		    gap: 12px;
+		    margin-bottom: 24px;
+		    flex-wrap: wrap;
+		}
+
+		.tab {
+		    background: var(--bg-secondary);
+		    color: var(--text-secondary);
+		    padding: 12px 24px;
+		    border-radius: 12px;
+		    cursor: pointer;
+		    transition: var(--transition);
+		    font-weight: 600;
+		    border: 1.5px solid rgba(255,255,255,0.07);
+		}
+
+		.tab:hover {
+		    background: var(--glass);
+		    color: var(--text-primary);
+		}
+
+		.tab.active {
+		    background: var(--gradient2);
+		    color: #fff;
+		    box-shadow: 0 4px 16px #43e97b22;
+		}
+
+		.tab-content {
+		    display: none;
+		    animation: fadeIn 0.4s;
+		}
+
+		.tab-content.active {
+		    display: block;
+		}
+
+		.form-group {
+		    margin-bottom: 20px;
+		}
+
+		.form-group label {
+		    display: block;
+		    margin-bottom: 8px;
+		    color: var(--text-secondary);
+		    font-weight: 600;
+		}
+
+		.form-group input,
+		.form-group textarea,
+		.form-group select {
+		    width: 100%;
+		    background: var(--bg-secondary);
+		    border: 1.5px solid rgba(255,255,255,0.10);
+		    color: #fff;
+		    border-radius: 12px;
+		    padding: 12px 16px;
+		    font-size: 1.05em;
+		    transition: var(--transition);
+		}
+
+		.form-group input:focus,
+		.form-group textarea:focus,
+		.form-group select:focus {
+		    outline: none;
+		    border-color: var(--accent2);
+		    background: var(--glass);
+		    box-shadow: 0 0 0 3px rgba(79,172,254,0.15);
+		}
+
+		.btn {
+		    background: var(--gradient2);
+		    color: #fff;
+		    border: none;
+		    border-radius: 12px;
+		    padding: 12px 28px;
+		    font-size: 1.1em;
+		    font-weight: 700;
+		    cursor: pointer;
+		    transition: var(--transition);
+		    box-shadow: 0 4px 16px #43e97b22;
+		}
+
+		.btn:hover {
+		    transform: translateY(-2px);
+		    box-shadow: 0 6px 20px #43e97b33;
+		}
+
+		.btn-outline {
+		    background: transparent;
+		    border: 1.5px solid var(--accent2);
+		    color: var(--accent2);
+		}
+
+		.btn-outline:hover {
+		    background: var(--gradient2);
+		    color: #fff;
+		}
+
+		.btn-sm {
+		    padding: 8px 16px;
+		    font-size: 0.95em;
+		}
+
+		.applications-list {
+		    display: flex;
+		    flex-direction: column;
+		    gap: 16px;
+		}
+
+		.application-card {
+		    background: var(--bg-secondary);
+		    border-radius: 12px;
+		    padding: 20px;
+		    display: flex;
+		    justify-content: space-between;
+		    align-items: center;
+		    transition: var(--transition);
+		    border: 1.5px solid rgba(255,255,255,0.07);
+		}
+
+		.application-card:hover {
+		    transform: translateX(4px);
+		    border-color: var(--accent2);
+		    box-shadow: 0 4px 16px rgba(79,172,254,0.15);
+		}
+
+		.application-info {
+		    flex: 1;
+		}
+
+		.application-name {
+		    font-size: 1.2em;
+		    font-weight: 700;
+		    margin-bottom: 4px;
+		}
+
+		.application-details {
+		    color: var(--text-secondary);
+		    font-size: 0.95em;
+		}
+
+		.application-actions {
+		    display: flex;
+		    gap: 12px;
+		}
+
+		/* Enhanced Card Styles */
+		.card {
+		    background: var(--bg-card);
+		    border-radius: 20px;
+		    padding: 32px;
+		    transition: var(--transition);
+		    position: relative;
+		    backdrop-filter: blur(var(--blur));
+		    border: 1.5px solid rgba(255,255,255,0.07);
+		    overflow: hidden;
+		}
+
+		.card::before {
+		    content: '';
+		    position: absolute;
+		    top: 0;
+		    left: 0;
+		    width: 100%;
+		    height: 100%;
+		    background: linear-gradient(45deg, transparent, rgba(255,255,255,0.03));
+		    pointer-events: none;
+		}
+
+		.card:hover {
+		    transform: translateY(-8px);
+		    box-shadow: 0 12px 36px rgba(0,242,254,0.15);
+		    border-color: var(--accent2);
+		}
+
+		.card .icon {
+		    font-size: 2.4em;
+		    margin-bottom: 20px;
+		    background: var(--gradient2);
+		    -webkit-background-clip: text;
+		    -webkit-text-fill-color: transparent;
+		    filter: drop-shadow(0 2px 8px rgba(67,233,123,0.3));
+		}
+
+		.card-title {
+		    font-size: 1.4em;
+		    font-weight: 700;
+		    margin-bottom: 12px;
+		    letter-spacing: 0.5px;
+		}
+
+		.card-desc {
+		    color: var(--text-secondary);
+		    font-size: 1.1em;
+		    line-height: 1.6;
+		    margin-bottom: 24px;
+		}
+
+		/* Enhanced Button Styles */
+		.card-btn, .card-btn-alt {
+		    display: inline-block;
+		    padding: 12px 28px;
+		    border-radius: 12px;
+		    font-size: 1.1em;
+		    font-weight: 700;
+		    cursor: pointer;
+		    transition: var(--transition);
+		    text-align: center;
+		    text-decoration: none;
+		}
+
+		.card-btn {
+		    background: var(--gradient2);
+		    color: #fff;
+		    border: none;
+		    box-shadow: 0 4px 16px rgba(67,233,123,0.25);
+		}
+
+		.card-btn-alt {
+		    background: transparent;
+		    color: var(--accent2);
+		    border: 1.5px solid var(--accent2);
+		    margin-left: 12px;
+		}
+
+		.card-btn:hover, .card-btn-alt:hover {
+		    transform: translateY(-2px);
+		    box-shadow: 0 6px 20px rgba(67,233,123,0.35);
+		}
+
+		.card-btn-alt:hover {
+		    background: var(--gradient2);
+		    color: #fff;
+		}
+
+		/* Enhanced Modal Styles */
+		.modal {
+		    background: var(--bg-card);
+		    border-radius: 24px;
+		    padding: 40px;
+		    min-width: 400px;
+		    max-width: 95vw;
+		    box-shadow: var(--shadow-card);
+		    position: relative;
+		    border: 1.5px solid rgba(255,255,255,0.09);
+		    backdrop-filter: blur(var(--blur));
+		}
+
+		.modal h3 {
+		    font-size: 1.8em;
+		    margin-bottom: 24px;
+		    background: var(--gradient);
+		    -webkit-background-clip: text;
+		    -webkit-text-fill-color: transparent;
+		}
+
+		.modal-close {
+		    position: absolute;
+		    top: 20px;
+		    right: 20px;
+		    background: var(--bg-secondary);
+		    border: none;
+		    color: var(--text-secondary);
+		    width: 36px;
+		    height: 36px;
+		    border-radius: 50%;
+		    display: flex;
+		    align-items: center;
+		    justify-content: center;
+		    font-size: 1.2em;
+		    cursor: pointer;
+		    transition: var(--transition);
+		}
+
+		.modal-close:hover {
+		    background: var(--gradient2);
+		    color: #fff;
+		    transform: rotate(90deg);
+		}
+
+		/* Enhanced Form Styles */
+		.modal input,
+		.modal textarea,
+		.modal select {
+		    width: 100%;
+		    background: var(--bg-secondary);
+		    border: 1.5px solid rgba(255,255,255,0.10);
+		    color: #fff;
+		    border-radius: 12px;
+		    padding: 14px 18px;
+		    font-size: 1.1em;
+		    transition: var(--transition);
+		    margin-bottom: 20px;
+		}
+
+		.modal input:focus,
+		.modal textarea:focus,
+		.modal select:focus {
+		    outline: none;
+		    border-color: var(--accent2);
+		    background: var(--glass);
+		    box-shadow: 0 0 0 3px rgba(79,172,254,0.15);
+		}
+
+		.modal label {
+		    color: var(--text-secondary);
+		    font-size: 1.1em;
+		    margin-bottom: 8px;
+		    display: block;
+		    font-weight: 600;
+		}
+
+		.modal .modal-btn {
+		    background: var(--gradient2);
+		    color: #fff;
+		    border: none;
+		    border-radius: 12px;
+		    padding: 14px 32px;
+		    font-size: 1.1em;
+		    font-weight: 700;
+		    cursor: pointer;
+		    margin-top: 20px;
+		    box-shadow: 0 4px 16px rgba(67,233,123,0.25);
+		    transition: var(--transition);
+		    width: 100%;
+		}
+
+		.modal .modal-btn:hover {
+		    transform: translateY(-2px);
+		    box-shadow: 0 6px 20px rgba(67,233,123,0.35);
+		}
+
+		/* Enhanced Success Message */
+		.success-msg {
+		    color: var(--accent2);
+		    font-weight: 700;
+		    margin-top: 16px;
+		    letter-spacing: 0.5px;
+		    text-align: center;
+		    padding: 12px;
+		    background: rgba(79,172,254,0.1);
+		    border-radius: 8px;
+		    border: 1px solid rgba(79,172,254,0.2);
+		} 
+		
+        :root {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: rgba(20,20,20,0.85);
+            --bg-card: rgba(26,26,26,0.85);
+            --glass: rgba(26,26,26,0.55);
+            --text-primary: #fff;
+            --text-secondary: #a0a0a0;
+            --accent: #00f2fe;
+            --accent2: #4facfe;
+            --accent3: #43e97b;
+            --gradient: linear-gradient(135deg, var(--accent), var(--accent2));
+            --gradient2: linear-gradient(120deg, #43e97b 0%, #38f9d7 100%);
+            --shadow: 0 8px 32px 0 rgba(0,242,254,0.13);
+            --shadow-card: 0 4px 24px rgba(0,242,254,0.10), 0 1.5px 8px rgba(79,172,254,0.08);
+            --transition: all 0.35s cubic-bezier(0.4,0,0.2,1);
+            --blur: 18px;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
+        body {
+            background: linear-gradient(120deg, #232526 0%, #0a0a0a 100%);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        ::selection { background: var(--accent2); color: #fff; }
+        ::-webkit-scrollbar { width: 10px; background: var(--bg-secondary); }
+        ::-webkit-scrollbar-thumb { background: var(--accent2); border-radius: 8px; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 32px 16px; }
+        header {
+            display: flex; align-items: center; justify-content: space-between; padding: 24px 0 16px;
+            border-bottom: 1.5px solid rgba(255,255,255,0.07); margin-bottom: 18px;
+            backdrop-filter: blur(var(--blur));
+        }
+        .logo {
+            font-size: 2.2em; font-weight: 700; background: var(--gradient2); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-decoration: none; letter-spacing: 1px;
+            filter: drop-shadow(0 2px 8px #00f2fe33);
+        }
+        nav { display: flex; gap: 18px; }
+        nav button {
+            background: var(--glass); border: none; color: var(--text-secondary); font-size: 1em; padding: 10px 22px; border-radius: 22px; cursor: pointer; transition: var(--transition);
+            font-weight: 600; letter-spacing: 0.5px; box-shadow: 0 1.5px 8px rgba(79,172,254,0.08);
+        }
+        nav button.active, nav button:hover {
+            background: var(--gradient2); color: #fff; box-shadow: 0 4px 16px #43e97b22;
+            transform: translateY(-2px) scale(1.04);
+        }
+        h2 { margin-bottom: 18px; font-size: 1.6em; font-weight: 700; letter-spacing: 0.5px; }
+        .section { display: none; margin-bottom: 48px; }
+        .section.active { display: block; animation: fadeIn 0.6s; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(24px);} to { opacity: 1; transform: none;} }
+        .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 28px; }
+        .card {
+            background: var(--bg-card); border-radius: 20px; box-shadow: var(--shadow-card); padding: 32px 26px; transition: var(--transition); position: relative;
+            backdrop-filter: blur(var(--blur)); border: 1.5px solid rgba(255,255,255,0.07);
+        }
+        .card:hover {
+            transform: translateY(-8px) scale(1.025) rotate(-0.5deg);
+            box-shadow: 0 12px 36px 0 #00f2fe33, 0 2px 12px #43e97b22;
+            border-color: var(--accent2);
+        }
+        .card .icon {
+            font-size: 2.2em; background: var(--gradient2); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 14px; filter: drop-shadow(0 2px 8px #43e97b33);
+        }
+        .card-title { font-size: 1.25em; font-weight: 700; margin-bottom: 10px; letter-spacing: 0.2px; }
+        .card-desc { color: var(--text-secondary); font-size: 1.04em; margin-bottom: 18px; }
+        .card-btn, .card-btn-alt {
+            display: inline-block; background: var(--gradient2); color: #fff; border: none; border-radius: 22px; padding: 10px 26px; font-size: 1em; font-weight: 700; cursor: pointer; transition: var(--transition); margin-top: 10px; box-shadow: 0 2px 12px #43e97b22;
+        }
+        .card-btn-alt { background: var(--bg-secondary); color: var(--accent2); border: 1.5px solid var(--accent2); margin-left: 10px; }
+        .card-btn:hover, .card-btn-alt:hover {
+            background: var(--gradient); color: #fff; transform: scale(1.06) translateY(-2px);
+            box-shadow: 0 6px 18px #00f2fe33;
+        }
+        .filters { display: flex; gap: 14px; margin-bottom: 22px; flex-wrap: wrap; }
+        .filter-btn {
+            background: var(--bg-secondary); color: var(--text-secondary); border: none; border-radius: 16px; padding: 8px 20px; cursor: pointer; transition: var(--transition); font-weight: 600;
+        }
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--gradient2); color: #fff; box-shadow: 0 2px 8px #43e97b22;
+        }
+        .search-bar {
+            background: var(--bg-secondary); border: 1.5px solid rgba(255,255,255,0.10); border-radius: 14px; color: #fff; padding: 14px 22px; font-size: 1.08em; margin-bottom: 22px; width: 100%; box-shadow: 0 1.5px 8px #43e97b11;
+        }
+        .search-bar:focus { outline: none; border-color: var(--accent2); background: var(--glass); }
+        .modal-bg { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(10,10,10,0.7); z-index: 1000; align-items: center; justify-content: center; }
+        .modal-bg.active { display: flex; }
+        .modal {
+            background: var(--bg-card); border-radius: 20px; padding: 36px 32px; min-width: 320px; max-width: 95vw; box-shadow: var(--shadow-card); position: relative;
+            border: 1.5px solid rgba(255,255,255,0.09); backdrop-filter: blur(var(--blur));
+        }
+        .modal-close { position: absolute; top: 18px; right: 18px; background: none; border: none; color: var(--text-secondary); font-size: 1.3em; cursor: pointer; transition: var(--transition); }
+        .modal-close:hover { color: var(--accent2); transform: scale(1.2); }
+        .modal h3 { margin-bottom: 14px; }
+        .modal input, .modal textarea, .modal select { width: 100%; background: var(--bg-secondary); border: 1.5px solid rgba(255,255,255,0.10); color: #fff; border-radius: 10px; padding: 12px 14px; margin-bottom: 16px; font-size: 1.05em; transition: var(--transition); }
+        .modal input:focus, .modal textarea:focus, .modal select:focus { outline: none; border-color: var(--accent2); background: var(--glass); }
+        .modal label { color: var(--text-secondary); font-size: 1em; margin-bottom: 5px; display: block; }
+        .modal .modal-btn { background: var(--gradient2); color: #fff; border: none; border-radius: 18px; padding: 12px 28px; font-size: 1em; font-weight: 700; cursor: pointer; margin-top: 10px; box-shadow: 0 2px 12px #43e97b22; transition: var(--transition); }
+        .modal .modal-btn:hover { background: var(--gradient); color: #fff; transform: scale(1.06) translateY(-2px); }
+        .success-msg { color: var(--accent2); font-weight: 700; margin-top: 12px; letter-spacing: 0.2px; }
+        .roadmap-list, .checklist, .success-stories, .hiring-partners { list-style: none; padding-left: 0; }
+        .roadmap-list li, .checklist li, .success-stories li, .hiring-partners li { background: var(--bg-secondary); border-radius: 10px; padding: 12px 16px; margin-bottom: 10px; color: var(--text-secondary); font-size: 1.01em; transition: var(--transition); }
+        .roadmap-list li.selected { background: var(--gradient2); color: #fff; }
+        .mentor-list { display: flex; gap: 18px; flex-wrap: wrap; }
+        .mentor-card { background: var(--bg-secondary); border-radius: 14px; padding: 18px 16px; min-width: 180px; flex: 1; text-align: center; box-shadow: 0 1.5px 8px #43e97b11; transition: var(--transition); }
+        .mentor-card .icon { font-size: 1.6em; margin-bottom: 8px; background: var(--gradient2); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .mentor-card:hover { background: var(--gradient2); color: #fff; transform: scale(1.04) translateY(-2px); box-shadow: 0 4px 16px #43e97b22; }
+        .webinar-list { display: flex; gap: 18px; flex-wrap: wrap; }
+        .webinar-card { background: var(--bg-secondary); border-radius: 14px; padding: 16px 14px; min-width: 180px; flex: 1; text-align: center; box-shadow: 0 1.5px 8px #43e97b11; transition: var(--transition); }
+        .webinar-card .icon { font-size: 1.4em; margin-bottom: 8px; background: var(--gradient2); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .webinar-card:hover { background: var(--gradient2); color: #fff; transform: scale(1.04) translateY(-2px); box-shadow: 0 4px 16px #43e97b22; }
+        .success-stories { margin-top: 14px; }
+        .success-stories li { display: flex; align-items: center; gap: 12px; }
+        .success-stories .icon { font-size: 1.3em; background: var(--gradient2); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hiring-partners { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 12px; }
+        .hiring-partners li { background: var(--bg-card); border: 1.5px solid var(--bg-secondary); padding: 12px 20px; border-radius: 10px; color: var(--accent2); font-weight: 700; }
+        .recruiter-login { max-width: 340px; margin: 0 auto; }
+        .chatbot-box { background: var(--bg-secondary); border-radius: 20px; padding: 22px 18px; min-height: 240px; max-width: 480px; margin: 0 auto; box-shadow: var(--shadow-card); position: relative; }
+        .chat-messages { max-height: 180px; overflow-y: auto; margin-bottom: 12px; }
+        .chat-msg { margin-bottom: 10px; padding: 8px 14px; border-radius: 16px; display: inline-block; max-width: 90%; word-break: break-word; font-size: 1.04em; }
+        .chat-msg.user { text-align: right; color: #fff; background: var(--gradient2); float: right; clear: both; box-shadow: 0 2px 8px #43e97b22; }
+        .chat-msg.ai { text-align: left; color: #fff; background: var(--gradient); float: left; clear: both; box-shadow: 0 2px 8px #00f2fe22; }
+        .chat-input-row { display: flex; gap: 10px; }
+        .chat-input { flex: 1; background: var(--bg-card); border: 1.5px solid rgba(255,255,255,0.10); color: #fff; border-radius: 10px; padding: 10px 14px; font-size: 1.05em; transition: var(--transition); }
+        .chat-input:focus { outline: none; border-color: var(--accent2); background: var(--glass); }
+        .chat-send { background: var(--gradient2); color: #fff; border: none; border-radius: 10px; padding: 10px 22px; font-size: 1em; font-weight: 700; cursor: pointer; box-shadow: 0 2px 8px #43e97b22; transition: var(--transition); }
+        .chat-send:hover { background: var(--gradient); color: #fff; transform: scale(1.08) translateY(-2px); }
+        @media (max-width: 700px) {
+            .container { padding: 12px 2vw; }
+            .card-grid { grid-template-columns: 1fr; }
+            header { flex-direction: column; gap: 10px; }
+            .stats-grid { grid-template-columns: 1fr; }
+            .mentor-list, .webinar-list, .hiring-partners { flex-direction: column; gap: 10px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="#" class="logo">EduTrack Careers</a>
+            <nav>
+                <button class="tab-btn active" data-tab="jobs"><i class="fas fa-briefcase"></i> Jobs</button>
+                <button class="tab-btn" data-tab="guidance"><i class="fas fa-user-graduate"></i> Guidance</button>
+                <button class="tab-btn" data-tab="resume"><i class="fas fa-file-alt"></i> Resume</button>
+                <button class="tab-btn" data-tab="readiness"><i class="fas fa-tasks"></i> Readiness</button>
+                <button class="tab-btn" data-tab="tracks"><i class="fas fa-route"></i> Tracks</button>
+                <button class="tab-btn" data-tab="ai"><i class="fas fa-robot"></i> AI Assistant</button>
+                <button class="tab-btn" data-tab="recruiter"><i class="fas fa-user-tie"></i> Recruiter</button>
+            </nav>
+        </header>
+
+        <!-- Internship & Job Opportunities -->
+        <section class="section active" id="jobs">
+            <h2><i class="fas fa-briefcase"></i> Internship & Job Opportunities</h2>
+            <div class="filters">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="internship">Internships</button>
+                <button class="filter-btn" data-filter="fulltime">Full Time</button>
+                <button class="filter-btn" data-filter="remote">Remote</button>
+                <button class="filter-btn" data-filter="onsite">Onsite</button>
+            </div>
+            <input type="text" class="search-bar" id="job-search" placeholder="Search jobs by title, company, or skill...">
+            <div class="card-grid" id="job-listings">
+                <!-- Job cards will be injected here -->
+            </div>
+        </section>
+
+        <!-- Career Guidance & Mentorship -->
+        <section class="section" id="guidance">
+            <h2><i class="fas fa-user-graduate"></i> Career Guidance & Mentorship</h2>
+            <div class="mentor-list">
+                <div class="mentor-card">
+                    <div class="icon"><i class="fas fa-user-tie"></i></div>
+                    <div class="card-title">Priya Sharma</div>
+                    <div class="card-desc">Senior Data Scientist, Google</div>
+                    <button class="card-btn" onclick="openModal('book-mentor')">Book Session</button>
+                </div>
+                <div class="mentor-card">
+                    <div class="icon"><i class="fas fa-user-tie"></i></div>
+                    <div class="card-title">Rahul Mehta</div>
+                    <div class="card-desc">Lead Engineer, Microsoft</div>
+                    <button class="card-btn" onclick="openModal('book-mentor')">Book Session</button>
+                </div>
+            </div>
+            <h3 style="margin-top:32px;">Upcoming Webinars</h3>
+            <div class="webinar-list">
+                <div class="webinar-card">
+                    <div class="icon"><i class="fas fa-video"></i></div>
+                    <div class="card-title">Resume Building 101</div>
+                    <div class="card-desc">April 28, 6:00 PM</div>
+                    <button class="card-btn-alt">Register</button>
+                </div>
+                <div class="webinar-card">
+                    <div class="icon"><i class="fas fa-video"></i></div>
+                    <div class="card-title">Crack Your First Interview</div>
+                    <div class="card-desc">May 2, 7:30 PM</div>
+                    <button class="card-btn-alt">Register</button>
+                </div>
+            </div>
+            <h3 style="margin-top:32px;">Success Stories</h3>
+            <ul class="success-stories">
+                <li><span class="icon"><i class="fas fa-trophy"></i></span> <b>Neha S.</b> landed a job at Amazon after 3 months of mentorship!</li>
+                <li><span class="icon"><i class="fas fa-trophy"></i></span> <b>Arjun R.</b> secured a Google internship via EduTrack.</li>
+            </ul>
+        </section>
+
+        <!-- Resume & Profile Builder -->
+        <section class="section" id="resume">
+            <h2><i class="fas fa-file-alt"></i> Resume & Profile Builder</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <div class="icon"><i class="fas fa-file-signature"></i></div>
+                    <div class="card-title">Resume Generator</div>
+                    <div class="card-desc">Create a professional resume in minutes.</div>
+                    <button class="card-btn" onclick="openModal('resume-gen')">Generate Resume</button>
+                </div>
+                <div class="card">
+                    <div class="icon"><i class="fas fa-upload"></i></div>
+                    <div class="card-title">Portfolio Uploader</div>
+                    <div class="card-desc">Upload your portfolio or work samples.</div>
+                    <button class="card-btn" onclick="openModal('portfolio-upload')">Upload</button>
+                </div>
+                <div class="card">
+                    <div class="icon"><i class="fas fa-check-circle"></i></div>
+                    <div class="card-title">Job Readiness Checklist</div>
+                    <div class="card-desc">Track your progress for job readiness.</div>
+                    <button class="card-btn" onclick="openModal('readiness-checklist')">View Checklist</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Job Readiness Programs -->
+        <section class="section" id="readiness">
+            <h2><i class="fas fa-tasks"></i> Job Readiness Programs</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <div class="icon"><i class="fas fa-laptop-code"></i></div>
+                    <div class="card-title">Skill Courses</div>
+                    <div class="card-desc">Curated courses to boost your skills.</div>
+                    <button class="card-btn" onclick="openModal('skill-courses')">Explore</button>
+                </div>
+                <div class="card">
+                    <div class="icon"><i class="fas fa-user-check"></i></div>
+                    <div class="card-title">Mock Interviews</div>
+                    <div class="card-desc">Practice with real interviewers.</div>
+                    <button class="card-btn" onclick="openModal('mock-interview')">Book Now</button>
+                </div>
+                <div class="card">
+                    <div class="icon"><i class="fas fa-brain"></i></div>
+                    <div class="card-title">Aptitude Tests</div>
+                    <div class="card-desc">Sharpen your problem-solving skills.</div>
+                    <button class="card-btn" onclick="openModal('aptitude-test')">Take Test</button>
+                </div>
+                <div class="card">
+                    <div class="icon"><i class="fas fa-comments"></i></div>
+                    <div class="card-title">Soft Skills Assessment</div>
+                    <div class="card-desc">Evaluate and improve your soft skills.</div>
+                    <button class="card-btn" onclick="openModal('soft-skills')">Start</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Career Tracks -->
+        <section class="section" id="tracks">
+            <h2><i class="fas fa-route"></i> Career Tracks</h2>
+            <div class="filters">
+                <button class="filter-btn active" data-track="all">All</button>
+                <button class="filter-btn" data-track="fullstack">Full Stack Developer</button>
+                <button class="filter-btn" data-track="datasci">Data Scientist</button>
+                <button class="filter-btn" data-track="uiux">UI/UX Designer</button>
+                <button class="filter-btn" data-track="ml">Machine Learning</button>
+            </div>
+            <div class="card-grid" id="track-listings">
+                <!-- Track cards will be injected here -->
+            </div>
+        </section>
+
+        <!-- AI Career Assistant -->
+        <section class="section" id="ai">
+            <h2><i class="fas fa-robot"></i> AI Career Assistant</h2>
+            <div class="chatbot-box">
+                <div class="chat-messages" id="chat-messages"></div>
+                <div class="chat-input-row">
+                    <input type="text" class="chat-input" id="chat-input" placeholder="Ask for career advice...">
+                    <button class="chat-send" id="chat-send"><i class="fas fa-paper-plane"></i></button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recruiter Portal -->
+        <section class="section" id="recruiter">
+            <h2><i class="fas fa-user-tie"></i> Recruiter Portal</h2>
+            <div id="recruiter-dashboard">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="icon"><i class="fas fa-briefcase"></i></div>
+                        <div class="number">12</div>
+                        <div class="label">Active Job Postings</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="icon"><i class="fas fa-users"></i></div>
+                        <div class="number">156</div>
+                        <div class="label">Total Applications</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="icon"><i class="fas fa-eye"></i></div>
+                        <div class="number">2.4k</div>
+                        <div class="label">Job Views</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="icon"><i class="fas fa-star"></i></div>
+                        <div class="number">4.8</div>
+                        <div class="label">Average Rating</div>
+                    </div>
+                </div>
+                <div class="tabs" id="recruiter-tabs">
+                    <div class="tab active" data-tab="post-job">Post New Job</div>
+                    <div class="tab" data-tab="applications">Applications</div>
+                    <div class="tab" data-tab="analytics">Analytics</div>
+                    <div class="tab" data-tab="settings">Settings</div>
+                </div>
+                <div class="tab-content active" id="recruiter-post-job">
+                    <div class="card">
+                        <h3 class="card-title">Post a New Job</h3>
+                        <form id="recruiter-job-form">
+                            <div class="form-group">
+                                <label>Job Title</label>
+                                <input type="text" id="recruiter-job-title" placeholder="e.g., Senior Frontend Developer" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Company</label>
+                                <input type="text" id="recruiter-job-company" placeholder="Your company name" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Location</label>
+                                <input type="text" id="recruiter-job-location" placeholder="e.g., Bangalore, Remote" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Job Type</label>
+                                <select id="recruiter-job-type" required>
+                                    <option value="Full Time">Full Time</option>
+                                    <option value="Part Time">Part Time</option>
+                                    <option value="Internship">Internship</option>
+                                    <option value="Contract">Contract</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Required Skills</label>
+                                <input type="text" id="recruiter-job-skills" placeholder="e.g., React, Node.js, MongoDB" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Job Description</label>
+                                <textarea id="recruiter-job-description" placeholder="Detailed job description..." required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Requirements</label>
+                                <textarea id="recruiter-job-requirements" placeholder="Job requirements..." required></textarea>
+                            </div>
+                            <button type="submit" class="btn">Post Job</button>
+                            <div id="recruiter-job-msg" class="success-msg"></div>
+                        </form>
+                    </div>
+                </div>
+                <div class="tab-content" id="recruiter-applications">
+                    <div class="card">
+                        <h3 class="card-title">Recent Applications</h3>
+                        <div class="applications-list">
+                            <div class="application-card">
+                                <div class="application-info">
+                                    <div class="application-name">Rahul Sharma</div>
+                                    <div class="application-details">Frontend Developer • 3 years experience</div>
+                                </div>
+                                <div class="application-actions">
+                                    <button class="btn btn-sm btn-outline">View Resume</button>
+                                    <button class="btn btn-sm">Schedule Interview</button>
+                                </div>
+                            </div>
+                            <div class="application-card">
+                                <div class="application-info">
+                                    <div class="application-name">Priya Patel</div>
+                                    <div class="application-details">Data Scientist • 2 years experience</div>
+                                </div>
+                                <div class="application-actions">
+                                    <button class="btn btn-sm btn-outline">View Resume</button>
+                                    <button class="btn btn-sm">Schedule Interview</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-content" id="recruiter-analytics">
+                    <div class="card">
+                        <h3 class="card-title">Job Performance Analytics</h3>
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <div class="icon"><i class="fas fa-chart-line"></i></div>
+                                <div class="number">85%</div>
+                                <div class="label">Application Rate</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="icon"><i class="fas fa-clock"></i></div>
+                                <div class="number">3.2</div>
+                                <div class="label">Avg. Response Time (days)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-content" id="recruiter-settings">
+                    <div class="card">
+                        <h3 class="card-title">Account Settings</h3>
+                        <form id="recruiter-settings-form">
+                            <div class="form-group">
+                                <label>Company Name</label>
+                                <input type="text" id="recruiter-company-name" value="Google" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="email" id="recruiter-company-email" value="hr@google.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Change Password</label>
+                                <input type="password" id="recruiter-new-password" placeholder="New password">
+                            </div>
+                            <button type="submit" class="btn">Save Changes</button>
+                            <div id="recruiter-settings-msg" class="success-msg"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Modal Popups -->
+        <div class="modal-bg" id="modal-bg">
+            <div class="modal" id="modal-content">
+                <button class="modal-close" onclick="closeModal()"><i class="fas fa-times"></i></button>
+                <div id="modal-body"></div>
+            </div>
+        </div>
+    </div>
+    <script>
+    // Tab navigation
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const sections = document.querySelectorAll('.section');
+    tabBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            tabBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const tab = btn.getAttribute('data-tab');
+            sections.forEach(sec => sec.classList.remove('active'));
+            document.getElementById(tab).classList.add('active');
+        });
+    });
+
+    // Dummy job data
+    const jobs = [
+        {title: 'Frontend Developer', company: 'Google', type: 'Full Time', location: 'Bangalore', mode: 'Onsite', skills: 'React, JS, CSS'},
+        {title: 'Data Science Intern', company: 'Amazon', type: 'Internship', location: 'Remote', mode: 'Remote', skills: 'Python, ML, SQL'},
+        {title: 'UI/UX Designer', company: 'Adobe', type: 'Full Time', location: 'Delhi', mode: 'Onsite', skills: 'Figma, UX, UI'},
+        {title: 'Backend Developer', company: 'Flipkart', type: 'Full Time', location: 'Remote', mode: 'Remote', skills: 'Node.js, MongoDB'},
+        {title: 'ML Engineer Intern', company: 'Microsoft', type: 'Internship', location: 'Hyderabad', mode: 'Onsite', skills: 'Python, ML, Deep Learning'},
+    ];
+    function renderJobs(filter = 'all', search = '') {
+        const jobList = document.getElementById('job-listings');
+        jobList.innerHTML = '';
+        jobs.filter(job => {
+            let match = (filter === 'all' || job.type.toLowerCase().includes(filter) || job.mode.toLowerCase() === filter);
+            if (search) {
+                const s = search.toLowerCase();
+                match = match && (
+                    job.title.toLowerCase().includes(s) ||
+                    job.company.toLowerCase().includes(s) ||
+                    job.skills.toLowerCase().includes(s)
+                );
+            }
+            return match;
+        }).forEach(job => {
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `
+                <div class="icon"><i class="fas fa-briefcase"></i></div>
+                <div class="card-title">${job.title}</div>
+                <div class="card-desc">${job.company} &middot; ${job.location} &middot; <span style="color:var(--accent2)">${job.type}</span></div>
+                <div class="card-desc" style="font-size:0.98em;">Skills: ${job.skills}</div>
+                <button class="card-btn" onclick="openModal('apply-job', '${job.title}', '${job.company}')">Apply</button>
+            `;
+            jobList.appendChild(card);
+        });
+    }
+    renderJobs();
+    // Job filter
+    document.querySelectorAll('#jobs .filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('#jobs .filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            renderJobs(btn.getAttribute('data-filter'), document.getElementById('job-search').value);
+        });
+    });
+    document.getElementById('job-search').addEventListener('input', e => {
+        const active = document.querySelector('#jobs .filter-btn.active').getAttribute('data-filter');
+        renderJobs(active, e.target.value);
+    });
+
+    // Dummy tracks data
+    const tracks = [
+        {name: 'Full Stack Developer', key: 'fullstack', roadmap: ['HTML/CSS/JS', 'React/Vue', 'Node.js', 'Databases', 'Projects'], projects: ['Blog Platform', 'E-commerce Site']},
+        {name: 'Data Scientist', key: 'datasci', roadmap: ['Python', 'Pandas/Numpy', 'ML Algorithms', 'Data Viz', 'Projects'], projects: ['Stock Predictor', 'Image Classifier']},
+        {name: 'UI/UX Designer', key: 'uiux', roadmap: ['Design Principles', 'Figma', 'Prototyping', 'User Testing', 'Projects'], projects: ['App Redesign', 'Landing Page']},
+        {name: 'Machine Learning', key: 'ml', roadmap: ['Python', 'Maths', 'ML Models', 'Deep Learning', 'Projects'], projects: ['Chatbot', 'Recommendation System']},
+    ];
+    function renderTracks(filter = 'all') {
+        const trackList = document.getElementById('track-listings');
+        trackList.innerHTML = '';
+        tracks.filter(track => filter === 'all' || track.key === filter).forEach(track => {
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `
+                <div class="icon"><i class="fas fa-route"></i></div>
+                <div class="card-title">${track.name}</div>
+                <div class="card-desc">Roadmap:</div>
+                <ul class="roadmap-list">${track.roadmap.map(step => `<li>${step}</li>`).join('')}</ul>
+                <div class="card-desc" style="margin-top:10px;">Project Ideas:</div>
+                <ul class="roadmap-list">${track.projects.map(p => `<li>${p}</li>`).join('')}</ul>
+            `;
+            trackList.appendChild(card);
+        });
+    }
+    renderTracks();
+    document.querySelectorAll('#tracks .filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('#tracks .filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            renderTracks(btn.getAttribute('data-track'));
+        });
+    });
+
+    // Modal logic
+    function openModal(type, ...args) {
+        const modalBg = document.getElementById('modal-bg');
+        const modalBody = document.getElementById('modal-body');
+        modalBg.classList.add('active');
+        let html = '';
+        if (type === 'apply-job') {
+            html = `<h3>Apply for ${args[0]} at ${args[1]}</h3>
+                <label>Name</label><input type='text' id='apply-name'>
+                <label>Email</label><input type='email' id='apply-email'>
+                <label>Resume (PDF)</label><input type='file' id='apply-resume' accept='.pdf'>
+                <button class='modal-btn' onclick='submitJobApp()'>Submit Application</button>
+                <div id='modal-msg'></div>`;
+        } else if (type === 'book-mentor') {
+            html = `<h3>Book a Mentor Session</h3>
+                <label>Name</label><input type='text' id='mentor-name'>
+                <label>Email</label><input type='email' id='mentor-email'>
+                <label>Preferred Date</label><input type='date' id='mentor-date'>
+                <button class='modal-btn' onclick='submitMentorBook()'>Book</button>
+                <div id='modal-msg'></div>`;
+        } else if (type === 'resume-gen') {
+            html = `<h3>Resume Generator</h3>
+                <label>Full Name</label><input type='text' id='res-name'>
+                <label>Email</label><input type='email' id='res-email'>
+                <label>Education</label><input type='text' id='res-edu'>
+                <label>Skills</label><input type='text' id='res-skills'>
+                <button class='modal-btn' onclick='generateResume()'>Generate</button>
+                <div id='modal-msg'></div>`;
+        } else if (type === 'portfolio-upload') {
+            html = `<h3>Upload Portfolio</h3>
+                <label>Portfolio File (PDF/ZIP)</label><input type='file' id='portfolio-file' accept='.pdf,.zip'>
+                <button class='modal-btn' onclick='uploadPortfolio()'>Upload</button>
+                <div id='modal-msg'></div>`;
+        } else if (type === 'readiness-checklist') {
+            html = `<h3>Job Readiness Checklist</h3>
+                <ul class='checklist'>
+                    <li><input type='checkbox' checked> Resume Created</li>
+                    <li><input type='checkbox'> Portfolio Uploaded</li>
+                    <li><input type='checkbox'> Mock Interview Completed</li>
+                    <li><input type='checkbox'> Aptitude Test Passed</li>
+                    <li><input type='checkbox'> Soft Skills Assessed</li>
+                </ul>`;
+        } else if (type === 'skill-courses') {
+            html = `<h3>Skill Courses</h3>
+                <ul class='roadmap-list'>
+                    <li>Frontend Development Bootcamp</li>
+                    <li>Data Science with Python</li>
+                    <li>UI/UX Design Essentials</li>
+                    <li>Machine Learning Crash Course</li>
+                </ul>`;
+        } else if (type === 'mock-interview') {
+            html = `<h3>Book a Mock Interview</h3>
+                <label>Name</label><input type='text' id='mock-name'>
+                <label>Email</label><input type='email' id='mock-email'>
+                <label>Preferred Date</label><input type='date' id='mock-date'>
+                <button class='modal-btn' onclick='submitMockInterview()'>Book</button>
+                <div id='modal-msg'></div>`;
+        } else if (type === 'aptitude-test') {
+            html = `<h3>Aptitude Test</h3>
+                <p>Sample Question: What is 15% of 200?</p>
+                <input type='text' id='apt-answer' placeholder='Your answer'>
+                <button class='modal-btn' onclick='submitAptitude()'>Submit</button>
+                <div id='modal-msg'></div>`;
+        } else if (type === 'soft-skills') {
+            html = `<h3>Soft Skills Assessment</h3>
+                <p>How would you handle a team conflict?</p>
+                <textarea id='soft-answer' rows='3'></textarea>
+                <button class='modal-btn' onclick='submitSoftSkills()'>Submit</button>
+                <div id='modal-msg'></div>`;
+        }
+        modalBody.innerHTML = html;
+    }
+    function closeModal() {
+        document.getElementById('modal-bg').classList.remove('active');
+    }
+    // Modal submit handlers
+    function submitJobApp() {
+        document.getElementById('modal-msg').innerHTML = '<span class="success-msg">Application submitted! We will contact you soon.</span>';
+    }
+    function submitMentorBook() {
+        document.getElementById('modal-msg').innerHTML = '<span class="success-msg">Mentor session booked! Check your email for details.</span>';
+    }
+    function generateResume() {
+        document.getElementById('modal-msg').innerHTML = '<span class="success-msg">Resume generated! (Download link would appear here.)</span>';
+    }
+    function uploadPortfolio() {
+        document.getElementById('modal-msg').innerHTML = '<span class="success-msg">Portfolio uploaded successfully!</span>';
+    }
+    function submitMockInterview() {
+        document.getElementById('modal-msg').innerHTML = '<span class="success-msg">Mock interview booked!</span>';
+    }
+    function submitAptitude() {
+        const ans = document.getElementById('apt-answer').value.trim();
+        if(ans === '30') {
+            document.getElementById('modal-msg').innerHTML = '<span class="success-msg">Correct! You passed the sample test.</span>';
+        } else {
+            document.getElementById('modal-msg').innerHTML = '<span class="success-msg">Try again! (Hint: 15% of 200 is 30)</span>';
+        }
+    }
+    function submitSoftSkills() {
+        document.getElementById('modal-msg').innerHTML = '<span class="success-msg">Response submitted! Our team will review it.</span>';
+    }
+    // Recruiter Portal tab logic (scoped to #recruiter-dashboard)
+    (function() {
+        const tabContainer = document.getElementById('recruiter-tabs');
+        if (!tabContainer) return;
+        const tabs = tabContainer.querySelectorAll('.tab');
+        const tabContents = [
+            document.getElementById('recruiter-post-job'),
+            document.getElementById('recruiter-applications'),
+            document.getElementById('recruiter-analytics'),
+            document.getElementById('recruiter-settings')
+        ];
+        tabs.forEach((tab, idx) => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('active'));
+                tabContents.forEach(c => c.classList.remove('active'));
+                tab.classList.add('active');
+                tabContents[idx].classList.add('active');
+            });
+        });
+        // Job posting form
+        const jobForm = document.getElementById('recruiter-job-form');
+        if (jobForm) {
+            jobForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const msg = document.getElementById('recruiter-job-msg');
+                msg.textContent = 'Job posted successfully!';
+                this.reset();
+            });
+        }
+        // Settings form
+        const settingsForm = document.getElementById('recruiter-settings-form');
+        if (settingsForm) {
+            settingsForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const msg = document.getElementById('recruiter-settings-msg');
+                msg.textContent = 'Settings updated successfully!';
+            });
+        }
+        // Application actions
+        document.querySelectorAll('#recruiter-applications .application-actions .btn').forEach(btn => {
+            btn.addEventListener.addEventListener('click', function() {
+                const action = this.textContent.trim();
+                const applicant = this.closest('.application-card').querySelector('.application-name').textContent;
+                alert(`${action} for ${applicant}`);
+            });
+        });
+    })();
+    // AI Career Assistant (dummy)
+    const chatMessages = document.getElementById('chat-messages');
+    document.getElementById('chat-send').onclick = sendChat;
+    document.getElementById('chat-input').addEventListener('keydown', function(e){
+        if(e.key === 'Enter') sendChat();
+    });
+    function sendChat() {
+        const input = document.getElementById('chat-input');
+        const msg = input.value.trim();
+        if(!msg) return;
+        chatMessages.innerHTML += `<div class='chat-msg user'>${msg}</div>`;
+        input.value = '';
+        setTimeout(()=>{
+            chatMessages.innerHTML += `<div class='chat-msg ai'>${getAIReply(msg)}</div>`;
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }, 700);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+    function getAIReply(msg) {
+        msg = msg.toLowerCase();
+        if(msg.includes('resume')) return 'You can generate a resume in the Resume section!';
+        if(msg.includes('interview')) return 'Try our mock interviews for practice.';
+        if(msg.includes('job') || msg.includes('internship')) return 'Check the Jobs tab for latest opportunities.';
+        if(msg.includes('track')) return 'Explore career tracks for a guided roadmap.';
+        return 'I am here to help with your career queries!';
+    }
+    // Modal close on background click
+    document.getElementById('modal-bg').addEventListener('click', function(e){
+        if(e.target === this) closeModal();
+    });
+    </script>
+</body>
+</html> 

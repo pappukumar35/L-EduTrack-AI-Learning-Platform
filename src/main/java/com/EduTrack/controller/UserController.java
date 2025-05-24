@@ -123,9 +123,56 @@ public class UserController {
     public String showGamifiedZone() {
         return "gamifiedzone"; // matches file name in templates/ or static/
     }
+    
+    
+    @GetMapping("/career")
+    public String showCareerPage() {
+        return "Career"; // yeh templates/Career.html file ko render karega (case-sensitive ho sakta hai)
+    }
 
+
+    @GetMapping("/challenge")
+    public String showChallengePage() {
+        return "Challenge"; // yeh templates/Challenge.html file ko render karega
+    }
+    
+    @GetMapping("/community")
+    public String showCommunityPage() {
+        return "community"; // yeh templates/community.html file ko render karega
+    }
+
+    @GetMapping("/forums")
+    public String showForumsPage() {
+        return "forums"; // yeh templates/forums.html file ko render karega
+    }
+    @GetMapping("/doubt-corner")
+    public String showdoubt() {
+        return "doubt-corner"; // yeh templates/forums.html file ko render karega
+    }
+    @GetMapping("/mentor-connect")
+    public String showmentor() {
+        return "mentor-connect"; // yeh templates/forums.html file ko render karega
+    }
+    
+    @GetMapping("/study-groups")
+    public String showstudy() {
+        return "study-groups"; // yeh templates/forums.html file ko render karega
+    }
     
     
+    @GetMapping("/Gamified")
+    public String openGamifiedZone() {
+    	return "gamifiedzone";
+    }
     
+    @GetMapping("/course_community")
+    public String openCoursesCommunity() {
+         return "community";
+    }
+    
+    @GetMapping("/CoursesCareer")
+    public String CoursesCareer() {
+    	return "Career";
+    }
     
 }

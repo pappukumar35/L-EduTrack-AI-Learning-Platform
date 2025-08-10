@@ -4,7 +4,7 @@ Powered by **Java Full Stack • Spring Boot • Microservices • AI Integratio
 
 ---
 
-## 🌟 What is EduTrack?
+## 🌟 What is EduTrack?.
 EduTrack is an AI-powered, student-centric learning platform designed to revolutionize traditional learning. It enhances engagement, tracks student progress, and boosts focus through:
 
 - 🎮 **Gamification**

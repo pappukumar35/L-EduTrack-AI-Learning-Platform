@@ -16,7 +16,7 @@ EduTrack offers a complete, interactive, and motivating environment that empower
 
 ---
 
-## 🔥 Key Features
+## 🔥 Key Features.
 
 - ✅ **Personalized Learning Paths** – AI-driven recommendations tailored to individual learning styles.
 - 🏆 **Gamified Learning Experience** – Unlock badges, climb leaderboards, and earn rewards.

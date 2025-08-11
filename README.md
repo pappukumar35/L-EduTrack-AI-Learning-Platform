@@ -27,7 +27,7 @@ EduTrack offers a complete, interactive, and motivating environment that empower
 
 ---
 
-## 🎯 Uniqueness of EduTrack
+## 🎯 Uniqueness of EduTrack.
 
 | 🌈 **Feature**             | 💡 **Description**                                                       |
 |----------------------------|--------------------------------------------------------------------------|

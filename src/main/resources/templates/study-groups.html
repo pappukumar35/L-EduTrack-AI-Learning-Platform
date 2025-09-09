@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduTrack Study Groups</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #141414;
+            --bg-card: #1a1a1a;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --accent-primary: #00f2fe;
+            --accent-secondary: #4facfe;
+            --gradient-primary: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            --card-shadow: 0 4px 20px rgba(0, 242, 254, 0.1);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: var(--bg-secondary);
+            padding: 20px 0;
+            margin-bottom: 30px;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8em;
+            font-weight: 700;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: 15px 20px;
+            background: var(--bg-secondary);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-size: 1em;
+            margin-bottom: 20px;
+        }
+
+        .filter-tags {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .filter-tag {
+            padding: 8px 16px;
+            background: var(--bg-secondary);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .filter-tag:hover {
+            background: var(--bg-card);
+            color: var(--text-primary);
+        }
+
+        .filter-tag.active {
+            background: var(--gradient-primary);
+            color: var(--text-primary);
+            border: none;
+        }
+
+        .group-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .group-item {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
+        }
+
+        .group-item:hover {
+            transform: translateX(5px);
+            box-shadow: var(--card-shadow);
+        }
+
+        .group-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .group-info {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .group-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--gradient-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            color: var(--text-primary);
+        }
+
+        .group-details h3 {
+            font-size: 1.4em;
+            margin-bottom: 5px;
+        }
+
+        .group-stats {
+            display: flex;
+            gap: 15px;
+            color: var(--text-secondary);
+            font-size: 0.9em;
+        }
+
+        .group-members {
+            display: flex;
+            margin-left: 10px;
+        }
+
+        .member-avatar {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: 2px solid var(--bg-card);
+            margin-left: -10px;
+            background: var(--gradient-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8em;
+            color: var(--text-primary);
+        }
+
+        .group-description {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .group-tags {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .group-tag {
+            background: var(--bg-secondary);
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.9em;
+            color: var(--text-secondary);
+        }
+
+        .join-btn {
+            padding: 10px 25px;
+            background: var(--gradient-primary);
+            border: none;
+            border-radius: 8px;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .join-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--card-shadow);
+        }
+
+        .join-btn.joined {
+            background: var(--bg-secondary);
+            cursor: default;
+        }
+
+        .create-group-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--gradient-primary);
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5em;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: var(--card-shadow);
+        }
+
+        .create-group-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 30px;
+            width: 90%;
+            max-width: 600px;
+            margin: auto;
+            position: relative;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 1.5em;
+            cursor: pointer;
+        }
+
+        .group-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group label {
+            color: var(--text-secondary);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            padding: 12px;
+            background: var(--bg-secondary);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: var(--text-primary);
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            padding: 12px 25px;
+            background: var(--gradient-primary);
+            border: none;
+            border-radius: 8px;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--card-shadow);
+        }
+
+        .success-message {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--gradient-primary);
+            color: var(--text-primary);
+            padding: 15px 25px;
+            border-radius: 8px;
+            box-shadow: var(--card-shadow);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .success-message.active {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container header-content">
+            <a href="#" class="logo">EduTrack Study Groups</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <input type="text" class="search-bar" placeholder="Search study groups...">
+
+        <div class="filter-tags">
+            <div class="filter-tag active" data-subject="all">All Subjects</div>
+            <div class="filter-tag" data-subject="web">Web Development</div>
+            <div class="filter-tag" data-subject="data">Data Science</div>
+            <div class="filter-tag" data-subject="mobile">Mobile Development</div>
+            <div class="filter-tag" data-subject="design">UI/UX Design</div>
+        </div>
+
+        <div class="group-list">
+            <div class="group-item" data-subjects="web,design">
+                <div class="group-header">
+                    <div class="group-info">
+                        <div class="group-avatar">WD</div>
+                        <div class="group-details">
+                            <h3>Web Development Group</h3>
+                            <div class="group-stats">
+                                <span><i class="fas fa-users"></i> 15 members</span>
+                                <span><i class="fas fa-clock"></i> Active now</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="group-members">
+                        <div class="member-avatar">JD</div>
+                        <div class="member-avatar">MS</div>
+                        <div class="member-avatar">AL</div>
+                        <div class="member-avatar">+12</div>
+                    </div>
+                </div>
+                <p class="group-description">A collaborative space for web developers to share knowledge, work on projects, and prepare for interviews.</p>
+                <div class="group-tags">
+                    <span class="group-tag">React</span>
+                    <span class="group-tag">Node.js</span>
+                    <span class="group-tag">Frontend</span>
+                    <span class="group-tag">Backend</span>
+                </div>
+                <button class="join-btn">Join Group</button>
+            </div>
+
+            <div class="group-item" data-subjects="data">
+                <div class="group-header">
+                    <div class="group-info">
+                        <div class="group-avatar">DS</div>
+                        <div class="group-details">
+                            <h3>Data Science Study Group</h3>
+                            <div class="group-stats">
+                                <span><i class="fas fa-users"></i> 12 members</span>
+                                <span><i class="fas fa-clock"></i> Active now</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="group-members">
+                        <div class="member-avatar">RK</div>
+                        <div class="member-avatar">PT</div>
+                        <div class="member-avatar">SM</div>
+                        <div class="member-avatar">+9</div>
+                    </div>
+                </div>
+                <p class="group-description">Learn and practice data science concepts, work on real-world projects, and prepare for data science interviews.</p>
+                <div class="group-tags">
+                    <span class="group-tag">Python</span>
+                    <span class="group-tag">Machine Learning</span>
+                    <span class="group-tag">Data Analysis</span>
+                    <span class="group-tag">Statistics</span>
+                </div>
+                <button class="join-btn">Join Group</button>
+            </div>
+
+            <div class="group-item" data-subjects="mobile,design">
+                <div class="group-header">
+                    <div class="group-info">
+                        <div class="group-avatar">MD</div>
+                        <div class="group-details">
+                            <h3>Mobile Development Group</h3>
+                            <div class="group-stats">
+                                <span><i class="fas fa-users"></i> 18 members</span>
+                                <span><i class="fas fa-clock"></i> Active now</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="group-members">
+                        <div class="member-avatar">AK</div>
+                        <div class="member-avatar">RS</div>
+                        <div class="member-avatar">VP</div>
+                        <div class="member-avatar">+15</div>
+                    </div>
+                </div>
+                <p class="group-description">A community of mobile developers sharing knowledge about iOS, Android, and cross-platform development.</p>
+                <div class="group-tags">
+                    <span class="group-tag">React Native</span>
+                    <span class="group-tag">Flutter</span>
+                    <span class="group-tag">iOS</span>
+                    <span class="group-tag">Android</span>
+                </div>
+                <button class="join-btn">Join Group</button>
+            </div>
+        </div>
+    </div>
+
+    <button class="create-group-btn">+</button>
+
+    <div class="modal" id="createGroupModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Create Study Group</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <form class="group-form">
+                <div class="form-group">
+                    <label for="groupName">Group Name</label>
+                    <input type="text" id="groupName" required>
+                </div>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea id="description" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="subjects">Subjects (comma separated)</label>
+                    <input type="text" id="subjects" placeholder="e.g., Web Dev, Data Science, UI/UX">
+                </div>
+                <button type="submit" class="submit-btn">Create Group</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="success-message">Group created successfully!</div>
+
+    <script>
+        // Initialize variables
+        const searchBar = document.querySelector('.search-bar');
+        const filterTags = document.querySelectorAll('.filter-tag');
+        const groupItems = document.querySelectorAll('.group-item');
+        const joinButtons = document.querySelectorAll('.join-btn');
+        const createGroupBtn = document.querySelector('.create-group-btn');
+        const createGroupModal = document.getElementById('createGroupModal');
+        const closeModalBtn = document.querySelector('.close-modal');
+        const groupForm = document.querySelector('.group-form');
+        const successMessage = document.querySelector('.success-message');
+
+        // Search functionality
+        searchBar.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            groupItems.forEach(item => {
+                const name = item.querySelector('h3').textContent.toLowerCase();
+                const description = item.querySelector('.group-description').textContent.toLowerCase();
+                const tags = Array.from(item.querySelectorAll('.group-tag'))
+                    .map(tag => tag.textContent.toLowerCase());
+
+                if (name.includes(searchTerm) || 
+                    description.includes(searchTerm) || 
+                    tags.some(tag => tag.includes(searchTerm))) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+
+        // Filter functionality
+        filterTags.forEach(tag => {
+            tag.addEventListener('click', () => {
+                filterTags.forEach(t => t.classList.remove('active'));
+                tag.classList.add('active');
+
+                const selectedSubject = tag.getAttribute('data-subject');
+                groupItems.forEach(item => {
+                    if (selectedSubject === 'all') {
+                        item.style.display = 'block';
+                    } else {
+                        const itemSubjects = item.getAttribute('data-subjects').split(',');
+                        item.style.display = itemSubjects.includes(selectedSubject) ? 'block' : 'none';
+                    }
+                });
+            });
+        });
+
+        // Join button functionality
+        joinButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                if (!button.classList.contains('joined')) {
+                    const groupName = button.closest('.group-item').querySelector('h3').textContent;
+                    button.textContent = 'Joined';
+                    button.classList.add('joined');
+                    
+                    successMessage.textContent = `Successfully joined ${groupName}`;
+                    successMessage.classList.add('active');
+                    
+                    setTimeout(() => {
+                        successMessage.classList.remove('active');
+                    }, 3000);
+                }
+            });
+        });
+
+        // Create group modal functionality
+        createGroupBtn.addEventListener('click', () => {
+            createGroupModal.classList.add('active');
+        });
+
+        closeModalBtn.addEventListener('click', () => {
+            createGroupModal.classList.remove('active');
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target === createGroupModal) {
+                createGroupModal.classList.remove('active');
+            }
+        });
+
+        // Handle form submission
+        groupForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const groupName = document.getElementById('groupName').value;
+            const description = document.getElementById('description').value;
+            const subjects = document.getElementById('subjects').value;
+
+            // Create new group item
+            const newGroupItem = document.createElement('div');
+            newGroupItem.className = 'group-item';
+            newGroupItem.setAttribute('data-subjects', subjects.toLowerCase().replace(/\s/g, ''));
+            newGroupItem.innerHTML = `
+                <div class="group-header">
+                    <div class="group-info">
+                        <div class="group-avatar">${groupName.substring(0, 2).toUpperCase()}</div>
+                        <div class="group-details">
+                            <h3>${groupName}</h3>
+                            <div class="group-stats">
+                                <span><i class="fas fa-users"></i> 1 member</span>
+                                <span><i class="fas fa-clock"></i> Active now</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="group-members">
+                        <div class="member-avatar">You</div>
+                    </div>
+                </div>
+                <p class="group-description">${description}</p>
+                <div class="group-tags">
+                    ${subjects.split(',').map(subject => 
+                        `<span class="group-tag">${subject.trim()}</span>`
+                    ).join('')}
+                </div>
+                <button class="join-btn joined">Joined</button>
+            `;
+
+            // Add new group to the list
+            document.querySelector('.group-list').prepend(newGroupItem);
+            createGroupModal.classList.remove('active');
+            groupForm.reset();
+
+            successMessage.textContent = 'Group created successfully!';
+            successMessage.classList.add('active');
+            
+            setTimeout(() => {
+                successMessage.classList.remove('active');
+            }, 3000);
+        });
+    </script>
+</body>
+</html> 

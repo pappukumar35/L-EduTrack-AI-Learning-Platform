@@ -1,0 +1,2004 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduTrack - Coding Challenges</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #00f7ff;
+            --primary-dark: #0088ff;
+            --accent: #ff4ecd;
+            --success: #2ecc71;
+            --warning: #e67e22;
+            --danger: #e74c3c;
+            --light: #f8fafd;
+            --dark: #181c24;
+            --background: linear-gradient(120deg, #181c24 0%, #232946 100%);
+            --glass: rgba(255,255,255,0.08);
+            --glass-blur: blur(18px);
+            --shadow: 0 8px 32px 0 rgba(0, 247, 255, 0.10), 0 1.5px 8px 0 rgba(0,0,0,0.18);
+            --transition: all 0.35s cubic-bezier(.4,0,.2,1);
+            --gradient-primary: linear-gradient(90deg, #00f7ff 0%, #0088ff 100%);
+            --gradient-accent: linear-gradient(90deg, #ff4ecd 0%, #00f7ff 100%);
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        html, body {
+            min-height: 100vh;
+            background: var(--background);
+            color: var(--light);
+            scroll-behavior: smooth;
+        }
+        body {
+            padding: 0;
+        }
+		/* Enhanced Navbar */
+				.navbar {
+				    display: flex;
+				    justify-content: space-between;
+				    align-items: center;
+				    padding: 15px 30px;
+				    background: rgba(10, 10, 10, 0.8);
+				    backdrop-filter: blur(20px);
+				    border: 1px solid rgba(255, 255, 255, 0.1);
+				    border-radius: 20px;
+				    margin-bottom: 30px;
+				    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+				    position: sticky;
+				    top: 20px;
+				    z-index: 1000;
+				}
+				
+				
+
+				.navbar .logo {
+				    font-size: 28px;
+				    color: var(--primary);
+				    font-weight: 700;
+				    display: flex;
+				    align-items: center;
+				    text-shadow: 0 0 10px rgba(0, 247, 255, 0.3);
+				    transition: all 0.3s ease;
+				}
+
+				.navbar .logo:hover {
+				    transform: scale(1.05);
+				    text-shadow: 0 0 20px rgba(0, 247, 255, 0.5);
+				}
+
+				.navbar .logo i {
+				    margin-right: 12px;
+				    font-size: 32px;
+				    background: var(--gradient-primary);
+				    -webkit-background-clip: text;
+				    -webkit-text-fill-color: transparent;
+				}
+
+				.navbar nav {
+				    display: flex;
+				    gap: 25px;
+				}
+
+				.navbar nav a {
+				    color: var(--text-secondary);
+				    text-decoration: none;
+				    font-weight: 500;
+				    padding: 8px 16px;
+				    border-radius: 12px;
+				    transition: all 0.3s ease;
+				    position: relative;
+				}
+
+				.navbar nav a::before {
+				    content: '';
+				    position: absolute;
+				    bottom: 0;
+				    left: 50%;
+				    transform: translateX(-50%);
+				    width: 0;
+				    height: 2px;
+				    background: var(--gradient-primary);
+				    transition: width 0.3s ease;
+				}
+
+				.navbar nav a:hover {
+				    color: var(--primary);
+				    background: rgba(0, 247, 255, 0.1);
+				}
+
+				.navbar nav a:hover::before {
+				    width: 80%;
+				}
+
+				.navbar nav a.active {
+				    color: var(--primary);
+				    background: rgba(0, 247, 255, 0.1);
+				}
+
+				.navbar nav a.active::before {
+				    width: 80%;
+				}
+
+				.navbar .auth-buttons {
+				    display: flex;
+				    gap: 15px;
+				}
+
+				.navbar .auth-buttons a {
+				    padding: 12px 24px;
+				    border-radius: 12px;
+				    font-weight: 600;
+				    transition: all 0.3s ease;
+				    text-decoration: none;
+				    position: relative;
+				    overflow: hidden;
+				}
+
+				.navbar .auth-buttons a::before {
+				    content: '';
+				    position: absolute;
+				    top: 0;
+				    left: 0;
+				    width: 100%;
+				    height: 100%;
+				    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+				    transform: translateX(-100%);
+				    transition: transform 0.6s ease;
+				}
+
+				.navbar .auth-buttons a:hover::before {
+				    transform: translateX(100%);
+				}
+
+				.navbar .auth-buttons a.outline {
+				    border: 2px solid var(--primary);
+				    color: var(--primary);
+				    background: transparent;
+				}
+
+				.navbar .auth-buttons a.outline:hover {
+				    background: rgba(0, 247, 255, 0.1);
+				    transform: translateY(-2px);
+				    box-shadow: 0 4px 15px rgba(0, 247, 255, 0.2);
+				}
+
+				.navbar .auth-buttons a.fill {
+				    background: var(--gradient-primary);
+				    color: var(--background);
+				    border: none;
+				}
+
+				.navbar .auth-buttons a.fill:hover {
+				    transform: translateY(-2px);
+				    box-shadow: 0 4px 15px rgba(0, 247, 255, 0.3);
+				}
+
+
+
+        .main-container {
+            max-width: 1400px;
+            margin: 36px auto 0 auto;
+            padding: 0 24px 48px 24px;
+            display: flex;
+            gap: 32px;
+            min-height: 80vh;
+        }
+        #topicSidebar {
+            width: 260px;
+            min-width: 200px;
+            background: var(--glass);
+            border-radius: 22px;
+            padding: 32px 18px 24px 18px;
+            box-shadow: var(--shadow);
+            border: 1.5px solid rgba(255,255,255,0.10);
+            backdrop-filter: var(--glass-blur);
+            animation: fadeInLeft 1.1s cubic-bezier(.4,0,.2,1);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            height: fit-content;
+            max-height: 520px;
+            overflow-y: auto;
+        }
+        @keyframes fadeInLeft {
+            from { opacity: 0; transform: translateX(-60px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        #topicSidebar h3 {
+            color: var(--primary);
+            margin-bottom: 1.2rem;
+            font-size: 1.15rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+        #topicList {
+            list-style: none;
+            width: 100%;
+        }
+        #topicList .topic-item {
+            margin-bottom: 10px;
+            padding: 10px 18px;
+            background: transparent;
+            border-radius: 12px;
+            color: #eaffff;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            z-index: 1;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        #topicList .topic-item .topic-count {
+            background: var(--gradient-primary);
+            color: #181c24;
+            font-size: 0.95rem;
+            font-weight: 700;
+            border-radius: 8px;
+            padding: 2px 10px;
+            margin-left: 10px;
+            min-width: 32px;
+            text-align: center;
+            box-shadow: 0 1px 6px #00f7ff22;
+            transition: var(--transition);
+        }
+        #topicList .topic-item.active,
+        #topicList .topic-item:hover {
+            background: var(--gradient-primary);
+            color: #181c24;
+            box-shadow: 0 2px 12px #00f7ff33;
+            transform: scale(1.04);
+        }
+        .problem-list {
+            background: var(--glass);
+            border-radius: 22px;
+            padding: 32px 28px 28px 28px;
+            box-shadow: var(--shadow);
+            border: 1.5px solid rgba(255,255,255,0.10);
+            backdrop-filter: var(--glass-blur);
+            display: flex;
+            flex-direction: column;
+            animation: fadeInUp 1.1s cubic-bezier(.4,0,.2,1);
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(60px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .problem-list-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        .problem-list-header h2 {
+            font-size: 1.6rem;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        .problem-filters {
+            display: flex;
+            gap: 12px;
+        }
+        .filter-btn {
+            background: transparent;
+            border: 1.5px solid var(--primary);
+            color: var(--primary);
+            padding: 7px 18px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        .filter-btn.active,
+        .filter-btn:hover {
+            background: var(--gradient-primary);
+            color: #181c24;
+            box-shadow: 0 2px 12px #00f7ff33;
+            transform: scale(1.07);
+        }
+        .problem-list-scrollbox {
+            overflow-x: auto;
+            max-height: 400px;
+            border-radius: 14px;
+            background: rgba(255,255,255,0.03);
+            box-shadow: 0 2px 12px #00f7ff11;
+            animation: fadeInUp 1.2s cubic-bezier(.4,0,.2,1);
+        }
+        .problem-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        .problem-table th,
+        .problem-table td {
+            padding: 14px 12px;
+            text-align: left;
+            border-bottom: 1.5px solid rgba(255, 255, 255, 0.08);
+            font-size: 1rem;
+        }
+        .problem-table th {
+            color: var(--primary);
+            background: rgba(255,255,255,0.06);
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+        .problem-table tr {
+            transition: background 0.2s;
+        }
+        .problem-table tr:hover {
+            background: rgba(0, 247, 255, 0.07);
+            box-shadow: 0 2px 12px #00f7ff22;
+        }
+        .problem-status {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .status-icon {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            box-shadow: 0 2px 8px #00f7ff22;
+            transition: var(--transition);
+        }
+        .status-icon.solved { background: var(--success); color: #fff; }
+        .status-icon.attempted { background: var(--warning); color: #fff; }
+        .status-icon.unsolved { background: var(--danger); color: #fff; }
+        .difficulty-badge {
+            padding: 0.3rem 0.7rem;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            box-shadow: 0 1px 6px #00f7ff22;
+            transition: var(--transition);
+        }
+        .difficulty-badge.easy { background: linear-gradient(90deg, #2ecc71 60%, #00f7ff 100%); color: #fff; }
+        .difficulty-badge.medium { background: linear-gradient(90deg, #e67e22 60%, #00f7ff 100%); color: #fff; }
+        .difficulty-badge.hard { background: linear-gradient(90deg, #e74c3c 60%, #00f7ff 100%); color: #fff; }
+        .interview-section {
+            background: var(--glass);
+            border-radius: 22px;
+            padding: 32px 28px 28px 28px;
+            box-shadow: var(--shadow);
+            border: 1.5px solid rgba(255,255,255,0.10);
+            backdrop-filter: var(--glass-blur);
+            animation: fadeInUp 1.2s cubic-bezier(.4,0,.2,1);
+        }
+        .interview-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        .interview-header h2 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            font-weight: 700;
+        }
+        .interview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 28px;
+        }
+        .interview-card {
+            background: rgba(255,255,255,0.10);
+            border-radius: 16px;
+            padding: 28px 22px;
+            border: 1.5px solid rgba(0,247,255,0.10);
+            box-shadow: 0 2px 12px #00f7ff22;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 1.3s cubic-bezier(.4,0,.2,1);
+        }
+        .interview-card:hover {
+            transform: translateY(-6px) scale(1.03);
+            box-shadow: 0 8px 32px #00f7ff44;
+            background: linear-gradient(135deg, rgba(0, 247, 255, 0.1) 0%, rgba(0, 136, 255, 0.1) 100%);
+            border: 1.5px solid rgba(0, 247, 255, 0.3);
+        }
+
+        .interview-card:hover h3 {
+            color: var(--primary);
+            text-shadow: 0 0 10px rgba(0, 247, 255, 0.3);
+        }
+
+        .interview-card:hover p {
+            color: #ffffff;
+            opacity: 0.9;
+        }
+
+        .interview-card:hover .interview-stats span {
+            color: var(--primary);
+            text-shadow: 0 0 8px rgba(0, 247, 255, 0.2);
+        }
+
+        .interview-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        .interview-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-align: center;
+        }
+        .interview-card p {
+            color: #eaffff;
+            margin-bottom: 1.5rem;
+            opacity: 0.85;
+            text-align: center;
+        }
+        .interview-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .interview-stats {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+        .interview-stats span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary);
+            font-size: 0.9rem;
+        }
+        .start-interview-btn {
+            background: var(--gradient-primary);
+            border: none;
+            padding: 12px 24px;
+            border-radius: 10px;
+            color: #181c24;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 1rem;
+            box-shadow: 0 2px 12px #00f7ff33;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        .start-interview-btn:hover {
+            background: var(--gradient-accent);
+            color: #ffffff;
+            transform: scale(1.07);
+            box-shadow: 0 4px 20px rgba(255, 78, 205, 0.4);
+        }
+        .interview-card:hover .start-interview-btn {
+            background: var(--gradient-accent);
+            color: #ffffff;
+            box-shadow: 0 4px 20px rgba(255, 78, 205, 0.4);
+        }
+        .company-section {
+            background: var(--glass);
+            border-radius: 22px;
+            padding: 32px 28px 28px 28px;
+            box-shadow: var(--shadow);
+            border: 1.5px solid rgba(255,255,255,0.10);
+            backdrop-filter: var(--glass-blur);
+            animation: fadeInUp 1.3s cubic-bezier(.4,0,.2,1);
+        }
+        .company-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        .company-header h2 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            font-weight: 700;
+        }
+        .company-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 28px;
+        }
+        .company-card {
+            background: rgba(255,255,255,0.10);
+            border-radius: 16px;
+            padding: 28px 22px;
+            border: 1.5px solid rgba(0,247,255,0.10);
+            box-shadow: 0 2px 12px #00f7ff22;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 1.4s cubic-bezier(.4,0,.2,1);
+            text-align: center;
+        }
+        .company-card:hover {
+            transform: translateY(-6px) scale(1.03);
+            box-shadow: 0 8px 32px #00f7ff44;
+            background: linear-gradient(135deg, rgba(0, 247, 255, 0.1) 0%, rgba(0, 136, 255, 0.1) 100%);
+            border: 1.5px solid rgba(0, 247, 255, 0.3);
+        }
+
+        .company-card:hover h3 {
+            color: var(--primary);
+            text-shadow: 0 0 10px rgba(0, 247, 255, 0.3);
+        }
+
+        .company-card:hover p {
+            color: #ffffff;
+            opacity: 0.9;
+        }
+
+        .company-card:hover .stat-value {
+            color: var(--primary);
+            text-shadow: 0 0 8px rgba(0, 247, 255, 0.2);
+        }
+
+        .company-card:hover .stat-label {
+            color: #ffffff;
+            opacity: 0.9;
+        }
+
+        .company-logo {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .company-card h3 {
+            color: var(--primary);
+            margin-bottom: 0.7rem;
+            font-size: 1.15rem;
+            font-weight: 700;
+        }
+        .company-card p {
+            color: #eaffff;
+            opacity: 0.85;
+            margin-bottom: 1.5rem;
+        }
+        .company-stats {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+        .stat {
+            text-align: center;
+        }
+        .stat-value {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 0.3rem;
+        }
+        .stat-label {
+            font-size: 0.9rem;
+            color: #b2eaff;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            justify-content: center;
+        }
+        .company-logo i,
+        .interview-icon i {
+            transition: var(--transition);
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .company-card:hover .company-logo i,
+        .interview-card:hover .interview-icon i {
+            transform: scale(1.2);
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 8px rgba(0, 247, 255, 0.4));
+        }
+        .company-card:hover .company-logo i,
+        .interview-card:hover .interview-icon i {
+            background: var(--gradient-accent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        ::-webkit-scrollbar {
+            width: 10px;
+            background: rgba(0,247,255,0.04);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(120deg, #00f7ff 0%, #0088ff 100%);
+            border-radius: 8px;
+        }
+        @media (max-width: 1100px) {
+            .main-container { flex-direction: column; gap: 24px; }
+            #topicSidebar { width: 100%; min-width: unset; flex-direction: row; justify-content: flex-start; }
+        }
+        @media (max-width: 900px) {
+            .navbar { flex-direction: column; gap: 18px; padding: 18px 8px; }
+            .main-container { padding: 0 6px 32px 6px; }
+            .problem-list, .interview-section, .company-section { padding: 18px 8px; }
+            .problem-list-scrollbox { max-height: 220px; }
+            .interview-grid, .company-grid { grid-template-columns: 1fr; }
+            #topicSidebar { padding: 18px 8px; }
+        }
+        .editor-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            backdrop-filter: blur(8px);
+        }
+
+        .editor-container {
+            position: relative;
+            width: 95%;
+            height: 95%;
+            margin: 1% auto;
+            background: var(--dark);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            border: 1.5px solid rgba(255,255,255,0.1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .editor-header {
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .editor-header h3 {
+            color: var(--primary);
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .editor-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .editor-btn {
+            padding: 8px 16px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .run-btn {
+            background: var(--gradient-primary);
+            color: var(--dark);
+        }
+
+        .run-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 247, 255, 0.3);
+        }
+
+        .close-btn {
+            background: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .close-btn:hover {
+            background: rgba(0, 247, 255, 0.1);
+        }
+
+        .editor-content {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .problem-description {
+            width: 40%;
+            padding: 20px;
+            color: var(--light);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            overflow-y: auto;
+            border-right: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .problem-description h4 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .problem-description .difficulty {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .problem-description .difficulty.easy { background: var(--success); }
+        .problem-description .difficulty.medium { background: var(--warning); }
+        .problem-description .difficulty.hard { background: var(--danger); }
+
+        .problem-description .section {
+            margin-bottom: 20px;
+        }
+
+        .problem-description .section h5 {
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+
+        .problem-description pre {
+            background: rgba(255,255,255,0.05);
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 10px 0;
+        }
+
+        .problem-description code {
+            font-family: 'Consolas', monospace;
+            color: var(--primary);
+        }
+
+        .editor-wrapper {
+            flex: 1;
+            position: relative;
+        }
+
+        #monaco-editor {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+        }
+
+        .test-cases {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 8px;
+        }
+
+        .test-case {
+            margin-bottom: 15px;
+        }
+
+        .test-case h6 {
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .test-case pre {
+            margin: 0;
+        }
+
+        @media (max-width: 1200px) {
+            .editor-content {
+                flex-direction: column;
+            }
+            .problem-description {
+                width: 100%;
+                max-height: 40%;
+                border-right: none;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+            }
+        }
+
+        /* Add styles for the LeetCode link */
+        .problem-table td a:hover {
+            transform: scale(1.05);
+        }
+        .problem-table td a i {
+            transition: var(--transition);
+        }
+        .problem-table td a:hover i {
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <header class="navbar">
+        <div class="logo">
+            <i class="fa fa-graduation-cap" aria-hidden="true"></i> EduTrack
+        </div>
+        <nav class="nav-links">
+            <a href="/" aria-label="Home"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
+            <a href="/Courses" aria-label="Courses"><i class="-solid fa-book-open-reader"></i> Courses</a>
+            <a href="/gamifiedzone" aria-label="Gamified Zone">Gamified Zone</a>
+            <a href="/challenge" aria-label="Goals" class="active">Challenge</a>
+            <a href="/event" aria-label="Community">Community</a>
+            <a href="/career" aria-label="Careers">Careers</a>
+        </nav>
+    </header>
+    <main class="main-container">
+        <aside id="topicSidebar">
+            <div>
+                <h3>Topics</h3>
+                <ul id="topicList"></ul>
+            </div>
+        </aside>
+        <section style="flex:1;display:flex;flex-direction:column;gap:40px;">
+            <section class="problem-list">
+                <div class="problem-list-header">
+                    <h2><i class="fas fa-code"></i> Coding Problems</h2>
+                    <div class="problem-filters">
+                        <button class="filter-btn active" data-filter="All">All</button>
+                        <button class="filter-btn" data-filter="Easy">Easy</button>
+                        <button class="filter-btn" data-filter="Medium">Medium</button>
+                        <button class="filter-btn" data-filter="Hard">Hard</button>
+                        <button class="filter-btn" data-filter="Solved">Solved</button>
+                        <button class="filter-btn" data-filter="Unsolved">Unsolved</button>
+                    </div>
+                </div>
+                <div class="problem-list-scrollbox">
+                    <table class="problem-table">
+                        <thead>
+                            <tr>
+                                <th>Status</th>
+                                <th>Title</th>
+                                <th>Difficulty</th>
+                                <th>Category</th>
+                                <th>Acceptance Rate</th>
+                            </tr>
+                        </thead>
+                        <tbody id="problemTableBody"></tbody>
+                    </table>
+                </div>
+            </section>
+            <section class="interview-section">
+                <div class="interview-header">
+                    <h2><i class="fas fa-video"></i> Real-Time Interviews</h2>
+                </div>
+                <div class="interview-grid">
+                    <div class="interview-card">
+                        <div class="interview-icon">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <h3>Frontend Developer Interview</h3>
+                        <p>Practice real-time frontend development interviews with industry experts.</p>
+                        <div class="interview-meta">
+                            <div class="interview-stats">
+                                <span><i class="fas fa-clock"></i> 45 mins</span>
+                                <span><i class="fas fa-users"></i> 100+ Experts</span>
+                            </div>
+                            <button class="start-interview-btn">
+                                <i class="fas fa-play"></i> Start Interview
+                            </button>
+                        </div>
+                    </div>
+                    <div class="interview-card">
+                        <div class="interview-icon">
+                            <i class="fas fa-server"></i>
+                        </div>
+                        <h3>Backend Developer Interview</h3>
+                        <p>Practice real-time backend development interviews with industry experts.</p>
+                        <div class="interview-meta">
+                            <div class="interview-stats">
+                                <span><i class="fas fa-clock"></i> 45 mins</span>
+                                <span><i class="fas fa-users"></i> 100+ Experts</span>
+                            </div>
+                            <button class="start-interview-btn">
+                                <i class="fas fa-play"></i> Start Interview
+                            </button>
+                        </div>
+                    </div>
+                    <div class="interview-card">
+                        <div class="interview-icon">
+                            <i class="fas fa-layer-group"></i>
+                        </div>
+                        <h3>Full Stack Developer Interview</h3>
+                        <p>Practice real-time full stack development interviews with industry experts.</p>
+                        <div class="interview-meta">
+                            <div class="interview-stats">
+                                <span><i class="fas fa-clock"></i> 60 mins</span>
+                                <span><i class="fas fa-users"></i> 100+ Experts</span>
+                            </div>
+                            <button class="start-interview-btn">
+                                <i class="fas fa-play"></i> Start Interview
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="company-section">
+                <div class="company-header">
+                    <h2><i class="fas fa-building"></i> Company-Specific Questions</h2>
+                </div>
+                <div class="company-grid">
+                    <div class="company-card">
+                        <div class="company-logo">
+                            <i class="fab fa-google"></i>
+                        </div>
+                        <h3>Google</h3>
+                        <p>Practice questions frequently asked in Google interviews</p>
+                        <div class="company-stats">
+                            <div class="stat">
+                                <div class="stat-value">150+</div>
+                                <div class="stat-label"><i class="fas fa-code"></i> Questions</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">85%</div>
+                                <div class="stat-label"><i class="fas fa-chart-line"></i> Success Rate</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="company-card">
+                        <div class="company-logo">
+                            <i class="fab fa-microsoft"></i>
+                        </div>
+                        <h3>Microsoft</h3>
+                        <p>Practice questions frequently asked in Microsoft interviews</p>
+                        <div class="company-stats">
+                            <div class="stat">
+                                <div class="stat-value">120+</div>
+                                <div class="stat-label"><i class="fas fa-code"></i> Questions</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">80%</div>
+                                <div class="stat-label"><i class="fas fa-chart-line"></i> Success Rate</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="company-card">
+                        <div class="company-logo">
+                            <i class="fab fa-amazon"></i>
+                        </div>
+                        <h3>Amazon</h3>
+                        <p>Practice questions frequently asked in Amazon interviews</p>
+                        <div class="company-stats">
+                            <div class="stat">
+                                <div class="stat-value">200+</div>
+                                <div class="stat-label"><i class="fas fa-code"></i> Questions</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">75%</div>
+                                <div class="stat-label"><i class="fas fa-chart-line"></i> Success Rate</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+    </main>
+    <div class="editor-modal" id="editorModal">
+        <div class="editor-container">
+            <div class="editor-header">
+                <h3><i class="fas fa-code"></i> <span id="problemTitle">Problem Title</span></h3>
+                <div class="editor-actions">
+                    <button class="editor-btn run-btn" onclick="runCode()">
+                        <i class="fas fa-play"></i> Run Code
+                    </button>
+                    <button class="editor-btn close-btn" onclick="closeEditor()">
+                        <i class="fas fa-times"></i> Close
+                    </button>
+                </div>
+            </div>
+            <div class="editor-content">
+                <div class="problem-description" id="problemDescription">
+                    <!-- Problem description will be loaded here -->
+                </div>
+                <div class="editor-wrapper">
+                    <div id="monaco-editor"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Update Monaco Editor CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.36.1/min/vs/loader.js"></script>
+    
+    <script>
+        // Topic data with counts
+        const topicData = [
+            { name: 'Array', count: 1916 },
+            { name: 'String', count: 789 },
+            { name: 'Hash Table', count: 699 },
+            { name: 'Dynamic Programming', count: 586 },
+            { name: 'Math', count: 580 },
+            { name: 'Sorting', count: 452 },
+            { name: 'Greedy', count: 414 },
+            { name: 'Depth-First Search', count: 321 },
+            { name: 'Binary Search', count: 308 },
+            { name: 'Database', count: 304 },
+            { name: 'Matrix', count: 257 },
+            { name: 'Tree', count: 245 },
+            { name: 'Breadth-First Search', count: 244 },
+            { name: 'Bit Manipulation', count: 239 },
+            { name: 'Two Pointers', count: 218 },
+            { name: 'Prefix Sum', count: 204 },
+            { name: 'Heap (Priority Queue)', count: 194 },
+            { name: 'Simulation', count: 179 },
+            { name: 'Binary Tree', count: 177 },
+            { name: 'Stack', count: 169 },
+            { name: 'Graph', count: 166 },
+            { name: 'Counting', count: 162 },
+            { name: 'Sliding Window', count: 150 },
+            { name: 'Design', count: 130 },
+            { name: 'Enumeration', count: 117 },
+            { name: 'Backtracking', count: 108 },
+            { name: 'Union Find', count: 88 },
+            { name: 'Linked List', count: 81 },
+            { name: 'Ordered Set', count: 71 },
+            { name: 'Number Theory', count: 69 },
+            { name: 'Monotonic Stack', count: 67 },
+            { name: 'Segment Tree', count: 63 },
+            { name: 'Trie', count: 57 },
+            { name: 'Combinatorics', count: 54 },
+            { name: 'Bitmask', count: 52 },
+            { name: 'Queue', count: 48 },
+            { name: 'Divide and Conquer', count: 48 },
+            { name: 'Recursion', count: 47 },
+            { name: 'Binary Indexed Tree', count: 43 },
+            { name: 'Memoization', count: 42 },
+            { name: 'Hash Function', count: 40 },
+            { name: 'Geometry', count: 40 },
+            { name: 'Binary Search Tree', count: 40 },
+            { name: 'String Matching', count: 37 },
+            { name: 'Topological Sort', count: 36 },
+            { name: 'Shortest Path', count: 34 },
+            { name: 'Rolling Hash', count: 31 },
+            { name: 'Game Theory', count: 28 },
+            { name: 'Interactive', count: 23 },
+            { name: 'Data Stream', count: 21 },
+            { name: 'Monotonic Queue', count: 18 },
+            { name: 'Brainteaser', count: 17 },
+            { name: 'Doubly-Linked List', count: 13 },
+            { name: 'Randomized', count: 12 },
+            { name: 'Merge Sort', count: 12 },
+            { name: 'Counting Sort', count: 11 },
+            { name: 'Iterator', count: 9 },
+            { name: 'Concurrency', count: 9 },
+            { name: 'Probability and Statistics', count: 7 },
+            { name: 'Quickselect', count: 7 },
+            { name: 'Suffix Array', count: 7 },
+            { name: 'Line Sweep', count: 7 },
+            { name: 'Bucket Sort', count: 6 },
+            { name: 'Minimum Spanning Tree', count: 5 },
+            { name: 'Shell', count: 4 },
+            { name: 'Reservoir Sampling', count: 4 },
+            { name: 'Strongly Connected Component', count: 3 },
+            { name: 'Eulerian Circuit', count: 3 },
+            { name: 'Radix Sort', count: 3 },
+            { name: 'Rejection Sampling', count: 2 },
+            { name: 'Biconnected Component', count: 1 }
+        ];
+
+        // Example problems for each topic (20 per topic)
+        const problems = [
+            // Array Problems (20)
+            { title: 'Two Sum', difficulty: 'Easy', status: 'Solved', category: 'Array', acceptance: '45%', leetcodeLink: 'https://leetcode.com/problems/two-sum/' },
+            { title: 'Best Time to Buy and Sell Stock', difficulty: 'Easy', status: 'Solved', category: 'Array', acceptance: '52%', leetcodeLink: 'https://leetcode.com/problems/best-time-to-buy-and-sell-stock/' },
+            { title: 'Contains Duplicate', difficulty: 'Easy', status: 'Solved', category: 'Array', acceptance: '55%', leetcodeLink: 'https://leetcode.com/problems/contains-duplicate/' },
+            { title: 'Product of Array Except Self', difficulty: 'Medium', status: 'Attempted', category: 'Array', acceptance: '60%', leetcodeLink: 'https://leetcode.com/problems/product-of-array-except-self/' },
+            { title: 'Maximum Subarray', difficulty: 'Medium', status: 'Solved', category: 'Array', acceptance: '48%', leetcodeLink: 'https://leetcode.com/problems/maximum-subarray/' },
+            { title: 'Maximum Product Subarray', difficulty: 'Medium', status: 'Unsolved', category: 'Array', acceptance: '32%', leetcodeLink: 'https://leetcode.com/problems/maximum-product-subarray/' },
+            { title: 'Find Minimum in Rotated Sorted Array', difficulty: 'Medium', status: 'Solved', category: 'Array', acceptance: '46%', leetcodeLink: 'https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/' },
+            { title: 'Search in Rotated Sorted Array', difficulty: 'Medium', status: 'Attempted', category: 'Array', acceptance: '37%', leetcodeLink: 'https://leetcode.com/problems/search-in-rotated-sorted-array/' },
+            { title: '3Sum', difficulty: 'Medium', status: 'Unsolved', category: 'Array', acceptance: '28%', leetcodeLink: 'https://leetcode.com/problems/3sum/' },
+            { title: 'Container With Most Water', difficulty: 'Medium', status: 'Solved', category: 'Array', acceptance: '53%', leetcodeLink: 'https://leetcode.com/problems/container-with-most-water/' },
+            { title: 'Trapping Rain Water', difficulty: 'Hard', status: 'Attempted', category: 'Array', acceptance: '29%', leetcodeLink: 'https://leetcode.com/problems/trapping-rain-water/' },
+            { title: 'Merge Intervals', difficulty: 'Medium', status: 'Solved', category: 'Array', acceptance: '44%', leetcodeLink: 'https://leetcode.com/problems/merge-intervals/' },
+            { title: 'Insert Interval', difficulty: 'Medium', status: 'Unsolved', category: 'Array', acceptance: '35%', leetcodeLink: 'https://leetcode.com/problems/insert-interval/' },
+            { title: 'Spiral Matrix', difficulty: 'Medium', status: 'Attempted', category: 'Array', acceptance: '38%', leetcodeLink: 'https://leetcode.com/problems/spiral-matrix/' },
+            { title: 'Rotate Image', difficulty: 'Medium', status: 'Solved', category: 'Array', acceptance: '62%', leetcodeLink: 'https://leetcode.com/problems/rotate-image/' },
+            { title: 'Word Search', difficulty: 'Medium', status: 'Unsolved', category: 'Array', acceptance: '36%', leetcodeLink: 'https://leetcode.com/problems/word-search/' },
+            { title: 'Longest Consecutive Sequence', difficulty: 'Medium', status: 'Attempted', category: 'Array', acceptance: '45%', leetcodeLink: 'https://leetcode.com/problems/longest-consecutive-sequence/' },
+            { title: 'First Missing Positive', difficulty: 'Hard', status: 'Unsolved', category: 'Array', acceptance: '33%', leetcodeLink: 'https://leetcode.com/problems/first-missing-positive/' },
+            { title: 'Longest Substring Without Repeating Characters', difficulty: 'Medium', status: 'Solved', category: 'Array', acceptance: '30%', leetcodeLink: 'https://leetcode.com/problems/longest-substring-without-repeating-characters/' },
+            { title: 'LRU Cache', difficulty: 'Medium', status: 'Attempted', category: 'Array', acceptance: '40%', leetcodeLink: 'https://leetcode.com/problems/lru-cache/' },
+
+            // String Problems (20)
+            { title: 'Valid Palindrome', difficulty: 'Easy', status: 'Solved', category: 'String', acceptance: '42%', leetcodeLink: 'https://leetcode.com/problems/valid-palindrome/' },
+            { title: 'Valid Anagram', difficulty: 'Easy', status: 'Solved', category: 'String', acceptance: '60%', leetcodeLink: 'https://leetcode.com/problems/valid-anagram/' },
+            { title: 'Longest Palindromic Substring', difficulty: 'Medium', status: 'Attempted', category: 'String', acceptance: '31%', leetcodeLink: 'https://leetcode.com/problems/longest-palindromic-substring/' },
+            { title: 'Palindromic Substrings', difficulty: 'Medium', status: 'Unsolved', category: 'String', acceptance: '62%', leetcodeLink: 'https://leetcode.com/problems/palindromic-substrings/' },
+            { title: 'String to Integer (atoi)', difficulty: 'Medium', status: 'Unsolved', category: 'String', acceptance: '16%', leetcodeLink: 'https://leetcode.com/problems/string-to-integer-atoi/' },
+            { title: 'Implement strStr()', difficulty: 'Easy', status: 'Solved', category: 'String', acceptance: '35%', leetcodeLink: 'https://leetcode.com/problems/implement-strstr/' },
+            { title: 'Longest Common Prefix', difficulty: 'Easy', status: 'Solved', category: 'String', acceptance: '39%', leetcodeLink: 'https://leetcode.com/problems/longest-common-prefix/' },
+            { title: 'Reverse Words in a String', difficulty: 'Medium', status: 'Attempted', category: 'String', acceptance: '25%', leetcodeLink: 'https://leetcode.com/problems/reverse-words-in-a-string/' },
+            { title: 'Group Anagrams', difficulty: 'Medium', status: 'Attempted', category: 'String', acceptance: '54%', leetcodeLink: 'https://leetcode.com/problems/group-anagrams/' },
+            { title: 'Simplify Path', difficulty: 'Medium', status: 'Unsolved', category: 'String', acceptance: '35%', leetcodeLink: 'https://leetcode.com/problems/simplify-path/' },
+            { title: 'Decode Ways', difficulty: 'Medium', status: 'Unsolved', category: 'String', acceptance: '26%', leetcodeLink: 'https://leetcode.com/problems/decode-ways/' },
+            { title: 'Word Break', difficulty: 'Medium', status: 'Solved', category: 'String', acceptance: '41%', leetcodeLink: 'https://leetcode.com/problems/word-break/' },
+            { title: 'Word Break II', difficulty: 'Hard', status: 'Unsolved', category: 'String', acceptance: '42%', leetcodeLink: 'https://leetcode.com/problems/word-break-ii/' },
+            { title: 'Valid Parentheses', difficulty: 'Easy', status: 'Solved', category: 'String', acceptance: '40%', leetcodeLink: 'https://leetcode.com/problems/valid-parentheses/' },
+            { title: 'Generate Parentheses', difficulty: 'Medium', status: 'Attempted', category: 'String', acceptance: '65%', leetcodeLink: 'https://leetcode.com/problems/generate-parentheses/' },
+            { title: 'Longest Valid Parentheses', difficulty: 'Hard', status: 'Unsolved', category: 'String', acceptance: '30%', leetcodeLink: 'https://leetcode.com/problems/longest-valid-parentheses/' },
+            { title: 'Minimum Window Substring', difficulty: 'Hard', status: 'Unsolved', category: 'String', acceptance: '35%', leetcodeLink: 'https://leetcode.com/problems/minimum-window-substring/' },
+            { title: 'Sliding Window Maximum', difficulty: 'Hard', status: 'Attempted', category: 'String', acceptance: '44%', leetcodeLink: 'https://leetcode.com/problems/sliding-window-maximum/' },
+            { title: 'Longest Substring with At Most K Distinct Characters', difficulty: 'Medium', status: 'Unsolved', category: 'String', acceptance: '46%', leetcodeLink: 'https://leetcode.com/problems/longest-substring-with-at-most-k-distinct-characters/' },
+            { title: 'Longest Substring with At Most Two Distinct Characters', difficulty: 'Medium', status: 'Solved', category: 'String', acceptance: '50%', leetcodeLink: 'https://leetcode.com/problems/longest-substring-with-at-most-two-distinct-characters/' },
+
+            // Hash Table Problems (20)
+            { title: 'Two Sum', difficulty: 'Easy', status: 'Solved', category: 'Hash Table', acceptance: '45%', leetcodeLink: 'https://leetcode.com/problems/two-sum/' },
+            { title: 'Valid Anagram', difficulty: 'Easy', status: 'Solved', category: 'Hash Table', acceptance: '60%', leetcodeLink: 'https://leetcode.com/problems/valid-anagram/' },
+            { title: 'Group Anagrams', difficulty: 'Medium', status: 'Attempted', category: 'Hash Table', acceptance: '54%', leetcodeLink: 'https://leetcode.com/problems/group-anagrams/' },
+            { title: 'Top K Frequent Elements', difficulty: 'Medium', status: 'Unsolved', category: 'Hash Table', acceptance: '62%', leetcodeLink: 'https://leetcode.com/problems/top-k-frequent-elements/' },
+            { title: 'Longest Consecutive Sequence', difficulty: 'Medium', status: 'Attempted', category: 'Hash Table', acceptance: '45%', leetcodeLink: 'https://leetcode.com/problems/longest-consecutive-sequence/' },
+            { title: 'First Unique Character in a String', difficulty: 'Easy', status: 'Solved', category: 'Hash Table', acceptance: '52%', leetcodeLink: 'https://leetcode.com/problems/first-unique-character-in-a-string/' },
+            { title: 'Intersection of Two Arrays', difficulty: 'Easy', status: 'Solved', category: 'Hash Table', acceptance: '64%', leetcodeLink: 'https://leetcode.com/problems/intersection-of-two-arrays/' },
+            { title: 'Intersection of Two Arrays II', difficulty: 'Easy', status: 'Solved', category: 'Hash Table', acceptance: '52%', leetcodeLink: 'https://leetcode.com/problems/intersection-of-two-arrays-ii/' },
+            { title: 'Contains Duplicate', difficulty: 'Easy', status: 'Solved', category: 'Hash Table', acceptance: '55%', leetcodeLink: 'https://leetcode.com/problems/contains-duplicate/' },
+            { title: 'Contains Duplicate II', difficulty: 'Easy', status: 'Solved', category: 'Hash Table', acceptance: '38%', leetcodeLink: 'https://leetcode.com/problems/contains-duplicate-ii/' },
+            { title: 'Contains Duplicate III', difficulty: 'Medium', status: 'Unsolved', category: 'Hash Table', acceptance: '21%', leetcodeLink: 'https://leetcode.com/problems/contains-duplicate-iii/' },
+            { title: 'Jewels and Stones', difficulty: 'Easy', status: 'Solved', category: 'Hash Table', acceptance: '86%', leetcodeLink: 'https://leetcode.com/problems/jewels-and-stones/' },
+            { title: 'Happy Number', difficulty: 'Easy', status: 'Solved', category: 'Hash Table', acceptance: '51%', leetcodeLink: 'https://leetcode.com/problems/happy-number/' },
+            { title: 'Isomorphic Strings', difficulty: 'Easy', status: 'Solved', category: 'Hash Table', acceptance: '40%', leetcodeLink: 'https://leetcode.com/problems/isomorphic-strings/' },
+            { title: 'Word Pattern', difficulty: 'Easy', status: 'Solved', category: 'Hash Table', acceptance: '38%', leetcodeLink: 'https://leetcode.com/problems/word-pattern/' },
+            { title: 'Logger Rate Limiter', difficulty: 'Easy', status: 'Solved', category: 'Hash Table', acceptance: '71%', leetcodeLink: 'https://leetcode.com/problems/logger-rate-limiter/' },
+            { title: 'Design HashMap', difficulty: 'Easy', status: 'Solved', category: 'Hash Table', acceptance: '63%', leetcodeLink: 'https://leetcode.com/problems/design-hashmap/' },
+            { title: 'Design HashSet', difficulty: 'Easy', status: 'Solved', category: 'Hash Table', acceptance: '64%', leetcodeLink: 'https://leetcode.com/problems/design-hashset/' },
+            { title: 'Subarray Sum Equals K', difficulty: 'Medium', status: 'Attempted', category: 'Hash Table', acceptance: '43%', leetcodeLink: 'https://leetcode.com/problems/subarray-sum-equals-k/' },
+            { title: 'Continuous Subarray Sum', difficulty: 'Medium', status: 'Unsolved', category: 'Hash Table', acceptance: '24%', leetcodeLink: 'https://leetcode.com/problems/continuous-subarray-sum/' },
+
+            // Dynamic Programming Problems (20)
+            { title: 'Climbing Stairs', difficulty: 'Easy', status: 'Solved', category: 'Dynamic Programming', acceptance: '65%', leetcodeLink: 'https://leetcode.com/problems/climbing-stairs/' },
+            { title: 'Coin Change', difficulty: 'Medium', status: 'Attempted', category: 'Dynamic Programming', acceptance: '40%', leetcodeLink: 'https://leetcode.com/problems/coin-change/' },
+            { title: 'Longest Increasing Subsequence', difficulty: 'Medium', status: 'Unsolved', category: 'Dynamic Programming', acceptance: '45%', leetcodeLink: 'https://leetcode.com/problems/longest-increasing-subsequence/' },
+            { title: 'Word Break', difficulty: 'Medium', status: 'Solved', category: 'Dynamic Programming', acceptance: '41%', leetcodeLink: 'https://leetcode.com/problems/word-break/' },
+            { title: 'Combination Sum', difficulty: 'Medium', status: 'Attempted', category: 'Dynamic Programming', acceptance: '58%', leetcodeLink: 'https://leetcode.com/problems/combination-sum/' },
+            { title: 'House Robber', difficulty: 'Medium', status: 'Solved', category: 'Dynamic Programming', acceptance: '44%', leetcodeLink: 'https://leetcode.com/problems/house-robber/' },
+            { title: 'House Robber II', difficulty: 'Medium', status: 'Unsolved', category: 'Dynamic Programming', acceptance: '40%', leetcodeLink: 'https://leetcode.com/problems/house-robber-ii/' },
+            { title: 'Decode Ways', difficulty: 'Medium', status: 'Unsolved', category: 'Dynamic Programming', acceptance: '26%', leetcodeLink: 'https://leetcode.com/problems/decode-ways/' },
+            { title: 'Unique Paths', difficulty: 'Medium', status: 'Solved', category: 'Dynamic Programming', acceptance: '55%', leetcodeLink: 'https://leetcode.com/problems/unique-paths/' },
+            { title: 'Unique Paths II', difficulty: 'Medium', status: 'Attempted', category: 'Dynamic Programming', acceptance: '36%', leetcodeLink: 'https://leetcode.com/problems/unique-paths-ii/' },
+            { title: 'Longest Palindromic Substring', difficulty: 'Medium', status: 'Attempted', category: 'Dynamic Programming', acceptance: '31%', leetcodeLink: 'https://leetcode.com/problems/longest-palindromic-substring/' },
+            { title: 'Maximum Subarray', difficulty: 'Medium', status: 'Solved', category: 'Dynamic Programming', acceptance: '48%', leetcodeLink: 'https://leetcode.com/problems/maximum-subarray/' },
+            { title: 'Maximum Product Subarray', difficulty: 'Medium', status: 'Unsolved', category: 'Dynamic Programming', acceptance: '32%', leetcodeLink: 'https://leetcode.com/problems/maximum-product-subarray/' },
+            { title: 'Best Time to Buy and Sell Stock', difficulty: 'Easy', status: 'Solved', category: 'Dynamic Programming', acceptance: '52%', leetcodeLink: 'https://leetcode.com/problems/best-time-to-buy-and-sell-stock/' },
+            { title: 'Best Time to Buy and Sell Stock II', difficulty: 'Medium', status: 'Attempted', category: 'Dynamic Programming', acceptance: '58%', leetcodeLink: 'https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/' },
+            { title: 'Best Time to Buy and Sell Stock III', difficulty: 'Hard', status: 'Unsolved', category: 'Dynamic Programming', acceptance: '40%', leetcodeLink: 'https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iii/' },
+            { title: 'Best Time to Buy and Sell Stock IV', difficulty: 'Hard', status: 'Unsolved', category: 'Dynamic Programming', acceptance: '35%', leetcodeLink: 'https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iv/' },
+            { title: 'Longest Common Subsequence', difficulty: 'Medium', status: 'Attempted', category: 'Dynamic Programming', acceptance: '58%', leetcodeLink: 'https://leetcode.com/problems/longest-common-subsequence/' },
+            { title: 'Edit Distance', difficulty: 'Hard', status: 'Unsolved', category: 'Dynamic Programming', acceptance: '21%', leetcodeLink: 'https://leetcode.com/problems/edit-distance/' },
+            { title: 'Distinct Subsequences', difficulty: 'Hard', status: 'Unsolved', category: 'Dynamic Programming', acceptance: '40%', leetcodeLink: 'https://leetcode.com/problems/distinct-subsequences/' },
+
+            // Sorting Problems (20)
+            { title: 'Sort Colors', difficulty: 'Medium', status: 'Solved', category: 'Sorting', acceptance: '55%', leetcodeLink: 'https://leetcode.com/problems/sort-colors/' },
+            { title: 'Merge Intervals', difficulty: 'Medium', status: 'Attempted', category: 'Sorting', acceptance: '44%', leetcodeLink: 'https://leetcode.com/problems/merge-intervals/' },
+            { title: 'Largest Number', difficulty: 'Medium', status: 'Unsolved', category: 'Sorting', acceptance: '29%', leetcodeLink: 'https://leetcode.com/problems/largest-number/' },
+            { title: 'Meeting Rooms II', difficulty: 'Medium', status: 'Solved', category: 'Sorting', acceptance: '44%', leetcodeLink: 'https://leetcode.com/problems/meeting-rooms-ii/' },
+            { title: 'Kth Largest Element in an Array', difficulty: 'Medium', status: 'Solved', category: 'Sorting', acceptance: '62%', leetcodeLink: 'https://leetcode.com/problems/kth-largest-element-in-an-array/' },
+            { title: 'Wiggle Sort II', difficulty: 'Medium', status: 'Attempted', category: 'Sorting', acceptance: '30%', leetcodeLink: 'https://leetcode.com/problems/wiggle-sort-ii/' },
+            { title: 'Relative Sort Array', difficulty: 'Easy', status: 'Solved', category: 'Sorting', acceptance: '68%', leetcodeLink: 'https://leetcode.com/problems/relative-sort-array/' },
+            { title: 'Sort List', difficulty: 'Medium', status: 'Unsolved', category: 'Sorting', acceptance: '52%', leetcodeLink: 'https://leetcode.com/problems/sort-list/' },
+            { title: 'Maximum Gap', difficulty: 'Hard', status: 'Attempted', category: 'Sorting', acceptance: '38%', leetcodeLink: 'https://leetcode.com/problems/maximum-gap/' },
+            { title: 'H-Index', difficulty: 'Medium', status: 'Solved', category: 'Sorting', acceptance: '38%', leetcodeLink: 'https://leetcode.com/problems/h-index/' },
+            { title: 'H-Index II', difficulty: 'Medium', status: 'Unsolved', category: 'Sorting', acceptance: '36%', leetcodeLink: 'https://leetcode.com/problems/h-index-ii/' },
+            { title: 'Sort Characters By Frequency', difficulty: 'Medium', status: 'Solved', category: 'Sorting', acceptance: '70%', leetcodeLink: 'https://leetcode.com/problems/sort-characters-by-frequency/' },
+            { title: 'Sort an Array', difficulty: 'Medium', status: 'Attempted', category: 'Sorting', acceptance: '62%', leetcodeLink: 'https://leetcode.com/problems/sort-an-array/' },
+            { title: 'Hand of Straights', difficulty: 'Medium', status: 'Unsolved', category: 'Sorting', acceptance: '57%', leetcodeLink: 'https://leetcode.com/problems/hand-of-straights/' },
+            { title: 'Minimum Number of Arrows to Burst Balloons', difficulty: 'Medium', status: 'Solved', category: 'Sorting', acceptance: '54%', leetcodeLink: 'https://leetcode.com/problems/minimum-number-of-arrows-to-burst-balloons/' },
+            { title: 'Interval List Intersections', difficulty: 'Medium', status: 'Attempted', category: 'Sorting', acceptance: '67%', leetcodeLink: 'https://leetcode.com/problems/interval-list-intersections/' },
+            { title: 'Meeting Rooms', difficulty: 'Easy', status: 'Solved', category: 'Sorting', acceptance: '56%', leetcodeLink: 'https://leetcode.com/problems/meeting-rooms/' },
+            { title: 'Merge Sorted Array', difficulty: 'Easy', status: 'Solved', category: 'Sorting', acceptance: '49%', leetcodeLink: 'https://leetcode.com/problems/merge-sorted-array/' },
+            { title: 'Find All Numbers Disappeared in an Array', difficulty: 'Easy', status: 'Solved', category: 'Sorting', acceptance: '59%', leetcodeLink: 'https://leetcode.com/problems/find-all-numbers-disappeared-in-an-array/' },
+            { title: 'Find K Closest Elements', difficulty: 'Medium', status: 'Unsolved', category: 'Sorting', acceptance: '45%', leetcodeLink: 'https://leetcode.com/problems/find-k-closest-elements/' },
+
+            // Greedy Problems (20)
+            { title: 'Jump Game', difficulty: 'Medium', status: 'Solved', category: 'Greedy', acceptance: '36%', leetcodeLink: 'https://leetcode.com/problems/jump-game/' },
+            { title: 'Gas Station', difficulty: 'Medium', status: 'Attempted', category: 'Greedy', acceptance: '44%', leetcodeLink: 'https://leetcode.com/problems/gas-station/' },
+            { title: 'Candy', difficulty: 'Hard', status: 'Unsolved', category: 'Greedy', acceptance: '35%', leetcodeLink: 'https://leetcode.com/problems/candy/' },
+            { title: 'Assign Cookies', difficulty: 'Easy', status: 'Solved', category: 'Greedy', acceptance: '51%', leetcodeLink: 'https://leetcode.com/problems/assign-cookies/' },
+            { title: 'Non-overlapping Intervals', difficulty: 'Medium', status: 'Solved', category: 'Greedy', acceptance: '52%', leetcodeLink: 'https://leetcode.com/problems/non-overlapping-intervals/' },
+            { title: 'Minimum Number of Arrows to Burst Balloons', difficulty: 'Medium', status: 'Attempted', category: 'Greedy', acceptance: '54%', leetcodeLink: 'https://leetcode.com/problems/minimum-number-of-arrows-to-burst-balloons/' },
+            { title: 'Queue Reconstruction by Height', difficulty: 'Medium', status: 'Unsolved', category: 'Greedy', acceptance: '69%', leetcodeLink: 'https://leetcode.com/problems/queue-reconstruction-by-height/' },
+            { title: 'Partition Labels', difficulty: 'Medium', status: 'Solved', category: 'Greedy', acceptance: '80%', leetcodeLink: 'https://leetcode.com/problems/partition-labels/' },
+            { title: 'Lemonade Change', difficulty: 'Easy', status: 'Solved', category: 'Greedy', acceptance: '65%', leetcodeLink: 'https://leetcode.com/problems/lemonade-change/' },
+            { title: 'Is Subsequence', difficulty: 'Easy', status: 'Solved', category: 'Greedy', acceptance: '49%', leetcodeLink: 'https://leetcode.com/problems/is-subsequence/' },
+            { title: 'Minimum Path Sum', difficulty: 'Medium', status: 'Attempted', category: 'Greedy', acceptance: '66%', leetcodeLink: 'https://leetcode.com/problems/minimum-path-sum/' },
+            { title: 'Best Time to Buy and Sell Stock II', difficulty: 'Medium', status: 'Solved', category: 'Greedy', acceptance: '58%', leetcodeLink: 'https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/' },
+            { title: 'Can Place Flowers', difficulty: 'Easy', status: 'Solved', category: 'Greedy', acceptance: '32%', leetcodeLink: 'https://leetcode.com/problems/can-place-flowers/' },
+            { title: 'Minimum Number of Refueling Stops', difficulty: 'Hard', status: 'Unsolved', category: 'Greedy', acceptance: '36%', leetcodeLink: 'https://leetcode.com/problems/minimum-number-of-refueling-stops/' },
+            { title: 'IPO', difficulty: 'Hard', status: 'Attempted', category: 'Greedy', acceptance: '41%', leetcodeLink: 'https://leetcode.com/problems/ipo/' },
+            { title: 'Reconstruct Itinerary', difficulty: 'Hard', status: 'Unsolved', category: 'Greedy', acceptance: '38%', leetcodeLink: 'https://leetcode.com/problems/reconstruct-itinerary/' },
+            { title: 'Task Scheduler', difficulty: 'Medium', status: 'Solved', category: 'Greedy', acceptance: '56%', leetcodeLink: 'https://leetcode.com/problems/task-scheduler/' },
+            { title: 'Monotone Increasing Digits', difficulty: 'Medium', status: 'Attempted', category: 'Greedy', acceptance: '48%', leetcodeLink: 'https://leetcode.com/problems/monotone-increasing-digits/' },
+            { title: 'Patching Array', difficulty: 'Hard', status: 'Unsolved', category: 'Greedy', acceptance: '35%', leetcodeLink: 'https://leetcode.com/problems/patching-array/' },
+            { title: 'Minimum Cost For Tickets', difficulty: 'Medium', status: 'Solved', category: 'Greedy', acceptance: '56%', leetcodeLink: 'https://leetcode.com/problems/minimum-cost-for-tickets/' },
+
+            // Depth-First Search Problems (20)
+            { title: 'Number of Islands', difficulty: 'Medium', status: 'Solved', category: 'Depth-First Search', acceptance: '49%', leetcodeLink: 'https://leetcode.com/problems/number-of-islands/' },
+            { title: 'Word Search', difficulty: 'Medium', status: 'Attempted', category: 'Depth-First Search', acceptance: '36%', leetcodeLink: 'https://leetcode.com/problems/word-search/' },
+            { title: 'Surrounded Regions', difficulty: 'Medium', status: 'Unsolved', category: 'Depth-First Search', acceptance: '32%', leetcodeLink: 'https://leetcode.com/problems/surrounded-regions/' },
+            { title: 'Clone Graph', difficulty: 'Medium', status: 'Solved', category: 'Depth-First Search', acceptance: '54%', leetcodeLink: 'https://leetcode.com/problems/clone-graph/' },
+            { title: 'Pacific Atlantic Water Flow', difficulty: 'Medium', status: 'Attempted', category: 'Depth-First Search', acceptance: '48%', leetcodeLink: 'https://leetcode.com/problems/pacific-atlantic-water-flow/' },
+            { title: 'Word Ladder', difficulty: 'Hard', status: 'Unsolved', category: 'Depth-First Search', acceptance: '29%', leetcodeLink: 'https://leetcode.com/problems/word-ladder/' },
+            { title: 'Word Ladder II', difficulty: 'Hard', status: 'Unsolved', category: 'Depth-First Search', acceptance: '19%', leetcodeLink: 'https://leetcode.com/problems/word-ladder-ii/' },
+            { title: 'Minimum Genetic Mutation', difficulty: 'Medium', status: 'Solved', category: 'Depth-First Search', acceptance: '44%', leetcodeLink: 'https://leetcode.com/problems/minimum-genetic-mutation/' },
+            { title: 'Path Sum II', difficulty: 'Medium', status: 'Attempted', category: 'Depth-First Search', acceptance: '49%', leetcodeLink: 'https://leetcode.com/problems/path-sum-ii/' },
+            { title: 'Binary Tree Paths', difficulty: 'Easy', status: 'Solved', category: 'Depth-First Search', acceptance: '54%', leetcodeLink: 'https://leetcode.com/problems/binary-tree-paths/' },
+            { title: 'All Paths From Source to Target', difficulty: 'Medium', status: 'Unsolved', category: 'Depth-First Search', acceptance: '81%', leetcodeLink: 'https://leetcode.com/problems/all-paths-from-source-to-target/' },
+            { title: 'Find Eventual Safe States', difficulty: 'Medium', status: 'Solved', category: 'Depth-First Search', acceptance: '59%', leetcodeLink: 'https://leetcode.com/problems/find-eventual-safe-states/' },
+            { title: 'Course Schedule', difficulty: 'Medium', status: 'Attempted', category: 'Depth-First Search', acceptance: '44%', leetcodeLink: 'https://leetcode.com/problems/course-schedule/' },
+            { title: 'Course Schedule II', difficulty: 'Medium', status: 'Unsolved', category: 'Depth-First Search', acceptance: '44%', leetcodeLink: 'https://leetcode.com/problems/course-schedule-ii/' },
+            { title: 'Find Leaves of Binary Tree', difficulty: 'Medium', status: 'Solved', category: 'Depth-First Search', acceptance: '74%', leetcodeLink: 'https://leetcode.com/problems/find-leaves-of-binary-tree/' },
+            { title: 'Path Sum', difficulty: 'Easy', status: 'Solved', category: 'Depth-First Search', acceptance: '46%', leetcodeLink: 'https://leetcode.com/problems/path-sum/' },
+            { title: 'Path Sum III', difficulty: 'Medium', status: 'Attempted', category: 'Depth-First Search', acceptance: '46%', leetcodeLink: 'https://leetcode.com/problems/path-sum-iii/' },
+            { title: 'Sum of Left Leaves', difficulty: 'Easy', status: 'Solved', category: 'Depth-First Search', acceptance: '56%', leetcodeLink: 'https://leetcode.com/problems/sum-of-left-leaves/' },
+            { title: 'Find Bottom Left Tree Value', difficulty: 'Medium', status: 'Unsolved', category: 'Depth-First Search', acceptance: '67%', leetcodeLink: 'https://leetcode.com/problems/find-bottom-left-tree-value/' },
+            { title: 'Path Sum IV', difficulty: 'Medium', status: 'Unsolved', category: 'Depth-First Search', acceptance: '48%', leetcodeLink: 'https://leetcode.com/problems/path-sum-iv/' },
+
+            // Binary Search Problems (20)
+            { title: 'Binary Search', difficulty: 'Easy', status: 'Solved', category: 'Binary Search', acceptance: '54%', leetcodeLink: 'https://leetcode.com/problems/binary-search/' },
+            { title: 'Search Insert Position', difficulty: 'Easy', status: 'Solved', category: 'Binary Search', acceptance: '45%', leetcodeLink: 'https://leetcode.com/problems/search-insert-position/' },
+            { title: 'Find Minimum in Rotated Sorted Array', difficulty: 'Medium', status: 'Solved', category: 'Binary Search', acceptance: '46%', leetcodeLink: 'https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/' },
+            { title: 'Search in Rotated Sorted Array', difficulty: 'Medium', status: 'Attempted', category: 'Binary Search', acceptance: '37%', leetcodeLink: 'https://leetcode.com/problems/search-in-rotated-sorted-array/' },
+            { title: 'Find Peak Element', difficulty: 'Medium', status: 'Unsolved', category: 'Binary Search', acceptance: '44%', leetcodeLink: 'https://leetcode.com/problems/find-peak-element/' },
+            { title: 'Median of Two Sorted Arrays', difficulty: 'Hard', status: 'Unsolved', category: 'Binary Search', acceptance: '34%', leetcodeLink: 'https://leetcode.com/problems/median-of-two-sorted-arrays/' },
+            { title: 'Search a 2D Matrix', difficulty: 'Medium', status: 'Solved', category: 'Binary Search', acceptance: '45%', leetcodeLink: 'https://leetcode.com/problems/search-a-2d-matrix/' },
+            { title: 'Search a 2D Matrix II', difficulty: 'Medium', status: 'Attempted', category: 'Binary Search', acceptance: '45%', leetcodeLink: 'https://leetcode.com/problems/search-a-2d-matrix-ii/' },
+            { title: 'Find First and Last Position of Element in Sorted Array', difficulty: 'Medium', status: 'Unsolved', category: 'Binary Search', acceptance: '38%', leetcodeLink: 'https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/' },
+            { title: 'Find Kth Smallest Pair Distance', difficulty: 'Hard', status: 'Attempted', category: 'Binary Search', acceptance: '36%', leetcodeLink: 'https://leetcode.com/problems/find-k-th-smallest-pair-distance/' },
+            { title: 'Find K Closest Elements', difficulty: 'Medium', status: 'Solved', category: 'Binary Search', acceptance: '45%', leetcodeLink: 'https://leetcode.com/problems/find-k-closest-elements/' },
+            { title: 'Capacity To Ship Packages Within D Days', difficulty: 'Medium', status: 'Unsolved', category: 'Binary Search', acceptance: '56%', leetcodeLink: 'https://leetcode.com/problems/capacity-to-ship-packages-within-d-days/' },
+            { title: 'Find Smallest Letter Greater Than Target', difficulty: 'Easy', status: 'Solved', category: 'Binary Search', acceptance: '45%', leetcodeLink: 'https://leetcode.com/problems/find-smallest-letter-greater-than-target/' },
+            { title: 'Find Right Interval', difficulty: 'Medium', status: 'Attempted', category: 'Binary Search', acceptance: '43%', leetcodeLink: 'https://leetcode.com/problems/find-right-interval/' },
+            { title: 'Find the Duplicate Number', difficulty: 'Medium', status: 'Unsolved', category: 'Binary Search', acceptance: '62%', leetcodeLink: 'https://leetcode.com/problems/find-the-duplicate-number/' },
+            { title: 'Find Median from Data Stream', difficulty: 'Hard', status: 'Attempted', category: 'Binary Search', acceptance: '44%', leetcodeLink: 'https://leetcode.com/problems/find-median-from-data-stream/' },
+            { title: 'Find Kth Largest Number in Array', difficulty: 'Medium', status: 'Solved', category: 'Binary Search', acceptance: '62%', leetcodeLink: 'https://leetcode.com/problems/kth-largest-element-in-an-array/' },
+            { title: 'Find Minimum in Rotated Sorted Array II', difficulty: 'Hard', status: 'Unsolved', category: 'Binary Search', acceptance: '41%', leetcodeLink: 'https://leetcode.com/problems/find-minimum-in-rotated-sorted-array-ii/' },
+            { title: 'Find Peak Element II', difficulty: 'Medium', status: 'Attempted', category: 'Binary Search', acceptance: '44%', leetcodeLink: 'https://leetcode.com/problems/find-peak-element-ii/' },
+            { title: 'Find Kth Smallest Element in a Sorted Matrix', difficulty: 'Hard', status: 'Unsolved', category: 'Binary Search', acceptance: '52%', leetcodeLink: 'https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/' },
+
+            // Database Problems (20)
+            { title: 'Combine Two Tables', difficulty: 'Easy', status: 'Solved', category: 'Database', acceptance: '70%', leetcodeLink: 'https://leetcode.com/problems/combine-two-tables/' },
+            { title: 'Second Highest Salary', difficulty: 'Medium', status: 'Attempted', category: 'Database', acceptance: '36%', leetcodeLink: 'https://leetcode.com/problems/second-highest-salary/' },
+            { title: 'Nth Highest Salary', difficulty: 'Medium', status: 'Unsolved', category: 'Database', acceptance: '32%', leetcodeLink: 'https://leetcode.com/problems/nth-highest-salary/' },
+            { title: 'Rank Scores', difficulty: 'Medium', status: 'Solved', category: 'Database', acceptance: '38%', leetcodeLink: 'https://leetcode.com/problems/rank-scores/' },
+            { title: 'Consecutive Numbers', difficulty: 'Medium', status: 'Solved', category: 'Database', acceptance: '34%', leetcodeLink: 'https://leetcode.com/problems/consecutive-numbers/' },
+            { title: 'Department Highest Salary', difficulty: 'Medium', status: 'Attempted', category: 'Database', acceptance: '36%', leetcodeLink: 'https://leetcode.com/problems/department-highest-salary/' },
+            { title: 'Department Top Three Salaries', difficulty: 'Hard', status: 'Unsolved', category: 'Database', acceptance: '32%', leetcodeLink: 'https://leetcode.com/problems/department-top-three-salaries/' },
+            { title: 'Employees Earning More Than Their Managers', difficulty: 'Easy', status: 'Solved', category: 'Database', acceptance: '60%', leetcodeLink: 'https://leetcode.com/problems/employees-earning-more-than-their-managers/' },
+            { title: 'Duplicate Emails', difficulty: 'Easy', status: 'Solved', category: 'Database', acceptance: '57%', leetcodeLink: 'https://leetcode.com/problems/duplicate-emails/' },
+            { title: 'Customers Who Never Order', difficulty: 'Easy', status: 'Solved', category: 'Database', acceptance: '67%', leetcodeLink: 'https://leetcode.com/problems/customers-who-never-order/' },
+            { title: 'Rising Temperature', difficulty: 'Easy', status: 'Solved', category: 'Database', acceptance: '38%', leetcodeLink: 'https://leetcode.com/problems/rising-temperature/' },
+            { title: 'Game Play Analysis I', difficulty: 'Easy', status: 'Solved', category: 'Database', acceptance: '80%', leetcodeLink: 'https://leetcode.com/problems/game-play-analysis-i/' },
+            { title: 'Game Play Analysis II', difficulty: 'Easy', status: 'Solved', category: 'Database', acceptance: '60%', leetcodeLink: 'https://leetcode.com/problems/game-play-analysis-ii/' },
+            { title: 'Game Play Analysis III', difficulty: 'Easy', status: 'Solved', category: 'Database', acceptance: '60%', leetcodeLink: 'https://leetcode.com/problems/game-play-analysis-iii/' },
+            { title: 'Game Play Analysis IV', difficulty: 'Easy', status: 'Solved', category: 'Database', acceptance: '60%', leetcodeLink: 'https://leetcode.com/problems/game-play-analysis-iv/' },
+            { title: 'Employee Bonus', difficulty: 'Easy', status: 'Solved', category: 'Database', acceptance: '60%', leetcodeLink: 'https://leetcode.com/problems/employee-bonus/' },
+            { title: 'Exchange Seats', difficulty: 'Medium', status: 'Attempted', category: 'Database', acceptance: '60%', leetcodeLink: 'https://leetcode.com/problems/exchange-seats/' },
+            { title: 'Managers with at Least 5 Direct Reports', difficulty: 'Medium', status: 'Unsolved', category: 'Database', acceptance: '60%', leetcodeLink: 'https://leetcode.com/problems/managers-with-at-least-5-direct-reports/' },
+            { title: 'Project Employees I', difficulty: 'Easy', status: 'Solved', category: 'Database', acceptance: '60%', leetcodeLink: 'https://leetcode.com/problems/project-employees-i/' },
+            { title: 'Project Employees II', difficulty: 'Medium', status: 'Unsolved', category: 'Database', acceptance: '60%', leetcodeLink: 'https://leetcode.com/problems/project-employees-ii/' },
+
+            // Matrix Problems (20)
+            { title: 'Spiral Matrix', difficulty: 'Medium', status: 'Solved', category: 'Matrix', acceptance: '38%', leetcodeLink: 'https://leetcode.com/problems/spiral-matrix/' },
+            { title: 'Set Matrix Zeroes', difficulty: 'Medium', status: 'Attempted', category: 'Matrix', acceptance: '54%', leetcodeLink: 'https://leetcode.com/problems/set-matrix-zeroes/' },
+            { title: 'Search a 2D Matrix', difficulty: 'Medium', status: 'Solved', category: 'Matrix', acceptance: '45%', leetcodeLink: 'https://leetcode.com/problems/search-a-2d-matrix/' },
+            { title: 'Search a 2D Matrix II', difficulty: 'Medium', status: 'Attempted', category: 'Matrix', acceptance: '45%', leetcodeLink: 'https://leetcode.com/problems/search-a-2d-matrix-ii/' },
+            { title: 'Rotate Image', difficulty: 'Medium', status: 'Solved', category: 'Matrix', acceptance: '62%', leetcodeLink: 'https://leetcode.com/problems/rotate-image/' },
+            { title: 'Word Search', difficulty: 'Medium', status: 'Unsolved', category: 'Matrix', acceptance: '36%', leetcodeLink: 'https://leetcode.com/problems/word-search/' },
+            { title: 'Game of Life', difficulty: 'Medium', status: 'Solved', category: 'Matrix', acceptance: '70%', leetcodeLink: 'https://leetcode.com/problems/game-of-life/' },
+            { title: 'Number of Islands', difficulty: 'Medium', status: 'Attempted', category: 'Matrix', acceptance: '49%', leetcodeLink: 'https://leetcode.com/problems/number-of-islands/' },
+            { title: 'Maximal Rectangle', difficulty: 'Hard', status: 'Unsolved', category: 'Matrix', acceptance: '41%', leetcodeLink: 'https://leetcode.com/problems/maximal-rectangle/' },
+            { title: 'Maximal Square', difficulty: 'Medium', status: 'Solved', category: 'Matrix', acceptance: '48%', leetcodeLink: 'https://leetcode.com/problems/maximal-square/' },
+            { title: 'Minimum Path Sum', difficulty: 'Medium', status: 'Attempted', category: 'Matrix', acceptance: '66%', leetcodeLink: 'https://leetcode.com/problems/minimum-path-sum/' },
+            { title: 'Unique Paths', difficulty: 'Medium', status: 'Solved', category: 'Matrix', acceptance: '55%', leetcodeLink: 'https://leetcode.com/problems/unique-paths/' },
+            { title: 'Unique Paths II', difficulty: 'Medium', status: 'Attempted', category: 'Matrix', acceptance: '36%', leetcodeLink: 'https://leetcode.com/problems/unique-paths-ii/' },
+            { title: 'Flood Fill', difficulty: 'Easy', status: 'Solved', category: 'Matrix', acceptance: '60%', leetcodeLink: 'https://leetcode.com/problems/flood-fill/' },
+            { title: 'Island Perimeter', difficulty: 'Easy', status: 'Solved', category: 'Matrix', acceptance: '67%', leetcodeLink: 'https://leetcode.com/problems/island-perimeter/' },
+            { title: 'Diagonal Traverse', difficulty: 'Medium', status: 'Attempted', category: 'Matrix', acceptance: '49%', leetcodeLink: 'https://leetcode.com/problems/diagonal-traverse/' },
+            { title: 'Matrix Block Sum', difficulty: 'Medium', status: 'Unsolved', category: 'Matrix', acceptance: '68%', leetcodeLink: 'https://leetcode.com/problems/matrix-block-sum/' },
+            { title: 'Kth Smallest Element in a Sorted Matrix', difficulty: 'Hard', status: 'Unsolved', category: 'Matrix', acceptance: '52%', leetcodeLink: 'https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/' },
+            { title: 'Longest Increasing Path in a Matrix', difficulty: 'Hard', status: 'Unsolved', category: 'Matrix', acceptance: '47%', leetcodeLink: 'https://leetcode.com/problems/longest-increasing-path-in-a-matrix/' },
+            { title: 'Minimum Falling Path Sum', difficulty: 'Medium', status: 'Solved', category: 'Matrix', acceptance: '66%', leetcodeLink: 'https://leetcode.com/problems/minimum-falling-path-sum/' },
+
+            // Tree Problems (20)
+            { title: 'Binary Tree Inorder Traversal', difficulty: 'Easy', status: 'Solved', category: 'Tree', acceptance: '66%', leetcodeLink: 'https://leetcode.com/problems/binary-tree-inorder-traversal/' },
+            { title: 'Binary Tree Preorder Traversal', difficulty: 'Easy', status: 'Solved', category: 'Tree', acceptance: '66%', leetcodeLink: 'https://leetcode.com/problems/binary-tree-preorder-traversal/' },
+            { title: 'Binary Tree Postorder Traversal', difficulty: 'Easy', status: 'Solved', category: 'Tree', acceptance: '66%', leetcodeLink: 'https://leetcode.com/problems/binary-tree-postorder-traversal/' },
+            { title: 'Maximum Depth of Binary Tree', difficulty: 'Easy', status: 'Solved', category: 'Tree', acceptance: '80%', leetcodeLink: 'https://leetcode.com/problems/maximum-depth-of-binary-tree/' },
+            { title: 'Same Tree', difficulty: 'Easy', status: 'Solved', category: 'Tree', acceptance: '55%', leetcodeLink: 'https://leetcode.com/problems/same-tree/' },
+            { title: 'Invert Binary Tree', difficulty: 'Easy', status: 'Solved', category: 'Tree', acceptance: '79%', leetcodeLink: 'https://leetcode.com/problems/invert-binary-tree/' },
+            { title: 'Symmetric Tree', difficulty: 'Easy', status: 'Solved', category: 'Tree', acceptance: '54%', leetcodeLink: 'https://leetcode.com/problems/symmetric-tree/' },
+            { title: 'Path Sum', difficulty: 'Easy', status: 'Solved', category: 'Tree', acceptance: '46%', leetcodeLink: 'https://leetcode.com/problems/path-sum/' },
+            { title: 'Path Sum II', difficulty: 'Medium', status: 'Attempted', category: 'Tree', acceptance: '49%', leetcodeLink: 'https://leetcode.com/problems/path-sum-ii/' },
+            { title: 'Path Sum III', difficulty: 'Medium', status: 'Attempted', category: 'Tree', acceptance: '46%', leetcodeLink: 'https://leetcode.com/problems/path-sum-iii/' },
+            { title: 'Construct Binary Tree from Preorder and Inorder Traversal', difficulty: 'Medium', status: 'Unsolved', category: 'Tree', acceptance: '56%', leetcodeLink: 'https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/' },
+            { title: 'Construct Binary Tree from Inorder and Postorder Traversal', difficulty: 'Medium', status: 'Unsolved', category: 'Tree', acceptance: '48%', leetcodeLink: 'https://leetcode.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/' },
+            { title: 'Populating Next Right Pointers in Each Node', difficulty: 'Medium', status: 'Solved', category: 'Tree', acceptance: '54%', leetcodeLink: 'https://leetcode.com/problems/populating-next-right-pointers-in-each-node/' },
+            { title: 'Flatten Binary Tree to Linked List', difficulty: 'Medium', status: 'Attempted', category: 'Tree', acceptance: '50%', leetcodeLink: 'https://leetcode.com/problems/flatten-binary-tree-to-linked-list/' },
+            { title: 'Binary Tree Maximum Path Sum', difficulty: 'Hard', status: 'Unsolved', category: 'Tree', acceptance: '38%', leetcodeLink: 'https://leetcode.com/problems/binary-tree-maximum-path-sum/' },
+            { title: 'Balanced Binary Tree', difficulty: 'Easy', status: 'Solved', category: 'Tree', acceptance: '47%', leetcodeLink: 'https://leetcode.com/problems/balanced-binary-tree/' },
+            { title: 'Minimum Depth of Binary Tree', difficulty: 'Easy', status: 'Solved', category: 'Tree', acceptance: '39%', leetcodeLink: 'https://leetcode.com/problems/minimum-depth-of-binary-tree/' },
+            { title: 'Diameter of Binary Tree', difficulty: 'Easy', status: 'Solved', category: 'Tree', acceptance: '54%', leetcodeLink: 'https://leetcode.com/problems/diameter-of-binary-tree/' },
+            { title: 'Sum Root to Leaf Numbers', difficulty: 'Medium', status: 'Attempted', category: 'Tree', acceptance: '54%', leetcodeLink: 'https://leetcode.com/problems/sum-root-to-leaf-numbers/' },
+            { title: 'Recover Binary Search Tree', difficulty: 'Hard', status: 'Unsolved', category: 'Tree', acceptance: '41%', leetcodeLink: 'https://leetcode.com/problems/recover-binary-search-tree/' },
+
+            // Breadth-First Search Problems (20)
+            { title: 'Binary Tree Level Order Traversal', difficulty: 'Medium', status: 'Solved', category: 'Breadth-First Search', acceptance: '62%', leetcodeLink: 'https://leetcode.com/problems/binary-tree-level-order-traversal/' },
+            { title: 'Minimum Depth of Binary Tree', difficulty: 'Easy', status: 'Solved', category: 'Breadth-First Search', acceptance: '39%', leetcodeLink: 'https://leetcode.com/problems/minimum-depth-of-binary-tree/' },
+            { title: 'Word Ladder', difficulty: 'Hard', status: 'Unsolved', category: 'Breadth-First Search', acceptance: '29%', leetcodeLink: 'https://leetcode.com/problems/word-ladder/' },
+            { title: 'Word Ladder II', difficulty: 'Hard', status: 'Unsolved', category: 'Breadth-First Search', acceptance: '19%', leetcodeLink: 'https://leetcode.com/problems/word-ladder-ii/' },
+            { title: 'Number of Islands', difficulty: 'Medium', status: 'Attempted', category: 'Breadth-First Search', acceptance: '49%', leetcodeLink: 'https://leetcode.com/problems/number-of-islands/' },
+            { title: 'Minimum Genetic Mutation', difficulty: 'Medium', status: 'Solved', category: 'Breadth-First Search', acceptance: '44%', leetcodeLink: 'https://leetcode.com/problems/minimum-genetic-mutation/' },
+            { title: 'Open the Lock', difficulty: 'Medium', status: 'Attempted', category: 'Breadth-First Search', acceptance: '54%', leetcodeLink: 'https://leetcode.com/problems/open-the-lock/' },
+            { title: 'Perfect Squares', difficulty: 'Medium', status: 'Solved', category: 'Breadth-First Search', acceptance: '44%', leetcodeLink: 'https://leetcode.com/problems/perfect-squares/' },
+            { title: 'Rotting Oranges', difficulty: 'Medium', status: 'Attempted', category: 'Breadth-First Search', acceptance: '52%', leetcodeLink: 'https://leetcode.com/problems/rotting-oranges/' },
+            { title: 'Walls and Gates', difficulty: 'Medium', status: 'Unsolved', category: 'Breadth-First Search', acceptance: '49%', leetcodeLink: 'https://leetcode.com/problems/walls-and-gates/' },
+            { title: 'Course Schedule', difficulty: 'Medium', status: 'Solved', category: 'Breadth-First Search', acceptance: '44%', leetcodeLink: 'https://leetcode.com/problems/course-schedule/' },
+            { title: 'Course Schedule II', difficulty: 'Medium', status: 'Unsolved', category: 'Breadth-First Search', acceptance: '44%', leetcodeLink: 'https://leetcode.com/problems/course-schedule-ii/' },
+            { title: 'Find Largest Value in Each Tree Row', difficulty: 'Medium', status: 'Attempted', category: 'Breadth-First Search', acceptance: '60%', leetcodeLink: 'https://leetcode.com/problems/find-largest-value-in-each-tree-row/' },
+            { title: 'Populating Next Right Pointers in Each Node', difficulty: 'Medium', status: 'Solved', category: 'Breadth-First Search', acceptance: '54%', leetcodeLink: 'https://leetcode.com/problems/populating-next-right-pointers-in-each-node/' },
+            { title: 'Populating Next Right Pointers in Each Node II', difficulty: 'Medium', status: 'Unsolved', category: 'Breadth-First Search', acceptance: '41%', leetcodeLink: 'https://leetcode.com/problems/populating-next-right-pointers-in-each-node-ii/' },
+            { title: 'Shortest Path in Binary Matrix', difficulty: 'Medium', status: 'Attempted', category: 'Breadth-First Search', acceptance: '44%', leetcodeLink: 'https://leetcode.com/problems/shortest-path-in-binary-matrix/' },
+            { title: '01 Matrix', difficulty: 'Medium', status: 'Solved', category: 'Breadth-First Search', acceptance: '41%', leetcodeLink: 'https://leetcode.com/problems/01-matrix/' },
+            { title: 'Snakes and Ladders', difficulty: 'Medium', status: 'Unsolved', category: 'Breadth-First Search', acceptance: '32%', leetcodeLink: 'https://leetcode.com/problems/snakes-and-ladders/' },
+            { title: 'Open the Lock', difficulty: 'Medium', status: 'Attempted', category: 'Breadth-First Search', acceptance: '54%', leetcodeLink: 'https://leetcode.com/problems/open-the-lock/' },
+            { title: 'Sliding Puzzle', difficulty: 'Hard', status: 'Unsolved', category: 'Breadth-First Search', acceptance: '62%', leetcodeLink: 'https://leetcode.com/problems/sliding-puzzle/' },
+
+            // Bit Manipulation Problems (20)
+            { title: 'Single Number', difficulty: 'Easy', status: 'Solved', category: 'Bit Manipulation', acceptance: '70%', leetcodeLink: 'https://leetcode.com/problems/single-number/' },
+            { title: 'Number of 1 Bits', difficulty: 'Easy', status: 'Solved', category: 'Bit Manipulation', acceptance: '60%', leetcodeLink: 'https://leetcode.com/problems/number-of-1-bits/' },
+            { title: 'Counting Bits', difficulty: 'Easy', status: 'Solved', category: 'Bit Manipulation', acceptance: '75%', leetcodeLink: 'https://leetcode.com/problems/counting-bits/' },
+            { title: 'Reverse Bits', difficulty: 'Easy', status: 'Solved', category: 'Bit Manipulation', acceptance: '50%', leetcodeLink: 'https://leetcode.com/problems/reverse-bits/' },
+            { title: 'Missing Number', difficulty: 'Easy', status: 'Solved', category: 'Bit Manipulation', acceptance: '60%', leetcodeLink: 'https://leetcode.com/problems/missing-number/' },
+            { title: 'Sum of Two Integers', difficulty: 'Medium', status: 'Attempted', category: 'Bit Manipulation', acceptance: '50%', leetcodeLink: 'https://leetcode.com/problems/sum-of-two-integers/' },
+            { title: 'Power of Two', difficulty: 'Easy', status: 'Solved', category: 'Bit Manipulation', acceptance: '45%', leetcodeLink: 'https://leetcode.com/problems/power-of-two/' },
+            { title: 'Power of Four', difficulty: 'Easy', status: 'Solved', category: 'Bit Manipulation', acceptance: '45%', leetcodeLink: 'https://leetcode.com/problems/power-of-four/' },
+            { title: 'Bitwise AND of Numbers Range', difficulty: 'Medium', status: 'Unsolved', category: 'Bit Manipulation', acceptance: '40%', leetcodeLink: 'https://leetcode.com/problems/bitwise-and-of-numbers-range/' },
+            { title: 'Maximum XOR of Two Numbers in an Array', difficulty: 'Medium', status: 'Unsolved', category: 'Bit Manipulation', acceptance: '45%', leetcodeLink: 'https://leetcode.com/problems/maximum-xor-of-two-numbers-in-an-array/' },
+            { title: 'Repeated DNA Sequences', difficulty: 'Medium', status: 'Attempted', category: 'Bit Manipulation', acceptance: '40%', leetcodeLink: 'https://leetcode.com/problems/repeated-dna-sequences/' },
+            { title: 'Gray Code', difficulty: 'Medium', status: 'Unsolved', category: 'Bit Manipulation', acceptance: '50%', leetcodeLink: 'https://leetcode.com/problems/gray-code/' },
+            { title: 'Single Number II', difficulty: 'Medium', status: 'Unsolved', category: 'Bit Manipulation', acceptance: '55%', leetcodeLink: 'https://leetcode.com/problems/single-number-ii/' },
+            { title: 'Single Number III', difficulty: 'Medium', status: 'Unsolved', category: 'Bit Manipulation', acceptance: '65%', leetcodeLink: 'https://leetcode.com/problems/single-number-iii/' },
+            { title: 'UTF-8 Validation', difficulty: 'Medium', status: 'Unsolved', category: 'Bit Manipulation', acceptance: '40%', leetcodeLink: 'https://leetcode.com/problems/utf-8-validation/' },
+            { title: 'Binary Watch', difficulty: 'Easy', status: 'Solved', category: 'Bit Manipulation', acceptance: '50%', leetcodeLink: 'https://leetcode.com/problems/binary-watch/' },
+            { title: 'Subsets', difficulty: 'Medium', status: 'Solved', category: 'Bit Manipulation', acceptance: '70%', leetcodeLink: 'https://leetcode.com/problems/subsets/' },
+            { title: 'Subsets II', difficulty: 'Medium', status: 'Attempted', category: 'Bit Manipulation', acceptance: '50%', leetcodeLink: 'https://leetcode.com/problems/subsets-ii/' },
+            { title: 'Find the Difference', difficulty: 'Easy', status: 'Solved', category: 'Bit Manipulation', acceptance: '60%', leetcodeLink: 'https://leetcode.com/problems/find-the-difference/' },
+            { title: 'Hamming Distance', difficulty: 'Easy', status: 'Solved', category: 'Bit Manipulation', acceptance: '75%', leetcodeLink: 'https://leetcode.com/problems/hamming-distance/' },
+
+            // Two Pointers Problems (20)
+            { title: 'Two Sum', difficulty: 'Easy', status: 'Solved', category: 'Two Pointers', acceptance: '45%', leetcodeLink: 'https://leetcode.com/problems/two-sum/' },
+            { title: '3Sum', difficulty: 'Medium', status: 'Attempted', category: 'Two Pointers', acceptance: '28%', leetcodeLink: 'https://leetcode.com/problems/3sum/' },
+            { title: '3Sum Closest', difficulty: 'Medium', status: 'Solved', category: 'Two Pointers', acceptance: '45%', leetcodeLink: 'https://leetcode.com/problems/3sum-closest/' },
+            { title: '4Sum', difficulty: 'Medium', status: 'Unsolved', category: 'Two Pointers', acceptance: '35%', leetcodeLink: 'https://leetcode.com/problems/4sum/' },
+            { title: 'Container With Most Water', difficulty: 'Medium', status: 'Solved', category: 'Two Pointers', acceptance: '53%', leetcodeLink: 'https://leetcode.com/problems/container-with-most-water/' },
+            { title: 'Trapping Rain Water', difficulty: 'Hard', status: 'Attempted', category: 'Two Pointers', acceptance: '29%', leetcodeLink: 'https://leetcode.com/problems/trapping-rain-water/' },
+            { title: 'Remove Duplicates from Sorted Array', difficulty: 'Easy', status: 'Solved', category: 'Two Pointers', acceptance: '50%', leetcodeLink: 'https://leetcode.com/problems/remove-duplicates-from-sorted-array/' },
+            { title: 'Remove Duplicates from Sorted Array II', difficulty: 'Medium', status: 'Solved', category: 'Two Pointers', acceptance: '45%', leetcodeLink: 'https://leetcode.com/problems/remove-duplicates-from-sorted-array-ii/' },
+            { title: 'Move Zeroes', difficulty: 'Easy', status: 'Solved', category: 'Two Pointers', acceptance: '60%', leetcodeLink: 'https://leetcode.com/problems/move-zeroes/' },
+            { title: 'Merge Sorted Array', difficulty: 'Easy', status: 'Solved', category: 'Two Pointers', acceptance: '49%', leetcodeLink: 'https://leetcode.com/problems/merge-sorted-array/' },
+            { title: 'Valid Palindrome', difficulty: 'Easy', status: 'Solved', category: 'Two Pointers', acceptance: '42%', leetcodeLink: 'https://leetcode.com/problems/valid-palindrome/' },
+            { title: 'Valid Palindrome II', difficulty: 'Easy', status: 'Solved', category: 'Two Pointers', acceptance: '40%', leetcodeLink: 'https://leetcode.com/problems/valid-palindrome-ii/' },
+            { title: 'Reverse String', difficulty: 'Easy', status: 'Solved', category: 'Two Pointers', acceptance: '70%', leetcodeLink: 'https://leetcode.com/problems/reverse-string/' },
+            { title: 'Reverse Vowels of a String', difficulty: 'Easy', status: 'Solved', category: 'Two Pointers', acceptance: '50%', leetcodeLink: 'https://leetcode.com/problems/reverse-vowels-of-a-string/' },
+            { title: 'Intersection of Two Arrays', difficulty: 'Easy', status: 'Solved', category: 'Two Pointers', acceptance: '64%', leetcodeLink: 'https://leetcode.com/problems/intersection-of-two-arrays/' },
+            { title: 'Intersection of Two Arrays II', difficulty: 'Easy', status: 'Solved', category: 'Two Pointers', acceptance: '52%', leetcodeLink: 'https://leetcode.com/problems/intersection-of-two-arrays-ii/' },
+            { title: 'Longest Substring Without Repeating Characters', difficulty: 'Medium', status: 'Solved', category: 'Two Pointers', acceptance: '30%', leetcodeLink: 'https://leetcode.com/problems/longest-substring-without-repeating-characters/' },
+            { title: 'Minimum Window Substring', difficulty: 'Hard', status: 'Unsolved', category: 'Two Pointers', acceptance: '35%', leetcodeLink: 'https://leetcode.com/problems/minimum-window-substring/' },
+            { title: 'Sliding Window Maximum', difficulty: 'Hard', status: 'Attempted', category: 'Two Pointers', acceptance: '44%', leetcodeLink: 'https://leetcode.com/problems/sliding-window-maximum/' },
+            { title: 'Longest Substring with At Most K Distinct Characters', difficulty: 'Medium', status: 'Unsolved', category: 'Two Pointers', acceptance: '46%', leetcodeLink: 'https://leetcode.com/problems/longest-substring-with-at-most-k-distinct-characters/' },
+
+            // Prefix Sum Problems (20)
+            { title: 'Range Sum Query - Immutable', difficulty: 'Easy', status: 'Solved', category: 'Prefix Sum', acceptance: '60%', leetcodeLink: 'https://leetcode.com/problems/range-sum-query-immutable/' },
+            { title: 'Range Sum Query 2D - Immutable', difficulty: 'Medium', status: 'Solved', category: 'Prefix Sum', acceptance: '50%', leetcodeLink: 'https://leetcode.com/problems/range-sum-query-2d-immutable/' },
+            { title: 'Subarray Sum Equals K', difficulty: 'Medium', status: 'Attempted', category: 'Prefix Sum', acceptance: '43%', leetcodeLink: 'https://leetcode.com/problems/subarray-sum-equals-k/' },
+            { title: 'Continuous Subarray Sum', difficulty: 'Medium', status: 'Unsolved', category: 'Prefix Sum', acceptance: '24%', leetcodeLink: 'https://leetcode.com/problems/continuous-subarray-sum/' },
+            { title: 'Maximum Subarray', difficulty: 'Medium', status: 'Solved', category: 'Prefix Sum', acceptance: '48%', leetcodeLink: 'https://leetcode.com/problems/maximum-subarray/' },
+            { title: 'Maximum Product Subarray', difficulty: 'Medium', status: 'Unsolved', category: 'Prefix Sum', acceptance: '32%', leetcodeLink: 'https://leetcode.com/problems/maximum-product-subarray/' },
+            { title: 'Minimum Size Subarray Sum', difficulty: 'Medium', status: 'Solved', category: 'Prefix Sum', acceptance: '40%', leetcodeLink: 'https://leetcode.com/problems/minimum-size-subarray-sum/' },
+            { title: 'Maximum Sum Circular Subarray', difficulty: 'Medium', status: 'Unsolved', category: 'Prefix Sum', acceptance: '35%', leetcodeLink: 'https://leetcode.com/problems/maximum-sum-circular-subarray/' },
+            { title: 'Maximum Sum of Two Non-Overlapping Subarrays', difficulty: 'Medium', status: 'Unsolved', category: 'Prefix Sum', acceptance: '60%', leetcodeLink: 'https://leetcode.com/problems/maximum-sum-of-two-non-overlapping-subarrays/' },
+            { title: 'Maximum Sum of 3 Non-Overlapping Subarrays', difficulty: 'Hard', status: 'Unsolved', category: 'Prefix Sum', acceptance: '50%', leetcodeLink: 'https://leetcode.com/problems/maximum-sum-of-3-non-overlapping-subarrays/' },
+            { title: 'Maximum Subarray Sum with One Deletion', difficulty: 'Medium', status: 'Unsolved', category: 'Prefix Sum', acceptance: '40%', leetcodeLink: 'https://leetcode.com/problems/maximum-subarray-sum-with-one-deletion/' },
+            { title: 'Maximum Subarray Sum After One Operation', difficulty: 'Medium', status: 'Unsolved', category: 'Prefix Sum', acceptance: '40%', leetcodeLink: 'https://leetcode.com/problems/maximum-subarray-sum-after-one-operation/' },
+            { title: 'Maximum Subarray Sum After K Operations', difficulty: 'Hard', status: 'Unsolved', category: 'Prefix Sum', acceptance: '40%', leetcodeLink: 'https://leetcode.com/problems/maximum-subarray-sum-after-k-operations/' },
+            { title: 'Maximum Subarray Sum After K Operations II', difficulty: 'Hard', status: 'Unsolved', category: 'Prefix Sum', acceptance: '40%', leetcodeLink: 'https://leetcode.com/problems/maximum-subarray-sum-after-k-operations-ii/' },
+            { title: 'Maximum Subarray Sum After K Operations III', difficulty: 'Hard', status: 'Unsolved', category: 'Prefix Sum', acceptance: '40%', leetcodeLink: 'https://leetcode.com/problems/maximum-subarray-sum-after-k-operations-iii/' },
+            { title: 'Maximum Subarray Sum After K Operations IV', difficulty: 'Hard', status: 'Unsolved', category: 'Prefix Sum', acceptance: '40%', leetcodeLink: 'https://leetcode.com/problems/maximum-subarray-sum-after-k-operations-iv/' },
+            { title: 'Maximum Subarray Sum After K Operations V', difficulty: 'Hard', status: 'Unsolved', category: 'Prefix Sum', acceptance: '40%', leetcodeLink: 'https://leetcode.com/problems/maximum-subarray-sum-after-k-operations-v/' },
+            { title: 'Maximum Subarray Sum After K Operations VI', difficulty: 'Hard', status: 'Unsolved', category: 'Prefix Sum', acceptance: '40%', leetcodeLink: 'https://leetcode.com/problems/maximum-subarray-sum-after-k-operations-vi/' },
+            { title: 'Maximum Subarray Sum After K Operations VII', difficulty: 'Hard', status: 'Unsolved', category: 'Prefix Sum', acceptance: '40%', leetcodeLink: 'https://leetcode.com/problems/maximum-subarray-sum-after-k-operations-vii/' },
+            { title: 'Maximum Subarray Sum After K Operations VIII', difficulty: 'Hard', status: 'Unsolved', category: 'Prefix Sum', acceptance: '40%', leetcodeLink: 'https://leetcode.com/problems/maximum-subarray-sum-after-k-operations-viii/' },
+
+            // Heap (Priority Queue) Problems (20)
+            { title: 'Merge K Sorted Lists', difficulty: 'Hard', status: 'Attempted', category: 'Heap (Priority Queue)', acceptance: '45%', leetcodeLink: 'https://leetcode.com/problems/merge-k-sorted-lists/' },
+            { title: 'Find Median from Data Stream', difficulty: 'Hard', status: 'Unsolved', category: 'Heap (Priority Queue)', acceptance: '44%', leetcodeLink: 'https://leetcode.com/problems/find-median-from-data-stream/' },
+            { title: 'Top K Frequent Elements', difficulty: 'Medium', status: 'Solved', category: 'Heap (Priority Queue)', acceptance: '62%', leetcodeLink: 'https://leetcode.com/problems/top-k-frequent-elements/' },
+            { title: 'Kth Largest Element in an Array', difficulty: 'Medium', status: 'Solved', category: 'Heap (Priority Queue)', acceptance: '62%', leetcodeLink: 'https://leetcode.com/problems/kth-largest-element-in-an-array/' },
+            { title: 'Sliding Window Maximum', difficulty: 'Hard', status: 'Attempted', category: 'Heap (Priority Queue)', acceptance: '44%', leetcodeLink: 'https://leetcode.com/problems/sliding-window-maximum/' },
+            { title: 'Task Scheduler', difficulty: 'Medium', status: 'Solved', category: 'Heap (Priority Queue)', acceptance: '56%', leetcodeLink: 'https://leetcode.com/problems/task-scheduler/' },
+            { title: 'IPO', difficulty: 'Hard', status: 'Unsolved', category: 'Heap (Priority Queue)', acceptance: '41%', leetcodeLink: 'https://leetcode.com/problems/ipo/' },
+            { title: 'Find K Pairs with Smallest Sums', difficulty: 'Medium', status: 'Unsolved', category: 'Heap (Priority Queue)', acceptance: '38%', leetcodeLink: 'https://leetcode.com/problems/find-k-pairs-with-smallest-sums/' },
+            { title: 'Kth Smallest Element in a Sorted Matrix', difficulty: 'Hard', status: 'Unsolved', category: 'Heap (Priority Queue)', acceptance: '52%', leetcodeLink: 'https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/' },
+            { title: 'Reorganize String', difficulty: 'Medium', status: 'Solved', category: 'Heap (Priority Queue)', acceptance: '50%', leetcodeLink: 'https://leetcode.com/problems/reorganize-string/' },
+            { title: 'Furthest Building You Can Reach', difficulty: 'Medium', status: 'Unsolved', category: 'Heap (Priority Queue)', acceptance: '45%', leetcodeLink: 'https://leetcode.com/problems/furthest-building-you-can-reach/' },
+            { title: 'Minimum Number of Refueling Stops', difficulty: 'Hard', status: 'Unsolved', category: 'Heap (Priority Queue)', acceptance: '36%', leetcodeLink: 'https://leetcode.com/problems/minimum-number-of-refueling-stops/' },
+            { title: 'Maximum Performance of a Team', difficulty: 'Hard', status: 'Unsolved', category: 'Heap (Priority Queue)', acceptance: '41%', leetcodeLink: 'https://leetcode.com/problems/maximum-performance-of-a-team/' },
+            { title: 'Sequentially Ordinal Rank Tracker', difficulty: 'Hard', status: 'Unsolved', category: 'Heap (Priority Queue)', acceptance: '60%', leetcodeLink: 'https://leetcode.com/problems/sequentially-ordinal-rank-tracker/' },
+            { title: 'Process Tasks Using Servers', difficulty: 'Medium', status: 'Unsolved', category: 'Heap (Priority Queue)', acceptance: '40%', leetcodeLink: 'https://leetcode.com/problems/process-tasks-using-servers/' },
+            { title: 'Single-Threaded CPU', difficulty: 'Medium', status: 'Unsolved', category: 'Heap (Priority Queue)', acceptance: '40%', leetcodeLink: 'https://leetcode.com/problems/single-threaded-cpu/' },
+            { title: 'Maximum Number of Events That Can Be Attended', difficulty: 'Medium', status: 'Unsolved', category: 'Heap (Priority Queue)', acceptance: '45%', leetcodeLink: 'https://leetcode.com/problems/maximum-number-of-events-that-can-be-attended/' },
+            { title: 'Minimum Cost to Hire K Workers', difficulty: 'Hard', status: 'Unsolved', category: 'Heap (Priority Queue)', acceptance: '50%', leetcodeLink: 'https://leetcode.com/problems/minimum-cost-to-hire-k-workers/' },
+            { title: 'K Closest Points to Origin', difficulty: 'Medium', status: 'Solved', category: 'Heap (Priority Queue)', acceptance: '65%', leetcodeLink: 'https://leetcode.com/problems/k-closest-points-to-origin/' },
+            { title: 'Last Stone Weight', difficulty: 'Easy', status: 'Solved', category: 'Heap (Priority Queue)', acceptance: '65%', leetcodeLink: 'https://leetcode.com/problems/last-stone-weight/' },
+
+            // Simulation Problems (20)
+            { title: 'Robot Bounded In Circle', difficulty: 'Medium', status: 'Solved', category: 'Simulation', acceptance: '55%', leetcodeLink: 'https://leetcode.com/problems/robot-bounded-in-circle/' },
+            { title: 'Spiral Matrix', difficulty: 'Medium', status: 'Solved', category: 'Simulation', acceptance: '38%', leetcodeLink: 'https://leetcode.com/problems/spiral-matrix/' },
+            { title: 'Spiral Matrix II', difficulty: 'Medium', status: 'Solved', category: 'Simulation', acceptance: '60%', leetcodeLink: 'https://leetcode.com/problems/spiral-matrix-ii/' },
+            { title: 'Game of Life', difficulty: 'Medium', status: 'Solved', category: 'Simulation', acceptance: '70%', leetcodeLink: 'https://leetcode.com/problems/game-of-life/' },
+            { title: 'Rotate Image', difficulty: 'Medium', status: 'Solved', category: 'Simulation', acceptance: '62%', leetcodeLink: 'https://leetcode.com/problems/rotate-image/' },
+            { title: 'Set Matrix Zeroes', difficulty: 'Medium', status: 'Solved', category: 'Simulation', acceptance: '54%', leetcodeLink: 'https://leetcode.com/problems/set-matrix-zeroes/' },
+            { title: 'Valid Sudoku', difficulty: 'Medium', status: 'Solved', category: 'Simulation', acceptance: '50%', leetcodeLink: 'https://leetcode.com/problems/valid-sudoku/' },
+            { title: 'Sudoku Solver', difficulty: 'Hard', status: 'Unsolved', category: 'Simulation', acceptance: '45%', leetcodeLink: 'https://leetcode.com/problems/sudoku-solver/' },
+            { title: 'N-Queens', difficulty: 'Hard', status: 'Unsolved', category: 'Simulation', acceptance: '50%', leetcodeLink: 'https://leetcode.com/problems/n-queens/' },
+            { title: 'N-Queens II', difficulty: 'Hard', status: 'Unsolved', category: 'Simulation', acceptance: '60%', leetcodeLink: 'https://leetcode.com/problems/n-queens-ii/' },
+            { title: 'Word Search', difficulty: 'Medium', status: 'Solved', category: 'Simulation', acceptance: '36%', leetcodeLink: 'https://leetcode.com/problems/word-search/' },
+            { title: 'Word Search II', difficulty: 'Hard', status: 'Unsolved', category: 'Simulation', acceptance: '35%', leetcodeLink: 'https://leetcode.com/problems/word-search-ii/' },
+            { title: 'Number of Islands', difficulty: 'Medium', status: 'Solved', category: 'Simulation', acceptance: '49%', leetcodeLink: 'https://leetcode.com/problems/number-of-islands/' },
+            { title: 'Surrounded Regions', difficulty: 'Medium', status: 'Unsolved', category: 'Simulation', acceptance: '32%', leetcodeLink: 'https://leetcode.com/problems/surrounded-regions/' },
+            { title: 'Pacific Atlantic Water Flow', difficulty: 'Medium', status: 'Unsolved', category: 'Simulation', acceptance: '48%', leetcodeLink: 'https://leetcode.com/problems/pacific-atlantic-water-flow/' },
+            { title: 'Walls and Gates', difficulty: 'Medium', status: 'Unsolved', category: 'Simulation', acceptance: '49%', leetcodeLink: 'https://leetcode.com/problems/walls-and-gates/' },
+            { title: 'Flood Fill', difficulty: 'Easy', status: 'Solved', category: 'Simulation', acceptance: '60%', leetcodeLink: 'https://leetcode.com/problems/flood-fill/' },
+            { title: 'Island Perimeter', difficulty: 'Easy', status: 'Solved', category: 'Simulation', acceptance: '67%', leetcodeLink: 'https://leetcode.com/problems/island-perimeter/' },
+            { title: 'Max Area of Island', difficulty: 'Medium', status: 'Solved', category: 'Simulation', acceptance: '67%', leetcodeLink: 'https://leetcode.com/problems/max-area-of-island/' },
+            { title: 'Number of Enclaves', difficulty: 'Medium', status: 'Unsolved', category: 'Simulation', acceptance: '60%', leetcodeLink: 'https://leetcode.com/problems/number-of-enclaves/' },
+
+            // Binary Tree Problems (20)
+            { title: 'Binary Tree Inorder Traversal', difficulty: 'Easy', status: 'Solved', category: 'Binary Tree', acceptance: '66%', leetcodeLink: 'https://leetcode.com/problems/binary-tree-inorder-traversal/' },
+            { title: 'Binary Tree Preorder Traversal', difficulty: 'Easy', status: 'Solved', category: 'Binary Tree', acceptance: '66%', leetcodeLink: 'https://leetcode.com/problems/binary-tree-preorder-traversal/' },
+            { title: 'Binary Tree Postorder Traversal', difficulty: 'Easy', status: 'Solved', category: 'Binary Tree', acceptance: '66%', leetcodeLink: 'https://leetcode.com/problems/binary-tree-postorder-traversal/' },
+            { title: 'Maximum Depth of Binary Tree', difficulty: 'Easy', status: 'Solved', category: 'Binary Tree', acceptance: '80%', leetcodeLink: 'https://leetcode.com/problems/maximum-depth-of-binary-tree/' },
+            { title: 'Same Tree', difficulty: 'Easy', status: 'Solved', category: 'Binary Tree', acceptance: '55%', leetcodeLink: 'https://leetcode.com/problems/same-tree/' },
+            { title: 'Invert Binary Tree', difficulty: 'Easy', status: 'Solved', category: 'Binary Tree', acceptance: '79%', leetcodeLink: 'https://leetcode.com/problems/invert-binary-tree/' },
+            { title: 'Symmetric Tree', difficulty: 'Easy', status: 'Solved', category: 'Binary Tree', acceptance: '54%', leetcodeLink: 'https://leetcode.com/problems/symmetric-tree/' },
+            { title: 'Path Sum', difficulty: 'Easy', status: 'Solved', category: 'Binary Tree', acceptance: '46%', leetcodeLink: 'https://leetcode.com/problems/path-sum/' },
+            { title: 'Path Sum II', difficulty: 'Medium', status: 'Attempted', category: 'Binary Tree', acceptance: '49%', leetcodeLink: 'https://leetcode.com/problems/path-sum-ii/' },
+            { title: 'Path Sum III', difficulty: 'Medium', status: 'Attempted', category: 'Binary Tree', acceptance: '46%', leetcodeLink: 'https://leetcode.com/problems/path-sum-iii/' },
+            { title: 'Construct Binary Tree from Preorder and Inorder Traversal', difficulty: 'Medium', status: 'Unsolved', category: 'Binary Tree', acceptance: '56%', leetcodeLink: 'https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/' },
+            { title: 'Construct Binary Tree from Inorder and Postorder Traversal', difficulty: 'Medium', status: 'Unsolved', category: 'Binary Tree', acceptance: '48%', leetcodeLink: 'https://leetcode.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/' },
+            { title: 'Populating Next Right Pointers in Each Node', difficulty: 'Medium', status: 'Solved', category: 'Binary Tree', acceptance: '54%', leetcodeLink: 'https://leetcode.com/problems/populating-next-right-pointers-in-each-node/' },
+            { title: 'Flatten Binary Tree to Linked List', difficulty: 'Medium', status: 'Attempted', category: 'Binary Tree', acceptance: '50%', leetcodeLink: 'https://leetcode.com/problems/flatten-binary-tree-to-linked-list/' },
+            { title: 'Binary Tree Maximum Path Sum', difficulty: 'Hard', status: 'Unsolved', category: 'Binary Tree', acceptance: '38%', leetcodeLink: 'https://leetcode.com/problems/binary-tree-maximum-path-sum/' },
+            { title: 'Balanced Binary Tree', difficulty: 'Easy', status: 'Solved', category: 'Binary Tree', acceptance: '47%', leetcodeLink: 'https://leetcode.com/problems/balanced-binary-tree/' },
+            { title: 'Minimum Depth of Binary Tree', difficulty: 'Easy', status: 'Solved', category: 'Binary Tree', acceptance: '39%', leetcodeLink: 'https://leetcode.com/problems/minimum-depth-of-binary-tree/' },
+            { title: 'Diameter of Binary Tree', difficulty: 'Easy', status: 'Solved', category: 'Binary Tree', acceptance: '54%', leetcodeLink: 'https://leetcode.com/problems/diameter-of-binary-tree/' },
+            { title: 'Sum Root to Leaf Numbers', difficulty: 'Medium', status: 'Attempted', category: 'Binary Tree', acceptance: '54%', leetcodeLink: 'https://leetcode.com/problems/sum-root-to-leaf-numbers/' },
+            { title: 'Recover Binary Search Tree', difficulty: 'Hard', status: 'Unsolved', category: 'Binary Tree', acceptance: '41%', leetcodeLink: 'https://leetcode.com/problems/recover-binary-search-tree/' },
+
+            // Breadth-First Search Problems (20)
+            { title: 'Binary Tree Level Order Traversal', difficulty: 'Medium', status: 'Solved', category: 'Breadth-First Search', acceptance: '62%', leetcodeLink: 'https://leetcode.com/problems/binary-tree-level-order-traversal/' },
+            { title: 'Minimum Depth of Binary Tree', difficulty: 'Easy', status: 'Solved', category: 'Breadth-First Search', acceptance: '39%', leetcodeLink: 'https://leetcode.com/problems/minimum-depth-of-binary-tree/' },
+            { title: 'Word Ladder', difficulty: 'Hard', status: 'Unsolved', category: 'Breadth-First Search', acceptance: '29%', leetcodeLink: 'https://leetcode.com/problems/word-ladder/' },
+            { title: 'Word Ladder II', difficulty: 'Hard', status: 'Unsolved', category: 'Breadth-First Search', acceptance: '19%', leetcodeLink: 'https://leetcode.com/problems/word-ladder-ii/' },
+            { title: 'Number of Islands', difficulty: 'Medium', status: 'Attempted', category: 'Breadth-First Search', acceptance: '49%', leetcodeLink: 'https://leetcode.com/problems/number-of-islands/' },
+            { title: 'Minimum Genetic Mutation', difficulty: 'Medium', status: 'Solved', category: 'Breadth-First Search', acceptance: '44%', leetcodeLink: 'https://leetcode.com/problems/minimum-genetic-mutation/' },
+            { title: 'Open the Lock', difficulty: 'Medium', status: 'Attempted', category: 'Breadth-First Search', acceptance: '54%', leetcodeLink: 'https://leetcode.com/problems/open-the-lock/' },
+            { title: 'Perfect Squares', difficulty: 'Medium', status: 'Solved', category: 'Breadth-First Search', acceptance: '44%', leetcodeLink: 'https://leetcode.com/problems/perfect-squares/' },
+            { title: 'Rotting Oranges', difficulty: 'Medium', status: 'Attempted', category: 'Breadth-First Search', acceptance: '52%', leetcodeLink: 'https://leetcode.com/problems/rotting-oranges/' },
+            { title: 'Walls and Gates', difficulty: 'Medium', status: 'Unsolved', category: 'Breadth-First Search', acceptance: '49%', leetcodeLink: 'https://leetcode.com/problems/walls-and-gates/' },
+            { title: 'Course Schedule', difficulty: 'Medium', status: 'Solved', category: 'Breadth-First Search', acceptance: '44%', leetcodeLink: 'https://leetcode.com/problems/course-schedule/' },
+            { title: 'Course Schedule II', difficulty: 'Medium', status: 'Unsolved', category: 'Breadth-First Search', acceptance: '44%', leetcodeLink: 'https://leetcode.com/problems/course-schedule-ii/' },
+            { title: 'Find Largest Value in Each Tree Row', difficulty: 'Medium', status: 'Attempted', category: 'Breadth-First Search', acceptance: '60%', leetcodeLink: 'https://leetcode.com/problems/find-largest-value-in-each-tree-row/' },
+            { title: 'Populating Next Right Pointers in Each Node', difficulty: 'Medium', status: 'Solved', category: 'Breadth-First Search', acceptance: '54%', leetcodeLink: 'https://leetcode.com/problems/populating-next-right-pointers-in-each-node/' },
+            { title: 'Populating Next Right Pointers in Each Node II', difficulty: 'Medium', status: 'Unsolved', category: 'Breadth-First Search', acceptance: '41%', leetcodeLink: 'https://leetcode.com/problems/populating-next-right-pointers-in-each-node-ii/' },
+            { title: 'Shortest Path in Binary Matrix', difficulty: 'Medium', status: 'Attempted', category: 'Breadth-First Search', acceptance: '44%', leetcodeLink: 'https://leetcode.com/problems/shortest-path-in-binary-matrix/' },
+            { title: '01 Matrix', difficulty: 'Medium', status: 'Solved', category: 'Breadth-First Search', acceptance: '41%', leetcodeLink: 'https://leetcode.com/problems/01-matrix/' },
+            { title: 'Snakes and Ladders', difficulty: 'Medium', status: 'Unsolved', category: 'Breadth-First Search', acceptance: '32%', leetcodeLink: 'https://leetcode.com/problems/snakes-and-ladders/' },
+            { title: 'Open the Lock', difficulty: 'Medium', status: 'Attempted', category: 'Breadth-First Search', acceptance: '54%', leetcodeLink: 'https://leetcode.com/problems/open-the-lock/' },
+            { title: 'Sliding Puzzle', difficulty: 'Hard', status: 'Unsolved', category: 'Breadth-First Search', acceptance: '62%', leetcodeLink: 'https://leetcode.com/problems/sliding-puzzle/' },
+
+            // Bit Manipulation Problems (20)
+            { title: 'Single Number', difficulty: 'Easy', status: 'Solved', category: 'Bit Manipulation', acceptance: '70%', leetcodeLink: 'https://leetcode.com/problems/single-number/' },
+            { title: 'Number of 1 Bits', difficulty: 'Easy', status: 'Solved', category: 'Bit Manipulation', acceptance: '60%', leetcodeLink: 'https://leetcode.com/problems/number-of-1-bits/' },
+            { title: 'Counting Bits', difficulty: 'Easy', status: 'Solved', category: 'Bit Manipulation', acceptance: '75%', leetcodeLink: 'https://leetcode.com/problems/counting-bits/' },
+            { title: 'Reverse Bits', difficulty: 'Easy', status: 'Solved', category: 'Bit Manipulation', acceptance: '50%', leetcodeLink: 'https://leetcode.com/problems/reverse-bits/' },
+            { title: 'Missing Number', difficulty: 'Easy', status: 'Solved', category: 'Bit Manipulation', acceptance: '60%', leetcodeLink: 'https://leetcode.com/problems/missing-number/' },
+            { title: 'Sum of Two Integers', difficulty: 'Medium', status: 'Attempted', category: 'Bit Manipulation', acceptance: '50%', leetcodeLink: 'https://leetcode.com/problems/sum-of-two-integers/' },
+            { title: 'Power of Two', difficulty: 'Easy', status: 'Solved', category: 'Bit Manipulation', acceptance: '45%', leetcodeLink: 'https://leetcode.com/problems/power-of-two/' },
+            { title: 'Power of Four', difficulty: 'Easy', status: 'Solved', category: 'Bit Manipulation', acceptance: '45%', leetcodeLink: 'https://leetcode.com/problems/power-of-four/' },
+            { title: 'Bitwise AND of Numbers Range', difficulty: 'Medium', status: 'Unsolved', category: 'Bit Manipulation', acceptance: '40%', leetcodeLink: 'https://leetcode.com/problems/bitwise-and-of-numbers-range/' },
+            { title: 'Maximum XOR of Two Numbers in an Array', difficulty: 'Medium', status: 'Unsolved', category: 'Bit Manipulation', acceptance: '45%', leetcodeLink: 'https://leetcode.com/problems/maximum-xor-of-two-numbers-in-an-array/' },
+            { title: 'Repeated DNA Sequences', difficulty: 'Medium', status: 'Attempted', category: 'Bit Manipulation', acceptance: '40%', leetcodeLink: 'https://leetcode.com/problems/repeated-dna-sequences/' },
+            { title: 'Gray Code', difficulty: 'Medium', status: 'Unsolved', category: 'Bit Manipulation', acceptance: '50%', leetcodeLink: 'https://leetcode.com/problems/gray-code/' },
+            { title: 'Single Number II', difficulty: 'Medium', status: 'Unsolved', category: 'Bit Manipulation', acceptance: '55%', leetcodeLink: 'https://leetcode.com/problems/single-number-ii/' },
+            { title: 'Single Number III', difficulty: 'Medium', status: 'Unsolved', category: 'Bit Manipulation', acceptance: '65%', leetcodeLink: 'https://leetcode.com/problems/single-number-iii/' },
+            { title: 'UTF-8 Validation', difficulty: 'Medium', status: 'Unsolved', category: 'Bit Manipulation', acceptance: '40%', leetcodeLink: 'https://leetcode.com/problems/utf-8-validation/' },
+            { title: 'Binary Watch', difficulty: 'Easy', status: 'Solved', category: 'Bit Manipulation', acceptance: '50%', leetcodeLink: 'https://leetcode.com/problems/binary-watch/' },
+            { title: 'Subsets', difficulty: 'Medium', status: 'Solved', category: 'Bit Manipulation', acceptance: '70%', leetcodeLink: 'https://leetcode.com/problems/subsets/' },
+            { title: 'Subsets II', difficulty: 'Medium', status: 'Attempted', category: 'Bit Manipulation', acceptance: '50%', leetcodeLink: 'https://leetcode.com/problems/subsets-ii/' },
+            { title: 'Find the Difference', difficulty: 'Easy', status: 'Solved', category: 'Bit Manipulation', acceptance: '60%', leetcodeLink: 'https://leetcode.com/problems/find-the-difference/' },
+            { title: 'Hamming Distance', difficulty: 'Easy', status: 'Solved', category: 'Bit Manipulation', acceptance: '75%', leetcodeLink: 'https://leetcode.com/problems/hamming-distance/' },
+
+            // Two Pointers Problems (20)
+            { title: 'Two Sum', difficulty: 'Easy', status: 'Solved', category: 'Two Pointers', acceptance: '45%', leetcodeLink: 'https://leetcode.com/problems/two-sum/' },
+            { title: '3Sum', difficulty: 'Medium', status: 'Attempted', category: 'Two Pointers', acceptance: '28%', leetcodeLink: 'https://leetcode.com/problems/3sum/' },
+            { title: '3Sum Closest', difficulty: 'Medium', status: 'Solved', category: 'Two Pointers', acceptance: '45%', leetcodeLink: 'https://leetcode.com/problems/3sum-closest/' },
+            { title: '4Sum', difficulty: 'Medium', status: 'Unsolved', category: 'Two Pointers', acceptance: '35%', leetcodeLink: 'https://leetcode.com/problems/4sum/' },
+            { title: 'Container With Most Water', difficulty: 'Medium', status: 'Solved', category: 'Two Pointers', acceptance: '53%', leetcodeLink: 'https://leetcode.com/problems/container-with-most-water/' },
+            { title: 'Trapping Rain Water', difficulty: 'Hard', status: 'Attempted', category: 'Two Pointers', acceptance: '29%', leetcodeLink: 'https://leetcode.com/problems/trapping-rain-water/' },
+            { title: 'Remove Duplicates from Sorted Array', difficulty: 'Easy', status: 'Solved', category: 'Two Pointers', acceptance: '50%', leetcodeLink: 'https://leetcode.com/problems/remove-duplicates-from-sorted-array/' },
+            { title: 'Remove Duplicates from Sorted Array II', difficulty: 'Medium', status: 'Solved', category: 'Two Pointers', acceptance: '45%', leetcodeLink: 'https://leetcode.com/problems/remove-duplicates-from-sorted-array-ii/' },
+            { title: 'Move Zeroes', difficulty: 'Easy', status: 'Solved', category: 'Two Pointers', acceptance: '60%', leetcodeLink: 'https://leetcode.com/problems/move-zeroes/' },
+            { title: 'Merge Sorted Array', difficulty: 'Easy', status: 'Solved', category: 'Two Pointers', acceptance: '49%', leetcodeLink: 'https://leetcode.com/problems/merge-sorted-array/' },
+            { title: 'Valid Palindrome', difficulty: 'Easy', status: 'Solved', category: 'Two Pointers', acceptance: '42%', leetcodeLink: 'https://leetcode.com/problems/valid-palindrome/' },
+            { title: 'Valid Palindrome II', difficulty: 'Easy', status: 'Solved', category: 'Two Pointers', acceptance: '40%', leetcodeLink: 'https://leetcode.com/problems/valid-palindrome-ii/' },
+            { title: 'Reverse String', difficulty: 'Easy', status: 'Solved', category: 'Two Pointers', acceptance: '70%', leetcodeLink: 'https://leetcode.com/problems/reverse-string/' },
+            { title: 'Reverse Vowels of a String', difficulty: 'Easy', status: 'Solved', category: 'Two Pointers', acceptance: '50%', leetcodeLink: 'https://leetcode.com/problems/reverse-vowels-of-a-string/' },
+            { title: 'Intersection of Two Arrays', difficulty: 'Easy', status: 'Solved', category: 'Two Pointers', acceptance: '64%', leetcodeLink: 'https://leetcode.com/problems/intersection-of-two-arrays/' },
+            { title: 'Intersection of Two Arrays II', difficulty: 'Easy', status: 'Solved', category: 'Two Pointers', acceptance: '52%', leetcodeLink: 'https://leetcode.com/problems/intersection-of-two-arrays-ii/' },
+            { title: 'Longest Substring Without Repeating Characters', difficulty: 'Medium', status: 'Solved', category: 'Two Pointers', acceptance: '30%', leetcodeLink: 'https://leetcode.com/problems/longest-substring-without-repeating-characters/' },
+            { title: 'Minimum Window Substring', difficulty: 'Hard', status: 'Unsolved', category: 'Two Pointers', acceptance: '35%', leetcodeLink: 'https://leetcode.com/problems/minimum-window-substring/' },
+            { title: 'Sliding Window Maximum', difficulty: 'Hard', status: 'Attempted', category: 'Two Pointers', acceptance: '44%', leetcodeLink: 'https://leetcode.com/problems/sliding-window-maximum/' },
+            { title: 'Longest Substring with At Most K Distinct Characters', difficulty: 'Medium', status: 'Unsolved', category: 'Two Pointers', acceptance: '46%', leetcodeLink: 'https://leetcode.com/problems/longest-substring-with-at-most-k-distinct-characters/' },
+
+            // Prefix Sum Problems (20)
+            { title: 'Range Sum Query - Immutable', difficulty: 'Easy', status: 'Solved', category: 'Prefix Sum', acceptance: '60%', leetcodeLink: 'https://leetcode.com/problems/range-sum-query-immutable/' },
+            { title: 'Range Sum Query 2D - Immutable', difficulty: 'Medium', status: 'Solved', category: 'Prefix Sum', acceptance: '50%', leetcodeLink: 'https://leetcode.com/problems/range-sum-query-2d-immutable/' },
+            { title: 'Subarray Sum Equals K', difficulty: 'Medium', status: 'Attempted', category: 'Prefix Sum', acceptance: '43%', leetcodeLink: 'https://leetcode.com/problems/subarray-sum-equals-k/' },
+            { title: 'Continuous Subarray Sum', difficulty: 'Medium', status: 'Unsolved', category: 'Prefix Sum', acceptance: '24%', leetcodeLink: 'https://leetcode.com/problems/continuous-subarray-sum/' },
+            { title: 'Maximum Subarray', difficulty: 'Medium', status: 'Solved', category: 'Prefix Sum', acceptance: '48%', leetcodeLink: 'https://leetcode.com/problems/maximum-subarray/' },
+            { title: 'Maximum Product Subarray', difficulty: 'Medium', status: 'Unsolved', category: 'Prefix Sum', acceptance: '32%', leetcodeLink: 'https://leetcode.com/problems/maximum-product-subarray/' },
+            { title: 'Minimum Size Subarray Sum', difficulty: 'Medium', status: 'Solved', category: 'Prefix Sum', acceptance: '40%', leetcodeLink: 'https://leetcode.com/problems/minimum-size-subarray-sum/' },
+            { title: 'Maximum Sum Circular Subarray', difficulty: 'Medium', status: 'Unsolved', category: 'Prefix Sum', acceptance: '35%', leetcodeLink: 'https://leetcode.com/problems/maximum-sum-circular-subarray/' },
+            { title: 'Maximum Sum of Two Non-Overlapping Subarrays', difficulty: 'Medium', status: 'Unsolved', category: 'Prefix Sum', acceptance: '60%', leetcodeLink: 'https://leetcode.com/problems/maximum-sum-of-two-non-overlapping-subarrays/' },
+            { title: 'Maximum Sum of 3 Non-Overlapping Subarrays', difficulty: 'Hard', status: 'Unsolved', category: 'Prefix Sum', acceptance: '50%', leetcodeLink: 'https://leetcode.com/problems/maximum-sum-of-3-non-overlapping-subarrays/' },
+            { title: 'Maximum Subarray Sum with One Deletion', difficulty: 'Medium', status: 'Unsolved', category: 'Prefix Sum', acceptance: '40%', leetcodeLink: 'https://leetcode.com/problems/maximum-subarray-sum-with-one-deletion/' },
+            { title: 'Maximum Subarray Sum After One Operation', difficulty: 'Medium', status: 'Unsolved', category: 'Prefix Sum', acceptance: '40%', leetcodeLink: 'https://leetcode.com/problems/maximum-subarray-sum-after-one-operation/' },
+            { title: 'Maximum Subarray Sum After K Operations', difficulty: 'Hard', status: 'Unsolved', category: 'Prefix Sum', acceptance: '40%', leetcodeLink: 'https://leetcode.com/problems/maximum-subarray-sum-after-k-operations/' },
+            { title: 'Maximum Subarray Sum After K Operations II', difficulty: 'Hard', status: 'Unsolved', category: 'Prefix Sum', acceptance: '40%', leetcodeLink: 'https://leetcode.com/problems/maximum-subarray-sum-after-k-operations-ii/' },
+            { title: 'Maximum Subarray Sum After K Operations III', difficulty: 'Hard', status: 'Unsolved', category: 'Prefix Sum', acceptance: '40%', leetcodeLink: 'https://leetcode.com/problems/maximum-subarray-sum-after-k-operations-iii/' },
+            { title: 'Maximum Subarray Sum After K Operations IV', difficulty: 'Hard', status: 'Unsolved', category: 'Prefix Sum', acceptance: '40%', leetcodeLink: 'https://leetcode.com/problems/maximum-subarray-sum-after-k-operations-iv/' },
+            { title: 'Maximum Subarray Sum After K Operations V', difficulty: 'Hard', status: 'Unsolved', category: 'Prefix Sum', acceptance: '40%', leetcodeLink: 'https://leetcode.com/problems/maximum-subarray-sum-after-k-operations-v/' },
+            { title: 'Maximum Subarray Sum After K Operations VI', difficulty: 'Hard', status: 'Unsolved', category: 'Prefix Sum', acceptance: '40%', leetcodeLink: 'https://leetcode.com/problems/maximum-subarray-sum-after-k-operations-vi/' },
+            { title: 'Maximum Subarray Sum After K Operations VII', difficulty: 'Hard', status: 'Unsolved', category: 'Prefix Sum', acceptance: '40%', leetcodeLink: 'https://leetcode.com/problems/maximum-subarray-sum-after-k-operations-vii/' },
+            { title: 'Maximum Subarray Sum After K Operations VIII', difficulty: 'Hard', status: 'Unsolved', category: 'Prefix Sum', acceptance: '40%', leetcodeLink: 'https://leetcode.com/problems/maximum-subarray-sum-after-k-operations-viii/' },
+
+            // Heap (Priority Queue) Problems (20)
+            { title: 'Merge K Sorted Lists', difficulty: 'Hard', status: 'Attempted', category: 'Heap (Priority Queue)', acceptance: '45%', leetcodeLink: 'https://leetcode.com/problems/merge-k-sorted-lists/' },
+            { title: 'Find Median from Data Stream', difficulty: 'Hard', status: 'Unsolved', category: 'Heap (Priority Queue)', acceptance: '44%', leetcodeLink: 'https://leetcode.com/problems/find-median-from-data-stream/' },
+            { title: 'Top K Frequent Elements', difficulty: 'Medium', status: 'Solved', category: 'Heap (Priority Queue)', acceptance: '62%', leetcodeLink: 'https://leetcode.com/problems/top-k-frequent-elements/' },
+            { title: 'Kth Largest Element in an Array', difficulty: 'Medium', status: 'Solved', category: 'Heap (Priority Queue)', acceptance: '62%', leetcodeLink: 'https://leetcode.com/problems/kth-largest-element-in-an-array/' },
+            { title: 'Sliding Window Maximum', difficulty: 'Hard', status: 'Attempted', category: 'Heap (Priority Queue)', acceptance: '44%', leetcodeLink: 'https://leetcode.com/problems/sliding-window-maximum/' },
+            { title: 'Task Scheduler', difficulty: 'Medium', status: 'Solved', category: 'Heap (Priority Queue)', acceptance: '56%', leetcodeLink: 'https://leetcode.com/problems/task-scheduler/' },
+            { title: 'IPO', difficulty: 'Hard', status: 'Unsolved', category: 'Heap (Priority Queue)', acceptance: '41%', leetcodeLink: 'https://leetcode.com/problems/ipo/' },
+            { title: 'Find K Pairs with Smallest Sums', difficulty: 'Medium', status: 'Unsolved', category: 'Heap (Priority Queue)', acceptance: '38%', leetcodeLink: 'https://leetcode.com/problems/find-k-pairs-with-smallest-sums/' },
+            { title: 'Kth Smallest Element in a Sorted Matrix', difficulty: 'Hard', status: 'Unsolved', category: 'Heap (Priority Queue)', acceptance: '52%', leetcodeLink: 'https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/' },
+            { title: 'Reorganize String', difficulty: 'Medium', status: 'Solved', category: 'Heap (Priority Queue)', acceptance: '50%', leetcodeLink: 'https://leetcode.com/problems/reorganize-string/' },
+            { title: 'Furthest Building You Can Reach', difficulty: 'Medium', status: 'Unsolved', category: 'Heap (Priority Queue)', acceptance: '45%', leetcodeLink: 'https://leetcode.com/problems/furthest-building-you-can-reach/' },
+            { title: 'Minimum Number of Refueling Stops', difficulty: 'Hard', status: 'Unsolved', category: 'Heap (Priority Queue)', acceptance: '36%', leetcodeLink: 'https://leetcode.com/problems/minimum-number-of-refueling-stops/' },
+            { title: 'Maximum Performance of a Team', difficulty: 'Hard', status: 'Unsolved', category: 'Heap (Priority Queue)', acceptance: '41%', leetcodeLink: 'https://leetcode.com/problems/maximum-performance-of-a-team/' },
+            { title: 'Sequentially Ordinal Rank Tracker', difficulty: 'Hard', status: 'Unsolved', category: 'Heap (Priority Queue)', acceptance: '60%', leetcodeLink: 'https://leetcode.com/problems/sequentially-ordinal-rank-tracker/' },
+            { title: 'Process Tasks Using Servers', difficulty: 'Medium', status: 'Unsolved', category: 'Heap (Priority Queue)', acceptance: '40%', leetcodeLink: 'https://leetcode.com/problems/process-tasks-using-servers/' },
+            { title: 'Single-Threaded CPU', difficulty: 'Medium', status: 'Unsolved', category: 'Heap (Priority Queue)', acceptance: '40%', leetcodeLink: 'https://leetcode.com/problems/single-threaded-cpu/' },
+            { title: 'Maximum Number of Events That Can Be Attended', difficulty: 'Medium', status: 'Unsolved', category: 'Heap (Priority Queue)', acceptance: '45%', leetcodeLink: 'https://leetcode.com/problems/maximum-number-of-events-that-can-be-attended/' },
+            { title: 'Minimum Cost to Hire K Workers', difficulty: 'Hard', status: 'Unsolved', category: 'Heap (Priority Queue)', acceptance: '50%', leetcodeLink: 'https://leetcode.com/problems/minimum-cost-to-hire-k-workers/' },
+            { title: 'K Closest Points to Origin', difficulty: 'Medium', status: 'Solved', category: 'Heap (Priority Queue)', acceptance: '65%', leetcodeLink: 'https://leetcode.com/problems/k-closest-points-to-origin/' },
+            { title: 'Last Stone Weight', difficulty: 'Easy', status: 'Solved', category: 'Heap (Priority Queue)', acceptance: '65%', leetcodeLink: 'https://leetcode.com/problems/last-stone-weight/' },
+
+            // Simulation Problems (20)
+            { title: 'Robot Bounded In Circle', difficulty: 'Medium', status: 'Solved', category: 'Simulation', acceptance: '55%', leetcodeLink: 'https://leetcode.com/problems/robot-bounded-in-circle/' },
+            { title: 'Spiral Matrix', difficulty: 'Medium', status: 'Solved', category: 'Simulation', acceptance: '38%', leetcodeLink: 'https://leetcode.com/problems/spiral-matrix/' },
+            { title: 'Spiral Matrix II', difficulty: 'Medium', status: 'Solved', category: 'Simulation', acceptance: '60%', leetcodeLink: 'https://leetcode.com/problems/spiral-matrix-ii/' },
+            { title: 'Game of Life', difficulty: 'Medium', status: 'Solved', category: 'Simulation', acceptance: '70%', leetcodeLink: 'https://leetcode.com/problems/game-of-life/' },
+            { title: 'Rotate Image', difficulty: 'Medium', status: 'Solved', category: 'Simulation', acceptance: '62%', leetcodeLink: 'https://leetcode.com/problems/rotate-image/' },
+            { title: 'Set Matrix Zeroes', difficulty: 'Medium', status: 'Solved', category: 'Simulation', acceptance: '54%', leetcodeLink: 'https://leetcode.com/problems/set-matrix-zeroes/' },
+            { title: 'Valid Sudoku', difficulty: 'Medium', status: 'Solved', category: 'Simulation', acceptance: '50%', leetcodeLink: 'https://leetcode.com/problems/valid-sudoku/' },
+            { title: 'Sudoku Solver', difficulty: 'Hard', status: 'Unsolved', category: 'Simulation', acceptance: '45%', leetcodeLink: 'https://leetcode.com/problems/sudoku-solver/' },
+            { title: 'N-Queens', difficulty: 'Hard', status: 'Unsolved', category: 'Simulation', acceptance: '50%', leetcodeLink: 'https://leetcode.com/problems/n-queens/' },
+            { title: 'N-Queens II', difficulty: 'Hard', status: 'Unsolved', category: 'Simulation', acceptance: '60%', leetcodeLink: 'https://leetcode.com/problems/n-queens-ii/' },
+            { title: 'Word Search', difficulty: 'Medium', status: 'Solved', category: 'Simulation', acceptance: '36%', leetcodeLink: 'https://leetcode.com/problems/word-search/' },
+            { title: 'Word Search II', difficulty: 'Hard', status: 'Unsolved', category: 'Simulation', acceptance: '35%', leetcodeLink: 'https://leetcode.com/problems/word-search-ii/' },
+            { title: 'Number of Islands', difficulty: 'Medium', status: 'Solved', category: 'Simulation', acceptance: '49%', leetcodeLink: 'https://leetcode.com/problems/number-of-islands/' },
+            { title: 'Surrounded Regions', difficulty: 'Medium', status: 'Unsolved', category: 'Simulation', acceptance: '32%', leetcodeLink: 'https://leetcode.com/problems/surrounded-regions/' },
+            { title: 'Pacific Atlantic Water Flow', difficulty: 'Medium', status: 'Unsolved', category: 'Simulation', acceptance: '48%', leetcodeLink: 'https://leetcode.com/problems/pacific-atlantic-water-flow/' },
+            { title: 'Walls and Gates', difficulty: 'Medium', status: 'Unsolved', category: 'Simulation', acceptance: '49%', leetcodeLink: 'https://leetcode.com/problems/walls-and-gates/' },
+            { title: 'Flood Fill', difficulty: 'Easy', status: 'Solved', category: 'Simulation', acceptance: '60%', leetcodeLink: 'https://leetcode.com/problems/flood-fill/' },
+            { title: 'Island Perimeter', difficulty: 'Easy', status: 'Solved', category: 'Simulation', acceptance: '67%', leetcodeLink: 'https://leetcode.com/problems/island-perimeter/' },
+            { title: 'Max Area of Island', difficulty: 'Medium', status: 'Solved', category: 'Simulation', acceptance: '67%', leetcodeLink: 'https://leetcode.com/problems/max-area-of-island/' },
+            { title: 'Number of Enclaves', difficulty: 'Medium', status: 'Unsolved', category: 'Simulation', acceptance: '60%', leetcodeLink: 'https://leetcode.com/problems/number-of-enclaves/' },
+
+            // Binary Tree Problems (20)
+            { title: 'Binary Tree Inorder Traversal', difficulty: 'Easy', status: 'Solved', category: 'Binary Tree', acceptance: '66%', leetcodeLink: 'https://leetcode.com/problems/binary-tree-inorder-traversal/' },
+            { title: 'Binary Tree Preorder Traversal', difficulty: 'Easy', status: 'Solved', category: 'Binary Tree', acceptance: '66%', leetcodeLink: 'https://leetcode.com/problems/binary-tree-preorder-traversal/' },
+            { title: 'Binary Tree Postorder Traversal', difficulty: 'Easy', status: 'Solved', category: 'Binary Tree', acceptance: '66%', leetcodeLink: 'https://leetcode.com/problems/binary-tree-postorder-traversal/' },
+            { title: 'Maximum Depth of Binary Tree', difficulty: 'Easy', status: 'Solved', category: 'Binary Tree', acceptance: '80%', leetcodeLink: 'https://leetcode.com/problems/maximum-depth-of-binary-tree/' },
+            { title: 'Same Tree', difficulty: 'Easy', status: 'Solved', category: 'Binary Tree', acceptance: '55%', leetcodeLink: 'https://leetcode.com/problems/same-tree/' },
+            { title: 'Invert Binary Tree', difficulty: 'Easy', status: 'Solved', category: 'Binary Tree', acceptance: '79%', leetcodeLink: 'https://leetcode.com/problems/invert-binary-tree/' },
+            { title: 'Symmetric Tree', difficulty: 'Easy', status: 'Solved', category: 'Binary Tree', acceptance: '54%', leetcodeLink: 'https://leetcode.com/problems/symmetric-tree/' },
+            { title: 'Path Sum', difficulty: 'Easy', status: 'Solved', category: 'Binary Tree', acceptance: '46%', leetcodeLink: 'https://leetcode.com/problems/path-sum/' },
+            { title: 'Path Sum II', difficulty: 'Medium', status: 'Attempted', category: 'Binary Tree', acceptance: '49%', leetcodeLink: 'https://leetcode.com/problems/path-sum-ii/' },
+            { title: 'Path Sum III', difficulty: 'Medium', status: 'Attempted', category: 'Binary Tree', acceptance: '46%', leetcodeLink: 'https://leetcode.com/problems/path-sum-iii/' },
+            { title: 'Construct Binary Tree from Preorder and Inorder Traversal', difficulty: 'Medium', status: 'Unsolved', category: 'Binary Tree', acceptance: '56%', leetcodeLink: 'https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/' },
+            { title: 'Construct Binary Tree from Inorder and Postorder Traversal', difficulty: 'Medium', status: 'Unsolved', category: 'Binary Tree', acceptance: '48%', leetcodeLink: 'https://leetcode.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/' },
+            { title: 'Populating Next Right Pointers in Each Node', difficulty: 'Medium', status: 'Solved', category: 'Binary Tree', acceptance: '54%', leetcodeLink: 'https://leetcode.com/problems/populating-next-right-pointers-in-each-node/' },
+            { title: 'Flatten Binary Tree to Linked List', difficulty: 'Medium', status: 'Attempted', category: 'Binary Tree', acceptance: '50%', leetcodeLink: 'https://leetcode.com/problems/flatten-binary-tree-to-linked-list/' },
+            { title: 'Binary Tree Maximum Path Sum', difficulty: 'Hard', status: 'Unsolved', category: 'Binary Tree', acceptance: '38%', leetcodeLink: 'https://leetcode.com/problems/binary-tree-maximum-path-sum/' },
+            { title: 'Balanced Binary Tree', difficulty: 'Easy', status: 'Solved', category: 'Binary Tree', acceptance: '47%', leetcodeLink: 'https://leetcode.com/problems/balanced-binary-tree/' },
+            { title: 'Minimum Depth of Binary Tree', difficulty: 'Easy', status: 'Solved', category: 'Binary Tree', acceptance: '39%', leetcodeLink: 'https://leetcode.com/problems/minimum-depth-of-binary-tree/' },
+            { title: 'Diameter of Binary Tree', difficulty: 'Easy', status: 'Solved', category: 'Binary Tree', acceptance: '54%', leetcodeLink: 'https://leetcode.com/problems/diameter-of-binary-tree/' },
+            { title: 'Sum Root to Leaf Numbers', difficulty: 'Medium', status: 'Attempted', category: 'Binary Tree', acceptance: '54%', leetcodeLink: 'https://leetcode.com/problems/sum-root-to-leaf-numbers/' },
+            { title: 'Recover Binary Search Tree', difficulty: 'Hard', status: 'Unsolved', category: 'Binary Tree', acceptance: '41%', leetcodeLink: 'https://leetcode.com/problems/recover-binary-search-tree/' },
+
+            // Breadth-First Search Problems (20)
+            { title: 'Binary Tree Level Order Traversal', difficulty: 'Medium', status: 'Solved', category: 'Breadth-First Search', acceptance: '62%', leetcodeLink: 'https://leetcode.com/problems/binary-tree-level-order-traversal/' },
+            { title: 'Minimum Depth of Binary Tree', difficulty: 'Easy', status: 'Solved', category: 'Breadth-First Search', acceptance: '39%', leetcodeLink: 'https://leetcode.com/problems/minimum-depth-of-binary-tree/' },
+        ];
+
+        // Add all topic names to topics array for sidebar
+        const topics = ['All', ...topicData.map(t => t.name)];
+
+        // State
+        let selectedFilter = 'All';
+        let selectedTopic = 'All';
+
+        // Render topics in sidebar with count
+        function renderTopics() {
+            const topicList = document.getElementById('topicList');
+            topicList.innerHTML = '';
+            // All
+            const allLi = document.createElement('li');
+            allLi.textContent = 'All';
+            allLi.className = 'topic-item' + (selectedTopic === 'All' ? ' active' : '');
+            allLi.addEventListener('click', () => {
+                selectedTopic = 'All';
+                renderTopics();
+                renderProblems();
+            });
+            topicList.appendChild(allLi);
+            // Other topics
+            topicData.forEach(topic => {
+                const li = document.createElement('li');
+                li.className = 'topic-item' + (selectedTopic === topic.name ? ' active' : '');
+                li.innerHTML = `<span>${topic.name}</span><span class="topic-count">${topic.count}</span>`;
+                li.addEventListener('click', () => {
+                    selectedTopic = topic.name;
+                    renderTopics();
+                    renderProblems();
+                });
+                topicList.appendChild(li);
+            });
+        }
+
+        // Render problems in table
+        function renderProblems() {
+            const tbody = document.getElementById('problemTableBody');
+            tbody.innerHTML = '';
+            let filtered = problems.filter(p => {
+                // Filter by topic
+                if (selectedTopic !== 'All' && p.category !== selectedTopic) return false;
+                // Filter by difficulty/status
+                if (selectedFilter === 'All') return true;
+                if (['Easy','Medium','Hard'].includes(selectedFilter)) return p.difficulty === selectedFilter;
+                if (selectedFilter === 'Solved') return p.status === 'Solved';
+                if (selectedFilter === 'Unsolved') return p.status === 'Unsolved';
+                return true;
+            });
+            filtered.forEach(p => {
+                const tr = document.createElement('tr');
+                // Status
+                let statusClass = 'unsolved', statusIcon = 'fa-times', statusText = 'Unsolved';
+                if (p.status === 'Solved') { statusClass = 'solved'; statusIcon = 'fa-check'; statusText = 'Solved'; }
+                else if (p.status === 'Attempted') { statusClass = 'attempted'; statusIcon = 'fa-clock'; statusText = 'Attempted'; }
+
+                // Create title slug for LeetCode URL
+                const titleSlug = p.title.toLowerCase()
+                    .replace(/[^a-z0-9]+/g, '-')
+                    .replace(/(^-|-$)/g, '');
+                const leetCodeUrl = `https://leetcode.com/problems/${titleSlug}/`;
+
+                tr.innerHTML = `
+                    <td><div class="problem-status"><div class="status-icon ${statusClass}"><i class="fas ${statusIcon}"></i></div><span>${statusText}</span></div></td>
+                    <td>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <a href="javascript:void(0)" onclick="openEditor(${JSON.stringify(p)})" style="color: var(--primary); text-decoration: none; transition: var(--transition);" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--primary)'">${p.title}</a>
+                            <a href="${leetCodeUrl}" target="_blank" style="color: var(--accent); text-decoration: none; font-size: 0.9rem;" title="Open in LeetCode">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
+                    </td>
+                    <td><span class="difficulty-badge ${p.difficulty.toLowerCase()}">${p.difficulty}</span></td>
+                    <td>${p.category}</td>
+                    <td>${p.acceptance}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        // Filter button functionality
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                selectedFilter = button.getAttribute('data-filter');
+                renderProblems();
+            });
+        });
+
+        // Initial render
+        renderTopics();
+        renderProblems();
+
+        // Interview start functionality
+        const startButtons = document.querySelectorAll('.start-interview-btn');
+        startButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                alert('Starting interview...');
+            });
+        });
+
+        let editor;
+        let currentProblem;
+        let isEditorReady = false;
+
+        // Load Monaco Editor
+        require.config({
+            paths: {
+                'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.36.1/min/vs'
+            }
+        });
+
+        // Initialize editor when Monaco is loaded
+        require(['vs/editor/editor.main'], function() {
+            console.log('Monaco Editor loaded');
+            isEditorReady = true;
+            
+            // Create editor instance
+            editor = monaco.editor.create(document.getElementById('monaco-editor'), {
+                value: '// Write your code here\n',
+                language: 'javascript',
+                theme: 'vs-dark',
+                automaticLayout: true,
+                minimap: { enabled: true },
+                fontSize: 14,
+                lineNumbers: 'on',
+                roundedSelection: false,
+                scrollBeyondLastLine: false,
+                readOnly: false,
+                cursorStyle: 'line',
+                tabSize: 4,
+                wordWrap: 'on'
+            });
+
+            // Handle window resize
+            window.addEventListener('resize', function() {
+                if (editor) {
+                    editor.layout();
+                }
+            });
+        });
+
+        // Add this after the problems array
+        async function fetchLeetCodeProblem(titleSlug) {
+            try {
+                const response = await fetch(`https://leetcode.com/graphql`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        query: `
+                            query getProblem($titleSlug: String!) {
+                                question(titleSlug: $titleSlug) {
+                                    title
+                                    content
+                                    difficulty
+                                    codeSnippets {
+                                        lang
+                                        code
+                                    }
+                                    exampleTestcases
+                                    sampleTestCase
+                                }
+                            }
+                        `,
+                        variables: {
+                            titleSlug: titleSlug
+                        }
+                    })
+                });
+                const data = await response.json();
+                return data.data.question;
+            } catch (error) {
+                console.error('Error fetching problem:', error);
+                return null;
+            }
+        }
+
+        function getTitleSlug(title) {
+            return title.toLowerCase()
+                .replace(/[^a-z0-9]+/g, '-')
+                .replace(/(^-|-$)/g, '');
+        }
+
+        async function openEditor(problem) {
+            console.log('Opening editor for problem:', problem);
+            currentProblem = problem;
+            const modal = document.getElementById('editorModal');
+            modal.style.display = 'block';
+            document.getElementById('problemTitle').textContent = problem.title;
+            
+            // Show loading indicator
+            loadingIndicator.style.display = 'block';
+            
+            try {
+                // Fetch problem data from LeetCode
+                const titleSlug = getTitleSlug(problem.title);
+                const problemData = await fetchLeetCodeProblem(titleSlug);
+                
+                if (problemData) {
+                    // Set problem description with actual content
+                    const description = `
+                        <h4>${problemData.title}</h4>
+                        <span class="difficulty ${problemData.difficulty.toLowerCase()}">${problemData.difficulty}</span>
+                        
+                        <div class="section">
+                            <h5>Problem Description</h5>
+                            ${problemData.content}
+                        </div>
+
+                        <div class="section">
+                            <h5>Example</h5>
+                            <pre><code>${problemData.exampleTestcases}</code></pre>
+                        </div>
+
+                        <div class="test-cases">
+                            <h5>Test Cases</h5>
+                            <div class="test-case">
+                                <h6>Sample Test Case</h6>
+                                <pre><code>${problemData.sampleTestCase}</code></pre>
+                            </div>
+                        </div>
+                    `;
+                    document.getElementById('problemDescription').innerHTML = description;
+
+                    // Get the JavaScript code snippet
+                    const jsSnippet = problemData.codeSnippets.find(snippet => snippet.lang === 'javascript');
+                    if (jsSnippet) {
+                        if (isEditorReady && editor) {
+                            editor.setValue(jsSnippet.code);
+                            editor.layout();
+                        } else {
+                            const checkEditor = setInterval(() => {
+                                if (isEditorReady && editor) {
+                                    editor.setValue(jsSnippet.code);
+                                    editor.layout();
+                                    clearInterval(checkEditor);
+                                }
+                            }, 100);
+                        }
+                    }
+                } else {
+                    // Fallback to default template if fetch fails
+                    const template = `/**
+ * @param {any} input
+ * @return {any}
+ */
+function solution(input) {
+    // Write your code here
+    
+}
+
+// Test cases
+console.log(solution());`;
+                    
+                    if (isEditorReady && editor) {
+                        editor.setValue(template);
+                        editor.layout();
+                    }
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            } finally {
+                // Hide loading indicator
+                loadingIndicator.style.display = 'none';
+            }
+        }
+
+        // Update runCode function to handle LeetCode-style test cases
+        function runCode() {
+            if (!isEditorReady || !editor) {
+                alert('Editor is not ready yet. Please wait a moment and try again.');
+                return;
+            }
+            
+            const code = editor.getValue();
+            try {
+                // Create a safe environment to run the code
+                const safeEval = new Function(code);
+                const result = safeEval();
+                
+                // Display results
+                const resultsDiv = document.createElement('div');
+                resultsDiv.className = 'results-section';
+                resultsDiv.innerHTML = `
+                    <h5>Results</h5>
+                    <pre><code>${JSON.stringify(result, null, 2)}</code></pre>
+                `;
+                
+                // Add results to problem description
+                const descriptionDiv = document.getElementById('problemDescription');
+                const existingResults = descriptionDiv.querySelector('.results-section');
+                if (existingResults) {
+                    existingResults.remove();
+                }
+                descriptionDiv.appendChild(resultsDiv);
+            } catch (error) {
+                console.error('Error running code:', error);
+                alert('Error running code: ' + error.message);
+            }
+        }
+
+        function closeEditor() {
+            document.getElementById('editorModal').style.display = 'none';
+        }
+
+        // Add loading indicator
+        const loadingIndicator = document.createElement('div');
+        loadingIndicator.id = 'loadingIndicator';
+        loadingIndicator.style.cssText = `
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--dark);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            display: none;
+            z-index: 1001;
+        `;
+        loadingIndicator.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading Editor...';
+        document.body.appendChild(loadingIndicator);
+
+        // Show loading indicator when opening editor
+        const originalOpenEditor = openEditor;
+        openEditor = function(problem) {
+            loadingIndicator.style.display = 'block';
+            originalOpenEditor(problem);
+            setTimeout(() => {
+                loadingIndicator.style.display = 'none';
+            }, 1000);
+        };
+    </script>
+</body>
+</html> 

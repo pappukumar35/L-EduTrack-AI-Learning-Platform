@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doubt Corner - EduTrack</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #141414;
+            --bg-card: #1a1a1a;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --accent-primary: #00f2fe;
+            --accent-secondary: #4facfe;
+            --gradient-primary: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            --card-shadow: 0 4px 20px rgba(0, 242, 254, 0.1);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: var(--bg-secondary);
+            padding: 20px 0;
+            margin-bottom: 30px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8em;
+            font-weight: 700;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+
+        .back-btn {
+            padding: 10px 20px;
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: var(--text-primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+        }
+
+        .back-btn:hover {
+            background: var(--bg-secondary);
+            transform: translateX(-5px);
+        }
+
+        .page-title {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .page-description {
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            font-size: 1.1em;
+        }
+
+        .booking-section {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+        }
+
+        .time-slots {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .time-slot {
+            padding: 15px;
+            background: var(--bg-secondary);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .time-slot:hover {
+            background: var(--bg-primary);
+            transform: translateY(-2px);
+        }
+
+        .time-slot.active {
+            background: var(--gradient-primary);
+            border: none;
+        }
+
+        .booking-form {
+            display: grid;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group label {
+            color: var(--text-secondary);
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            padding: 12px;
+            background: var(--bg-secondary);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-size: 1em;
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .book-btn {
+            padding: 15px;
+            background: var(--gradient-primary);
+            border: none;
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .book-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--card-shadow);
+        }
+
+        .experts-section {
+            margin-top: 40px;
+        }
+
+        .experts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .expert-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .expert-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .expert-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--gradient-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+        }
+
+        .expert-info h3 {
+            margin-bottom: 5px;
+        }
+
+        .expert-info p {
+            color: var(--text-secondary);
+            font-size: 0.9em;
+        }
+
+        .expert-specialties {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 15px;
+        }
+
+        .specialty-tag {
+            background: var(--bg-secondary);
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.9em;
+        }
+
+        .success-message {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--gradient-primary);
+            color: var(--text-primary);
+            padding: 15px 25px;
+            border-radius: 8px;
+            box-shadow: var(--card-shadow);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .success-message.active {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container header-content">
+            <a href="community.html" class="back-btn">
+                <i class="fas fa-arrow-left"></i>
+                Back to Community
+            </a>
+            <a href="#" class="logo">EduTrack</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <h1 class="page-title">Doubt Corner</h1>
+        <p class="page-description">Get your doubts cleared by our expert mentors in real-time sessions. Book a slot that works best for you.</p>
+
+        <div class="booking-section">
+            <h2 class="section-title">Book a Session</h2>
+            <div class="time-slots">
+                <div class="time-slot">9:00 AM</div>
+                <div class="time-slot">10:00 AM</div>
+                <div class="time-slot">11:00 AM</div>
+                <div class="time-slot">2:00 PM</div>
+                <div class="time-slot">3:00 PM</div>
+                <div class="time-slot">4:00 PM</div>
+                <div class="time-slot">5:00 PM</div>
+                <div class="time-slot">6:00 PM</div>
+            </div>
+
+            <form class="booking-form">
+                <div class="form-group">
+                    <label for="subject">Subject</label>
+                    <select id="subject" required>
+                        <option value="">Select a subject</option>
+                        <option value="mathematics">Mathematics</option>
+                        <option value="physics">Physics</option>
+                        <option value="chemistry">Chemistry</option>
+                        <option value="computer-science">Computer Science</option>
+                        <option value="english">English</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="topic">Topic</label>
+                    <input type="text" id="topic" placeholder="Enter the specific topic" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Description of your doubt</label>
+                    <textarea id="description" placeholder="Please describe your doubt in detail..." required></textarea>
+                </div>
+
+                <button type="submit" class="book-btn">Book Session</button>
+            </form>
+        </div>
+
+        <div class="experts-section">
+            <h2 class="section-title">Available Experts</h2>
+            <div class="experts-grid">
+                <div class="expert-card">
+                    <div class="expert-header">
+                        <div class="expert-avatar">SJ</div>
+                        <div class="expert-info">
+                            <h3>Sarah Johnson</h3>
+                            <p>Mathematics Expert</p>
+                        </div>
+                    </div>
+                    <div class="expert-specialties">
+                        <span class="specialty-tag">Calculus</span>
+                        <span class="specialty-tag">Algebra</span>
+                        <span class="specialty-tag">Statistics</span>
+                    </div>
+                </div>
+
+                <div class="expert-card">
+                    <div class="expert-header">
+                        <div class="expert-avatar">RK</div>
+                        <div class="expert-info">
+                            <h3>Rajesh Kumar</h3>
+                            <p>Physics Expert</p>
+                        </div>
+                    </div>
+                    <div class="expert-specialties">
+                        <span class="specialty-tag">Mechanics</span>
+                        <span class="specialty-tag">Electromagnetism</span>
+                        <span class="specialty-tag">Optics</span>
+                    </div>
+                </div>
+
+                <div class="expert-card">
+                    <div class="expert-header">
+                        <div class="expert-avatar">AP</div>
+                        <div class="expert-info">
+                            <h3>Anita Patel</h3>
+                            <p>Computer Science Expert</p>
+                        </div>
+                    </div>
+                    <div class="expert-specialties">
+                        <span class="specialty-tag">Programming</span>
+                        <span class="specialty-tag">Data Structures</span>
+                        <span class="specialty-tag">Algorithms</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="success-message">Session booked successfully!</div>
+
+    <script>
+        // Time slot selection
+        const timeSlots = document.querySelectorAll('.time-slot');
+        timeSlots.forEach(slot => {
+            slot.addEventListener('click', () => {
+                timeSlots.forEach(s => s.classList.remove('active'));
+                slot.classList.add('active');
+            });
+        });
+
+        // Form submission
+        const bookingForm = document.querySelector('.booking-form');
+        const successMessage = document.querySelector('.success-message');
+
+        bookingForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Check if a time slot is selected
+            const selectedSlot = document.querySelector('.time-slot.active');
+            if (!selectedSlot) {
+                alert('Please select a time slot');
+                return;
+            }
+
+            // Show success message
+            successMessage.textContent = 'Session booked successfully!';
+            successMessage.classList.add('active');
+            setTimeout(() => {
+                successMessage.classList.remove('active');
+            }, 3000);
+
+            // Reset form
+            bookingForm.reset();
+            timeSlots.forEach(slot => slot.classList.remove('active'));
+        });
+    </script>
+</body>
+</html> 

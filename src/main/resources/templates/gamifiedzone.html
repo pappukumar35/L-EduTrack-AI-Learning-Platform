@@ -1,0 +1,1811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduTrack - Student Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        :root {
+            --primary: #00f7ff;
+            --success: #2ecc71;
+            --warning: #e67e22;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+            --gradient-primary: linear-gradient(135deg, #00f7ff, #2980b9);
+            --text-secondary: #ecf0f1;
+            --background: #1a1a1a;
+        }
+
+        body {
+            background: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .challenges-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Progress Dashboard Styles */
+        .progress-dashboard {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .dashboard-header h2 {
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+        }
+
+        .level-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 500;
+        }
+
+        .level-badge.gold {
+            background: linear-gradient(135deg, #ffd700, #ffa500);
+            color: white;
+        }
+
+        .dashboard-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--light);
+            padding: 1.5rem;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: var(--transition);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+
+        .stat-card i {
+            font-size: 2rem;
+            color: var(--primary);
+        }
+
+        .stat-info h3 {
+            font-size: 0.9rem;
+            color: var(--dark);
+            opacity: 0.8;
+        }
+
+        .stat-info p {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .progress-section {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .progress-bar-container {
+            background: var(--light);
+            padding: 1.5rem;
+            border-radius: 10px;
+            transition: var(--transition);
+        }
+
+        .progress-bar-container:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--success));
+            border-radius: 4px;
+            transition: var(--transition);
+        }
+
+        /* Courses Section */
+        .courses-section {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .courses-section h2 {
+            color: var(--dark);
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+        }
+
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .course-card {
+            background: var(--light);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .course-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .course-icon {
+            width: 60px;
+            height: 60px;
+            background: white;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            transition: var(--transition);
+        }
+
+        .course-card:hover .course-icon {
+            transform: scale(1.1);
+        }
+
+        .course-icon i {
+            font-size: 2rem;
+            color: var(--primary);
+        }
+
+        .course-card h3 {
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .course-card p {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .course-progress {
+            margin-bottom: 1rem;
+        }
+
+        .course-progress .progress-bar {
+            height: 6px;
+            margin-bottom: 0.5rem;
+        }
+
+        .course-progress span {
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        .explore-btn {
+            width: 100%;
+            padding: 0.8rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        .explore-btn:hover {
+            background: #3498db;
+            transform: translateY(-2px);
+        }
+
+        /* Course-specific colors */
+        .course-card:nth-child(1) .course-icon i { color: #e34c26; } /* HTML */
+        .course-card:nth-child(2) .course-icon i { color: #264de4; } /* CSS */
+        .course-card:nth-child(3) .course-icon i { color: #f7df1e; } /* JavaScript */
+        .course-card:nth-child(4) .course-icon i { color: #00758f; } /* SQL */
+        .course-card:nth-child(5) .course-icon i { color: #306998; } /* Python */
+        .course-card:nth-child(6) .course-icon i { color: #007396; } /* Java */
+        .course-card:nth-child(7) .course-icon i { color: #61dafb; } /* React */
+
+        /* Achievements Section */
+        .achievements-section {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .achievements-section h2 {
+            color: var(--dark);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+        }
+
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .achievement-card {
+            background: var(--light);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .achievement-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .achievement-card i {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .achievement-card h3 {
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .achievement-card p {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .achievement-date {
+            font-size: 0.8rem;
+            color: #888;
+        }
+
+        /* Topics Progress Section */
+        .topics-progress {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .topics-progress h2 {
+            color: var(--dark);
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+        }
+
+        .topics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .topic-card {
+            background: var(--light);
+            padding: 1.5rem;
+            border-radius: 10px;
+            transition: var(--transition);
+        }
+
+        .topic-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .topic-card i {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .topic-card h3 {
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+
+        .topic-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .stat {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .stat .label {
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        .stat .value {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .topic-progress {
+            margin-top: 1rem;
+        }
+
+        /* Activity Graph Section */
+        .activity-graph {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .activity-graph h2 {
+            color: var(--dark);
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+        }
+
+        .graph-container {
+            position: relative;
+            height: 400px;
+            width: 100%;
+        }
+
+        .graph-tooltip {
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .challenges-container {
+                padding: 1rem;
+            }
+
+            .dashboard-header {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .dashboard-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .courses-grid,
+            .achievements-grid,
+            .topics-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .topic-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .graph-container {
+                height: 300px;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .stat-card,
+        .achievement-card,
+        .topic-card,
+        .course-card {
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        /* Profile Section */
+        .profile-section {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .profile-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: var(--light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .profile-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .profile-image .edit-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 0.5rem;
+            text-align: center;
+            color: white;
+            cursor: pointer;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .profile-image:hover .edit-overlay {
+            opacity: 1;
+        }
+
+        .profile-info {
+            flex: 1;
+        }
+
+        .profile-info h2 {
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .profile-info p {
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .profile-stat {
+            background: var(--light);
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .profile-stat h4 {
+            color: var(--dark);
+            margin-bottom: 0.25rem;
+        }
+
+        .profile-stat p {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .edit-profile-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .edit-profile-btn:hover {
+            background: #3498db;
+            transform: translateY(-2px);
+        }
+
+        /* Enrolled Courses Section */
+        .enrolled-courses {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .enrolled-courses h2 {
+            color: var(--dark);
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+        }
+
+        .enrolled-courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .enrolled-course-card {
+            background: var(--light);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .enrolled-course-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .course-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .course-icon {
+            width: 50px;
+            height: 50px;
+            background: white;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .course-icon i {
+            font-size: 1.5rem;
+        }
+
+        .course-info h3 {
+            color: var(--dark);
+            margin-bottom: 0.25rem;
+        }
+
+        .course-info p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .course-progress {
+            margin: 1rem 0;
+        }
+
+        .course-progress .progress-bar {
+            height: 6px;
+            background: #e0e0e0;
+            border-radius: 3px;
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+        }
+
+        .course-progress .progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--success));
+            border-radius: 3px;
+            transition: var(--transition);
+        }
+
+        .course-progress span {
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        .course-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .course-btn {
+            flex: 1;
+            padding: 0.8rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+            text-align: center;
+        }
+
+        .continue-btn {
+            background: var(--primary);
+            color: white;
+        }
+
+        .continue-btn:hover {
+            background: #3498db;
+            transform: translateY(-2px);
+        }
+
+        .view-btn {
+            background: var(--light);
+            color: var(--dark);
+            border: 1px solid #ddd;
+        }
+
+        .view-btn:hover {
+            background: #e0e0e0;
+            transform: translateY(-2px);
+        }
+
+        /* Course-specific colors */
+        .course-icon.html i { color: #e34c26; }
+        .course-icon.css i { color: #264de4; }
+        .course-icon.js i { color: #f7df1e; }
+        .course-icon.python i { color: #306998; }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .profile-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .profile-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .enrolled-courses-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .course-actions {
+                flex-direction: column;
+            }
+        }
+
+        /* Profile Modal Styles */
+        .profile-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .profile-modal.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-content {
+            background: white;
+            width: 90%;
+            max-width: 800px;
+            margin: auto;
+            border-radius: 15px;
+            position: relative;
+            transform: translateY(-20px);
+            transition: transform 0.3s ease;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .profile-modal.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h2 {
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #666;
+            cursor: pointer;
+            padding: 0.5rem;
+            transition: var(--transition);
+        }
+
+        .close-modal:hover {
+            color: var(--dark);
+            transform: rotate(90deg);
+        }
+
+        .modal-body {
+            padding: 1.5rem;
+        }
+
+        /* Profile Edit Form */
+        .profile-form {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            color: var(--dark);
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(41, 128, 185, 0.1);
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .save-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        .save-btn:hover {
+            background: #3498db;
+            transform: translateY(-2px);
+        }
+
+        .cancel-btn {
+            background: var(--light);
+            color: var(--dark);
+            border: 1px solid #ddd;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        .cancel-btn:hover {
+            background: #e0e0e0;
+            transform: translateY(-2px);
+        }
+
+        /* Profile Stats in Modal */
+        .profile-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .profile-stat-card {
+            background: var(--light);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .profile-stat-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+
+        .profile-stat-card i {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .profile-stat-card h3 {
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-stat-card p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design for Modal */
+        @media (max-width: 768px) {
+            .modal-content {
+                width: 95%;
+                margin: 1rem;
+            }
+
+            .profile-stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .form-actions {
+                flex-direction: column;
+            }
+
+            .save-btn,
+            .cancel-btn {
+                width: 100%;
+            }
+        }
+
+        /* Analytics Dashboard Styles */
+        .analytics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .analytics-card {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .analytics-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .analytics-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .analytics-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--light);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .analytics-icon i {
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        .analytics-info h3 {
+            color: var(--dark);
+            margin-bottom: 0.25rem;
+        }
+
+        .analytics-info p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .analytics-value {
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin: 1rem 0;
+        }
+
+        .analytics-trend {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--success);
+            font-size: 0.9rem;
+        }
+
+        .analytics-trend.negative {
+            color: #e74c3c;
+        }
+
+        /* Level Progress Section */
+        .level-progress {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .level-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .level-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .level-badge {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .level-badge.gold {
+            background: linear-gradient(135deg, #ffd700, #ffa500);
+            color: white;
+        }
+
+        .level-progress-bar {
+            height: 8px;
+            background: var(--light);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+        }
+
+        .level-progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--success));
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        /* Problem Solving Stats */
+        .problem-stats {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .problem-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .problem-stat-card {
+            background: var(--light);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .problem-stat-card h4 {
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .problem-stat-card .value {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .problem-stat-card .sub-value {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 0.25rem;
+        }
+
+        /* Difficulty Distribution */
+        .difficulty-chart {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .difficulty-bars {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .difficulty-bar {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .difficulty-label {
+            width: 100px;
+            color: var(--dark);
+            font-weight: 500;
+        }
+
+        .difficulty-progress {
+            flex: 1;
+            height: 8px;
+            background: var(--light);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .difficulty-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        .difficulty-fill.easy { background: #2ecc71; }
+        .difficulty-fill.medium { background: #f1c40f; }
+        .difficulty-fill.hard { background: #e74c3c; }
+
+        .difficulty-value {
+            width: 60px;
+            text-align: right;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .analytics-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .problem-stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .level-header {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+        }
+
+       
+		
+		
+		
+
+		/* Enhanced Navbar */
+		.navbar {
+		    display: flex;
+		    justify-content: space-between;
+		    align-items: center;
+		    padding: 15px 30px;
+		    background: rgba(10, 10, 10, 0.8);
+		    backdrop-filter: blur(20px);
+		    border: 1px solid rgba(255, 255, 255, 0.1);
+		    border-radius: 20px;
+		    margin-bottom: 30px;
+		    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+		    position: sticky;
+		    top: 20px;
+		    z-index: 1000;
+		}
+		
+		
+
+		.navbar .logo {
+		    font-size: 28px;
+		    color: var(--primary);
+		    font-weight: 700;
+		    display: flex;
+		    align-items: center;
+		    text-shadow: 0 0 10px rgba(0, 247, 255, 0.3);
+		    transition: all 0.3s ease;
+		}
+
+		.navbar .logo:hover {
+		    transform: scale(1.05);
+		    text-shadow: 0 0 20px rgba(0, 247, 255, 0.5);
+		}
+
+		.navbar .logo i {
+		    margin-right: 12px;
+		    font-size: 32px;
+		    background: var(--gradient-primary);
+		    -webkit-background-clip: text;
+		    -webkit-text-fill-color: transparent;
+		}
+
+		.navbar nav {
+		    display: flex;
+		    gap: 25px;
+		}
+
+		.navbar nav a {
+		    color: var(--text-secondary);
+		    text-decoration: none;
+		    font-weight: 500;
+		    padding: 8px 16px;
+		    border-radius: 12px;
+		    transition: all 0.3s ease;
+		    position: relative;
+		}
+
+		.navbar nav a::before {
+		    content: '';
+		    position: absolute;
+		    bottom: 0;
+		    left: 50%;
+		    transform: translateX(-50%);
+		    width: 0;
+		    height: 2px;
+		    background: var(--gradient-primary);
+		    transition: width 0.3s ease;
+		}
+
+		.navbar nav a:hover {
+		    color: var(--primary);
+		    background: rgba(0, 247, 255, 0.1);
+		}
+
+		.navbar nav a:hover::before {
+		    width: 80%;
+		}
+
+		.navbar nav a.active {
+		    color: var(--primary);
+		    background: rgba(0, 247, 255, 0.1);
+		}
+
+		.navbar nav a.active::before {
+		    width: 80%;
+		}
+
+		.navbar .auth-buttons {
+		    display: flex;
+		    gap: 15px;
+		}
+
+		.navbar .auth-buttons a {
+		    padding: 12px 24px;
+		    border-radius: 12px;
+		    font-weight: 600;
+		    transition: all 0.3s ease;
+		    text-decoration: none;
+		    position: relative;
+		    overflow: hidden;
+		}
+
+		.navbar .auth-buttons a::before {
+		    content: '';
+		    position: absolute;
+		    top: 0;
+		    left: 0;
+		    width: 100%;
+		    height: 100%;
+		    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+		    transform: translateX(-100%);
+		    transition: transform 0.6s ease;
+		}
+
+		.navbar .auth-buttons a:hover::before {
+		    transform: translateX(100%);
+		}
+
+		.navbar .auth-buttons a.outline {
+		    border: 2px solid var(--primary);
+		    color: var(--primary);
+		    background: transparent;
+		}
+
+		.navbar .auth-buttons a.outline:hover {
+		    background: rgba(0, 247, 255, 0.1);
+		    transform: translateY(-2px);
+		    box-shadow: 0 4px 15px rgba(0, 247, 255, 0.2);
+		}
+
+		.navbar .auth-buttons a.fill {
+		    background: var(--gradient-primary);
+		    color: var(--background);
+		    border: none;
+		}
+
+		.navbar .auth-buttons a.fill:hover {
+		    transform: translateY(-2px);
+		    box-shadow: 0 4px 15px rgba(0, 247, 255, 0.3);
+		}
+
+
+    </style>
+</head>
+<body>
+    <div class="challenges-container">
+        <header class="navbar">
+            <div class="logo">
+                <i class="fa fa-graduation-cap" aria-hidden="true"></i> EduTrack
+            </div>
+
+            <nav class="nav-links">
+                <a href="/" aria-label="Home">
+                    <i class="fa fa-home" aria-hidden="true"></i> Home
+                </a>
+                
+                <a href="/Courses" aria-label="Courses">
+                    <i class="fa-solid fa-book-open-reader"></i> Courses
+                </a>
+                
+                <a href="/gamifiedzone" aria-label="Gamified Zone">Gamified Zone</a>
+                <a href="/challenge" aria-label="Goals">Challenge</a>
+                <a href="/event" aria-label="Community">Community</a>
+                <a href="/career" aria-label="Careers">Careers</a>
+            </nav>
+
+           
+        </header>
+
+        <!-- Analytics Dashboard -->
+        <section class="analytics-grid">
+            <div class="analytics-card">
+                <div class="analytics-header">
+                    <div class="analytics-icon">
+                        <i class="fas fa-fire"></i>
+                    </div>
+                    <div class="analytics-info">
+                        <h3>Coding Streak</h3>
+                        <p>Current Streak</p>
+                    </div>
+                </div>
+                <div class="analytics-value">15 Days</div>
+                <div class="analytics-trend">
+                    <i class="fas fa-arrow-up"></i>
+                    <span>3 days longer than last week</span>
+                </div>
+            </div>
+
+            <div class="analytics-card">
+                <div class="analytics-header">
+                    <div class="analytics-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <div class="analytics-info">
+                        <h3>Problems Solved</h3>
+                        <p>Total Solutions</p>
+                    </div>
+                </div>
+                <div class="analytics-value">247</div>
+                <div class="analytics-trend">
+                    <i class="fas fa-arrow-up"></i>
+                    <span>12% increase this month</span>
+                </div>
+            </div>
+
+            <div class="analytics-card">
+                <div class="analytics-header">
+                    <div class="analytics-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <div class="analytics-info">
+                        <h3>Success Rate</h3>
+                        <p>Problem Solving</p>
+                    </div>
+                </div>
+                <div class="analytics-value">85%</div>
+                <div class="analytics-trend">
+                    <i class="fas fa-arrow-up"></i>
+                    <span>5% better than last month</span>
+                </div>
+            </div>
+
+            <div class="analytics-card">
+                <div class="analytics-header">
+                    <div class="analytics-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="analytics-info">
+                        <h3>Average Time</h3>
+                        <p>Per Problem</p>
+                    </div>
+                </div>
+                <div class="analytics-value">12m</div>
+                <div class="analytics-trend negative">
+                    <i class="fas fa-arrow-down"></i>
+                    <span>2m faster than last week</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Level Progress -->
+        <section class="level-progress">
+            <div class="level-header">
+                <div class="level-info">
+                    <div class="level-badge gold">
+                        <i class="fas fa-crown"></i>
+                        <span>Gold Level</span>
+                    </div>
+                    <h3>Level 8 - Advanced Problem Solver</h3>
+                </div>
+                <button class="edit-profile-btn" onclick="openProfileModal()">
+                    <i class="fas fa-user"></i> View Profile
+                </button>
+            </div>
+            <div class="level-progress-bar">
+                <div class="level-progress-fill" style="width: 75%"></div>
+            </div>
+            <div class="progress-info">
+                <span>75% to Level 9</span>
+                <span>750/1000 XP</span>
+            </div>
+        </section>
+
+        <!-- Problem Solving Stats -->
+        <section class="problem-stats">
+            <h2><i class="fas fa-chart-bar"></i> Problem Solving Statistics</h2>
+            <div class="problem-stats-grid">
+                <div class="problem-stat-card">
+                    <h4>Easy Problems</h4>
+                    <div class="value">120</div>
+                    <div class="sub-value">98% Success Rate</div>
+                </div>
+                <div class="problem-stat-card">
+                    <h4>Medium Problems</h4>
+                    <div class="value">85</div>
+                    <div class="sub-value">82% Success Rate</div>
+                </div>
+                <div class="problem-stat-card">
+                    <h4>Hard Problems</h4>
+                    <div class="value">42</div>
+                    <div class="sub-value">65% Success Rate</div>
+                </div>
+                <div class="problem-stat-card">
+                    <h4>Total Submissions</h4>
+                    <div class="value">1,245</div>
+                    <div class="sub-value">Last 30 Days: 156</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Difficulty Distribution -->
+        <section class="difficulty-chart">
+            <h2><i class="fas fa-chart-pie"></i> Difficulty Distribution</h2>
+            <div class="difficulty-bars">
+                <div class="difficulty-bar">
+                    <span class="difficulty-label">Easy</span>
+                    <div class="difficulty-progress">
+                        <div class="difficulty-fill easy" style="width: 90%"></div>
+                    </div>
+                    <span class="difficulty-value">90%</span>
+                </div>
+                <div class="difficulty-bar">
+                    <span class="difficulty-label">Medium</span>
+                    <div class="difficulty-progress">
+                        <div class="difficulty-fill medium" style="width: 75%"></div>
+                    </div>
+                    <span class="difficulty-value">75%</span>
+                </div>
+                <div class="difficulty-bar">
+                    <span class="difficulty-label">Hard</span>
+                    <div class="difficulty-progress">
+                        <div class="difficulty-fill hard" style="width: 60%"></div>
+                    </div>
+                    <span class="difficulty-value">60%</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Enrolled Courses Section -->
+        <section class="enrolled-courses">
+            <h2><i class="fas fa-graduation-cap"></i> My Courses</h2>
+            <div class="enrolled-courses-grid">
+                <div class="enrolled-course-card">
+                    <div class="course-header">
+                        <div class="course-icon html">
+                            <i class="fab fa-html5"></i>
+                        </div>
+                        <div class="course-info">
+                            <h3>HTML Fundamentals</h3>
+                            <p>Web Development</p>
+                        </div>
+                    </div>
+                    <div class="course-progress">
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 75%"></div>
+                        </div>
+                        <span>75% Complete</span>
+                    </div>
+                    <div class="course-actions">
+                        <button class="course-btn continue-btn">Continue Learning</button>
+                        <button class="course-btn view-btn">View Details</button>
+                    </div>
+                </div>
+
+                <div class="enrolled-course-card">
+                    <div class="course-header">
+                        <div class="course-icon css">
+                            <i class="fab fa-css3-alt"></i>
+                        </div>
+                        <div class="course-info">
+                            <h3>CSS Styling</h3>
+                            <p>Web Development</p>
+                        </div>
+                    </div>
+                    <div class="course-progress">
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 45%"></div>
+                        </div>
+                        <span>45% Complete</span>
+                    </div>
+                    <div class="course-actions">
+                        <button class="course-btn continue-btn">Continue Learning</button>
+                        <button class="course-btn view-btn">View Details</button>
+                    </div>
+                </div>
+
+                <div class="enrolled-course-card">
+                    <div class="course-header">
+                        <div class="course-icon js">
+                            <i class="fab fa-js"></i>
+                        </div>
+                        <div class="course-info">
+                            <h3>JavaScript Basics</h3>
+                            <p>Web Development</p>
+                        </div>
+                    </div>
+                    <div class="course-progress">
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 30%"></div>
+                        </div>
+                        <span>30% Complete</span>
+                    </div>
+                    <div class="course-actions">
+                        <button class="course-btn continue-btn">Continue Learning</button>
+                        <button class="course-btn view-btn">View Details</button>
+                    </div>
+                </div>
+
+                <div class="enrolled-course-card">
+                    <div class="course-header">
+                        <div class="course-icon python">
+                            <i class="fab fa-python"></i>
+                        </div>
+                        <div class="course-info">
+                            <h3>Python Programming</h3>
+                            <p>Programming</p>
+                        </div>
+                    </div>
+                    <div class="course-progress">
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 60%"></div>
+                        </div>
+                        <span>60% Complete</span>
+                    </div>
+                    <div class="course-actions">
+                        <button class="course-btn continue-btn">Continue Learning</button>
+                        <button class="course-btn view-btn">View Details</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Activity Graph Section -->
+        <section class="activity-graph">
+            <h2><i class="fas fa-chart-line"></i> Learning Activity</h2>
+            <div class="graph-container">
+                <canvas id="activityChart"></canvas>
+            </div>
+        </section>
+    </div>
+
+    <!-- Profile Modal -->
+    <div class="profile-modal" id="profileModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-user-circle"></i> Profile Information</h2>
+                <button class="close-modal" onclick="closeProfileModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="profile-header">
+                    <div class="profile-image">
+                        <img src="https://via.placeholder.com/120" alt="Profile Picture">
+                        <div class="edit-overlay">
+                            <i class="fas fa-camera"></i> Change Photo
+                        </div>
+                    </div>
+                    <div class="profile-info">
+                        <h2>John Doe</h2>
+                        <p><i class="fas fa-envelope"></i> john.doe@example.com</p>
+                        <p><i class="fas fa-phone"></i> +1 234 567 890</p>
+                        <p><i class="fas fa-map-marker-alt"></i> New York, USA</p>
+                    </div>
+                </div>
+
+                <form class="profile-form">
+                    <div class="form-group">
+                        <label for="fullName">Full Name</label>
+                        <input type="text" id="fullName" value="John Doe">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" value="john.doe@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone</label>
+                        <input type="tel" id="phone" value="+1 234 567 890">
+                    </div>
+                    <div class="form-group">
+                        <label for="location">Location</label>
+                        <input type="text" id="location" value="New York, USA">
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="save-btn">Save Changes</button>
+                        <button type="button" class="cancel-btn" onclick="closeProfileModal()">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Generate random data for the last 7 days
+        const generateData = () => {
+            const data = [];
+            const labels = [];
+            const today = new Date();
+            
+            for (let i = 6; i >= 0; i--) {
+                const date = new Date(today);
+                date.setDate(date.getDate() - i);
+                labels.push(date.toLocaleDateString('en-US', { weekday: 'short' }));
+                data.push(Math.floor(Math.random() * 100));
+            }
+            
+            return { labels, data };
+        };
+
+        // Chart configuration
+        const ctx = document.getElementById('activityChart').getContext('2d');
+        const { labels, data } = generateData();
+
+        const activityChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Daily Activity',
+                    data: data,
+                    borderColor: '#2980b9',
+                    backgroundColor: 'rgba(41, 128, 185, 0.1)',
+                    tension: 0.4,
+                    fill: true,
+                    pointBackgroundColor: '#2980b9',
+                    pointBorderColor: '#fff',
+                    pointBorderWidth: 2,
+                    pointRadius: 4,
+                    pointHoverRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                        padding: 12,
+                        titleFont: {
+                            size: 14,
+                            family: "'Poppins', sans-serif"
+                        },
+                        bodyFont: {
+                            size: 13,
+                            family: "'Poppins', sans-serif"
+                        },
+                        callbacks: {
+                            label: function(context) {
+                                return `Activity: ${context.raw} points`;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            color: 'rgba(0, 0, 0, 0.1)'
+                        },
+                        ticks: {
+                            font: {
+                                family: "'Poppins', sans-serif"
+                            }
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        },
+                        ticks: {
+                            font: {
+                                family: "'Poppins', sans-serif"
+                            }
+                        }
+                    }
+                },
+                interaction: {
+                    intersect: false,
+                    mode: 'index'
+                },
+                animation: {
+                    duration: 1000,
+                    easing: 'easeInOutQuart'
+                }
+            }
+        });
+
+        // Add hover effect to show tooltip
+        const graphContainer = document.querySelector('.graph-container');
+        const tooltip = document.createElement('div');
+        tooltip.className = 'graph-tooltip';
+        graphContainer.appendChild(tooltip);
+
+        graphContainer.addEventListener('mousemove', (e) => {
+            const rect = graphContainer.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            tooltip.style.left = `${x + 10}px`;
+            tooltip.style.top = `${y + 10}px`;
+            tooltip.style.opacity = '1';
+        });
+
+        graphContainer.addEventListener('mouseleave', () => {
+            tooltip.style.opacity = '0';
+        });
+
+        // Profile Modal Functions
+        function openProfileModal() {
+            const modal = document.getElementById('profileModal');
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeProfileModal() {
+            const modal = document.getElementById('profileModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('profileModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeProfileModal();
+            }
+        });
+
+        // Handle form submission
+        document.querySelector('.profile-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            closeProfileModal();
+        });
+    </script>
+</body>
+</html> 
